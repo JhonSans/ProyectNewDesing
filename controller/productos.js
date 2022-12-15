@@ -90,17 +90,15 @@ app.controller("modalProducto", function ($uibModalInstance, respuesta, $http) {
   };
 
   // Objeto proveedor
-  vm.proveedor = {
-    info: respuesta.category,
-  };
+  vm.proveedor = [respuesta.supplier]
 
   //Objeto variables
   vm.opciones = {
     proveedoresArray: [],
     categoriasArray: [],
     descontinuadoArray: [
-        { estado: true, info: "Si" },
-        { estado: false, info: "No"}
+      { estado: true, info: "Si" },
+      { estado: false, info: "No" },
     ],
   };
 
