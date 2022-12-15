@@ -90,12 +90,14 @@ app.controller("modalProducto", function ($uibModalInstance, respuesta, $http) {
   };
 
   // Objeto proveedor
-  vm.proveedor = [respuesta.supplier]
+  vm.proveedor = [respuesta.supplier];
 
   //Objeto variables
   vm.opciones = {
+    id: 0,
     proveedoresArray: [],
     categoriasArray: [],
+    productosArray: [],
     descontinuadoArray: [
       { estado: true, info: "Si" },
       { estado: false, info: "No" },
@@ -116,4 +118,21 @@ app.controller("modalProducto", function ($uibModalInstance, respuesta, $http) {
   $http.get("https://localhost:7247/api/Categories").then(function (resultado) {
     vm.opciones.categoriasArray = resultado.data;
   });
+
+  // Funcion buscar proveedor
+  vm.buscarProveedor = function (id) {
+    vm.opciones.id = id;
+
+    //////////////////////// METODO GET PRODUCTOS ////////////////////////
+    $http.get("https://localhost:7247/api/Products").then(function (respuesta) {
+      // Recorre todos los productos
+      for (let i = 0; i < respuesta.data.length; i++) {
+        // Valida que los productos pertenezcan a el proveedor id
+        if (respuesta.data[i].supplierId === vm.opciones.id) {
+          // Agrega los productos a el array
+          vm.opciones.productosArray.push(respuesta.data[i]);
+        }
+      }
+    });
+  };
 });
