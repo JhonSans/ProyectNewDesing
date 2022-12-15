@@ -1,0 +1,70 @@
+<div ng-controller="productosCtrl as productos">
+  <!--Header-->
+  <div class="jumbotron">
+    <div
+      style="background-image: url('../img/northwind/productos-2.jpg')"
+    ></div>
+    <h1>Productos</h1>
+  </div>
+  <!--Main-->
+  <div class="row">
+    <div class="col-sm-12 north-list">
+      <div class="table-responsive">
+        <form>
+          <div class="form-group">
+            <h1>Producto ID</h1>
+            <input
+              type="text"
+              class="form-control"
+              ng-model="productos.productosDato.id"
+              placeholder="Digita el ID del producto que deseas buscar..."
+              ng-keyup="productos.buscarProducto(productos.productosDato.id)"
+            />
+          </div>
+          <!--Error-->
+          <div
+            uib-alert
+            ng-class="'alert-danger'"
+            ng-show="productos.opciones.error"
+            close="productos.cerrarAlerta()"
+          >
+            <strong>{{ productos.opciones.error }}</strong>
+          </div>
+        </form>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Detalles</th>
+            <th>Precio Unitario</th>
+            <th>Unidades en Stock</th>
+            <th colspan="2">Acciones</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="items in productos.productosDato.misProductos | filter : productos.productosDato.miProducto">
+              <td>{{ items.productId }}</td>
+              <td>{{ items.productName }}</td>
+              <td>{{ items.category.categoryName }}</td>
+              <td>{{ items.quantityPerUnit }}</td>
+              <td>{{ items.unitPrice }}</td>
+              <td>{{ items.unitsInStock }}</td>
+              <td>
+                <button class="btn btn-info">
+                  Ver
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger">
+                  Eliminar
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

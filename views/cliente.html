@@ -1,0 +1,342 @@
+<div ng-controller="clienteCtrl as cliente">
+  <!--Header-->
+  <div class="jumbotron">
+    <div style="background-image: url('../img/northwind/cliente-2.jpg')"></div>
+    <h1>Cliente</h1>
+  </div>
+  <!--Main-->
+  <div class="row">
+    <!--Listado de clientes-->
+    <div class="col-sm-12 north-list">
+      <form>
+        <div class="form-group">
+          <h1>Cliente ID</h1>
+          <input
+            type="text"
+            class="form-control"
+            ng-model="cliente.clienteDet.id"
+            placeholder="Digita el ID del cliente que deseas buscar..."
+            ng-keyup="cliente.buscarCliente(cliente.clienteDet.id)"
+          />
+        </div>
+        <!--Error-->
+        <div
+          uib-alert
+          ng-class="'alert-danger'"
+          ng-show="cliente.opciones.error"
+          close="cliente.cerrarAlerta()"
+        >
+          <strong>{{ cliente.opciones.error }}</strong>
+        </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <th>ID</th>
+            <th>Empresa</th>
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Dirección</th>
+            <th>Ciudad</th>
+            <th>País</th>
+            <th>Teléfono</th>
+            <th colspan="2">Acciones</th>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="datos in cliente.clienteDet.misClientes | filter : cliente.clienteDet.miCliente"
+            >
+              <td>{{ datos.customerId }}</td>
+              <td>{{ datos.companyName }}</td>
+              <td>{{ datos.contactName }}</td>
+              <td>{{ datos.contactTitle }}</td>
+              <td>{{ datos.address }}</td>
+              <td>{{ datos.city }}</td>
+              <td>{{ datos.country }}</td>
+              <td>{{ datos.phone }}</td>
+              <td>
+                <button ng-click="cliente.detalle(datos)" class="btn btn-info">
+                  Ver
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger">
+                  Eliminar
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--Paginador-->
+        <ul
+          uib-pagination
+          direction-links="false"
+          total-items="cliente.paginador.totalItems"
+          ng-model="cliente.paginador.paginaActual"
+          items-per-page="cliente.paginador.itemsPagina"
+        ></ul>
+      </div>
+    </div>
+
+    Total de Items: {{ cliente.paginador.totalItems }} <br />
+    Pagina Actual: {{ cliente.paginador.paginaActual }} <br />
+    Datos x Pagina: {{ cliente.paginador.itemsPagina }}
+
+    <!--Modal-->
+    <div class="col-sm-12">
+      <script type="text/ng-template" id="cliente.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Cliente: {{ cliente.clienteDato.id }}</h3>
+        </div>
+        <div class="modal-body north-modal" id="modal-body">
+            <uib-tabset active="activeJustified" justified="true">
+              <!--Detalles del cliente-->
+              <uib-tab index="0" heading="Detalles">
+                <div class="container-fluid container-list">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="com">Empresa</label>
+                        <input type="text" class="form-control" id="com" ng-model="cliente.clienteDato.empresa" value="{{ cliente.clienteDato.empresa }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="nom">Nombre</label>
+                        <input type="text" class="form-control" id="nom" ng-model="cliente.clienteDato.nombre" value="{{ cliente.clienteDato.nombre }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="tit">Título</label>
+                        <input type="text" class="form-control" id="tit" ng-model="cliente.clienteDato.titulo" value="{{ cliente.clienteDato.titulo }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="dir">Dirección</label>
+                        <input type="text" class="form-control" id="dir" ng-model="cliente.clienteDato.direccion" value="{{ cliente.clienteDato.direccion }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="ciu">Ciudad</label>
+                        <input type="text" class="form-control" id="ciu" ng-model="cliente.clienteDato.ciudad" value="{{ cliente.clienteDato.ciudad }}">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="reg">Región</label>
+                        <input type="text" class="form-control" id="reg" ng-model="cliente.clienteDato.region" value="{{ cliente.clienteDato.region }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="cod">Código Postal</label>
+                        <input type="text" class="form-control" id="cod" ng-model="cliente.clienteDato.codPostal" value="{{ cliente.clienteDato.codPostal }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="pai">País</label>
+                        <input type="text" class="form-control" id="pai" ng-model="cliente.clienteDato.pais" value="{{ cliente.clienteDato.pais }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="tel">Teléfono</label>
+                        <input type="text" class="form-control" id="tel" ng-model="cliente.clienteDato.telefono" value="{{ cliente.clienteDato.telefono }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="fax">FAX</label>
+                        <input type="text" class="form-control" id="fax" ng-model="cliente.clienteDato.fax" value="{{ cliente.clienteDato.fax }}">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 text-right">
+                      <button class="btn btn-primary" type="button" ng-click="cliente.guardar()">Guardar</button>
+                    </div>
+                  </div>
+                </div>
+              </uib-tab>
+              <!--Ordenes del cliente-->
+              <uib-tab index="1" heading="Ordenes">
+                <div class="container-fluid container-list">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <th>ID</th>
+                            <th>Fecha Pedido</th>
+                            <th>Ciudad</th>
+                            <th>Total Prodcutos</th>
+                            <th>Total</th>
+                            <th colspan="2">Acciones</th>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="datos in cliente.clienteDato.orden">
+                              <td>{{ datos.orderId }}</td>
+                              <td>{{ datos.orderDate }}</td>
+                              <td>{{ datos.shipCity }}</td>
+                              <td>
+                                <ul ng-repeat="detalle in datos.orderDetails">
+                                  <li>
+                                    <div>
+                                      Producto: {{ detalle.productId }}
+                                      Precio: {{ detalle.unitPrice }}
+                                      Canidad: {{ detalle.quantity }}
+                                      Descuento: {{ detalle.discount }}
+                                      Total: {{ (detalle.unitPrice * detalle.quantity) - ((detalle.unitPrice * detalle.quantity) * detalle.discount) }}
+                                    </div>
+                                  </li>
+                                </ul>
+                              </td>
+                              <td>
+                                
+                              </td>
+                              <td>
+                                <button ng-class="{ 'active' :  datos.orderId == cliente.detalle.id}" ng-click="cliente.detallePro(datos)" class="btn btn-nor btn-info">
+                                  Ver
+                                  <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                              </td>
+                              <td>
+                                <button class="btn btn-danger">
+                                  Eliminar
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!--Orden-->
+                      <div ng-show="cliente.detalle.id != 0">
+                        <uib-tabset active="activeJustified" justified="true" class="nor-det-list">
+                          <!--Detalles de la orden-->
+                          <uib-tab index="1" heading="Detalles">
+                            <div class="container-fluid container-list">
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label>ID</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.id }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Cliente</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.clienteId }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Empleado</label>
+                                    <select class="form-control" ng-model="cliente.detalle.empleadoId">
+                                      <option ng-repeat="empleado in cliente.opciones.empleadoArray" ng-value="{{ empleado.employeeId }}">
+                                        {{ empleado.employeeId }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Fecha de Orden</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.fechaOrden }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Fecha de Entrega</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.fechaEntrega }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Fecha de Salida</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.fechaSalida }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Vía</label>
+                                    <select class="form-control" ng-model="cliente.detalle.via">
+                                      <option ng-repeat="via in cliente.opciones.viaArray" ng-value="{{ via.shipperId }}">
+                                        {{ via.shipperId }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label>Flete</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.flete }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Repartidor</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.repartidor }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Dirección</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.direccion }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Ciudad</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.ciudad }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Región</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.region }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Código Postal</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.codPostal }}">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>País</label>
+                                    <input type="text" class="form-control" value="{{ cliente.detalle.pais }}">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </uib-tab>
+                          <!--Productos de la orden-->
+                          <uib-tab index="2" heading="Productos">
+                            <div class="container-fluid container-list">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                      <thead>
+                                        <th>Orden</th>
+                                        <th>Producto</th>
+                                        <th>Precio Unitario</th>
+                                        <th>Cantidad</th>
+                                        <th>Descuento</th>
+                                        <th>Total</th>
+                                        <th colspan="2">Acciones</th>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="item in cliente.detalle.detalles">
+                                          <td>{{ item.orderId }}</td>
+                                          <td ng-repeat="producto in cliente.opciones.productoArray | filter : item.productId | limitTo : 1">
+                                            {{ producto.productName }}
+                                          </td>
+                                          <td>{{ item.unitPrice }}</td>
+                                          <td>{{ item.quantity }}</td>
+                                          <td>{{ item.discount }}</td>
+                                          <td ng-repeat="total in cliente.opciones.suma | filter : item.productId | limitTo : 1">
+                                            {{ total.total }}
+                                          </td>
+                                          <td>
+                                            <button class="btn btn-warning">
+                                              Editar
+                                              <span class="glyphicon glyphicon-edit"></span>
+                                            </button>
+                                          </td>
+                                          <td>
+                                            <button class="btn btn-danger">
+                                              Eliminar
+                                              <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </uib-tab>
+                        </uib-tabset>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </uib-tab>
+            </uib-tabset>
+          </div>
+          <div class="modal-footer">
+          <button class="btn btn-warning" type="button" ng-click="cliente.cancelar()">Cancelar</button>
+        </div>
+      </script>
+    </div>
+  </div>
+</div>

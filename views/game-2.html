@@ -1,0 +1,399 @@
+<div ng-controller="miSegundoJuego as juego2">
+  <!--Header-->
+  <div class="jumbotron">
+    <div style="background-image: url('../img/game2/game-2-3.jpg');"></div>
+    <h1>Suma Mini-Max</h1>
+  </div>
+  <!--Main-->
+  <div class="row">
+    <!--Page Content-->
+    <div class="col-sm-12">
+      <p class="lead text-justify">
+        Minimax es un método de decisión para minimizar la pérdida máxima
+        esperada en juegos con adversario y con información perfecta.
+      </p>
+      <img
+        class="img-rounded"
+        src="/img/game2/game-2-2.jpg"
+        alt="Juego 1"
+        width="100%"
+      />
+      <div style="margin-top: 20px">
+        <dl class="text-justify">
+          <strong>John von Neumann</strong> dio la siguiente definición de lo
+          que era un juego:
+        </dl>
+        <blockquote>
+          <p class="text-justify">
+            <em
+              >"Un juego es una situación conflictiva en la que uno debe tomar
+              una decisión sabiendo que los demás también toman decisiones, y
+              que el resultado del conflicto se determina, de algún modo, a
+              partir de todas las decisiones realizadas."</em
+            >
+          </p>
+          <footer>John von Neumann</footer>
+        </blockquote>
+        <p class="text-justify">
+          Y demostró en 1926 que siempre existe una forma racional (una
+          estrategia óptima) de actuar en juegos de dos participantes, si los
+          intereses que los gobiernan son completamente opuestos. A este
+          resultado se le conoce como Teorema Minimax.
+        </p>
+      </div>
+      <div class="page-header">
+        <h1>Ejemplo #1 </h1>
+      </div>
+    </div>
+
+    <!--Solucion 1-->
+    <div class="col-sm-12">
+      <!--Recopila los datos para crear la lista-->
+      <div class="col-sm-6">
+        <div class="panel panel-default panel-numbers">
+          <div class="panel-heading">
+            <h3>Lista de Números</h3>
+          </div>
+          <div class="panel-body">
+            <form class="form-result">
+              <div class="form-group">
+                <ul class="list-group">
+                  <li
+                    class="list-group-item"
+                    style="position: relative"
+                    ng-repeat="(id, numero) in juego2.conjuntos.total"
+                  >
+                    {{ numero }}
+                    <span class="delete-input" ng-click="juego2.quitarNum(id)"
+                      >&times;</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+          <div class="panel-footer">
+            <form>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  ng-model="juego2.minMax.numero"
+                  placeholder="Digita un número..."
+                />
+                <div class="input-group-btn">
+                  <button
+                    class="btn btn-primary"
+                    ng-disabled="!(juego2.minMax.numero)"
+                    ng-click="juego2.agregarNum()"
+                  >
+                    Agregar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--Muestra la lista de numeros-->
+      <div class="col-sm-6 well-num-list">
+        <div class="well">
+          <span>Números: </span>
+          <p ng-repeat="numList in juego2.conjuntos.total">{{ numList }}</p>
+        </div>
+        <div class="well">
+          <span>Valor Mínimo: </span>{{ juego2.minMax.sumMin }}
+        </div>
+        <div class="well">
+          <span>Valor Máximo: </span>{{ juego2.minMax.sumMax }}
+        </div>
+        <div
+          uib-alert
+          ng-class="'alert-danger'"
+          ng-show="juego2.minMax.error"
+          close="juego2.cerrarAlerta()"
+        >
+          <strong>{{ juego2.minMax.error }}</strong>
+        </div>
+        <button
+          class="btn btn-primary btn-block"
+          style="margin-bottom: 15px"
+          ng-click="juego2.sumaMinMax()"
+        >
+          Suma
+        </button>
+      </div>
+      <!--Muestra el resultado-->
+      <div class="col-sm-12">
+        <div class="panel panel-default panel-numbers">
+          <div class="panel-heading">
+            <h4>Resultado:</h4>
+          </div>
+          <div class="panel-body">
+            <form class="form-result">
+              <div class="form-group">
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="x in juego2.respuesta">
+                    Si sumamos todos excepto {{ x.numeros }}, tenemos
+                    <p class="display-array" ng-repeat="c in x.conjunto">
+                      {{ c }}<span> + </span>
+                    </p>
+                    = {{ x.resultado }}
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+          <div class="panel-footer btn-clean">
+            <button
+              class="btn btn-primary"
+              ng-click="juego2.limpiarResultado()"
+            >
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Solucion 2-->
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1>Ejemplo #2</h1>
+      </div>
+      <!--Pide la cantidad de inputs a mostrar-->
+      <div class="col-sm-12">
+        <form>
+          <h3>Cantidad de Campos:</h3>
+          <div class="input-group" style="margin-bottom: 20px">
+            <input
+              type="text"
+              class="form-control"
+              ng-model="juego2.cantidad.numero"
+              placeholder="Digita un número, mínimo 5..."
+            />
+            <div class="input-group-btn">
+              <button
+                class="btn btn-primary"
+                ng-disabled="!(juego2.cantidad.numero)"
+                ng-click="juego2.agregarInput()"
+              >
+                Agregar
+              </button>
+            </div>
+          </div>
+          <div
+            uib-alert
+            ng-class="'alert-danger'"
+            ng-show="juego2.cantidad.error"
+            close="juego2.cerrarAlerta()"
+          >
+            <strong>{{ juego2.cantidad.error }}</strong>
+          </div>
+        </form>
+        <div class="panel panel-default panel-numbers">
+          <div class="panel-heading">
+            <h3>Campos:</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <li
+                class="list-group-item"
+                ng-repeat="num in juego2.cantidad.inputs"
+              >
+                <label for="numb">Número {{ num }}</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="numb"
+                  ng-model="juego2.lista.numeros[num]"
+                  placeholder="Digita un número..."
+                />
+              </li>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <button
+              class="btn btn-primary btn-block"
+              ng-click="juego2.sumarInputs()"
+            >
+              Sumar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--Muestra la lista de numeros-->
+      <div class="col-sm-4 well-num-list">
+        <div class="well">
+          <span>Números: </span>
+          <div ng-repeat="x in juego2.lista.numeros track by x">{{ x }}</div>
+        </div>
+      </div>
+      <!--Muestra el valor minimo-->
+      <div class="col-sm-4 well-num-list">
+        <div class="well">
+          <span>Valor Mínimo: </span>{{ juego2.cantidad.minSum }}
+        </div>
+      </div>
+      <!--Muestra el valor maximo-->
+      <div class="col-sm-4 well-num-list">
+        <div class="well">
+          <span>Valor Máximo: </span>{{ juego2.cantidad.maxSum }}
+        </div>
+      </div>
+      <!--Muestra el resultado-->
+      <div class="col-sm-12">
+        <div class="panel panel-default panel-numbers">
+          <div class="panel-heading">
+            <h4>Resultado:</h4>
+          </div>
+          <div class="panel-body">
+            <form class="form-result">
+              <div class="form-group">
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="m in juego2.resultado">
+                    Si sumamos todos excepto {{ m.numeros }}, tenemos
+                    <p class="display-array" ng-repeat="c in m.conjunto">
+                      {{ c }}<span> + </span>
+                    </p>
+                    = {{ m.total }}
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+          <div class="panel-footer btn-clean">
+            <button class="btn btn-primary" ng-click="juego2.limpiarPantalla()">
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Solucion 3-->
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1>Ejemplo #3</h1>
+      </div>
+      <div class="col-sm-12">
+        <div class="panel panel-default panel-numbers panel-end">
+          <!--Pide la cantidad de inputs a mostrar-->
+          <div class="panel-heading">
+            <form class="form-heading">
+              <h3>Campos:</h3>
+              <div class="btn-end">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  ng-disabled="!juego2.principal.sumaTotal"
+                  ng-click="juego2.isCollapsed = !juego2.isCollapsed"
+                >
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                </button>
+              </div>
+              <div style="margin-bottom: 20px">
+                <input
+                  type="text"
+                  class="form-control"
+                  ng-model="juego2.principal.campos"
+                  ng-keyup="juego2.agregarCampos()"
+                  placeholder="Digita un número, mínimo 5..."
+                />
+              </div>
+              <div
+                uib-alert
+                ng-class="'alert-danger'"
+                ng-show="juego2.principal.error"
+                close="juego2.cerrarAlerta()"
+              >
+                <strong>{{ juego2.principal.error }}</strong>
+              </div>
+            </form>
+          </div>
+          <div class="panel-body">
+            <!--Resultado de las sumas-->
+            <div uib-collapse="!juego2.isCollapsed" class="panel-collapse">
+              <div class="well well-lg">
+                <ul class="list-group">
+                  <li
+                    class="list-group-item panel-item"
+                    ng-repeat="res in juego2.principal.listaFinal"
+                  >
+                    Si sumamos todos excepto
+                    <strong>{{ res.numero | number }}</strong>, tenemos
+                    <p class="display-array" ng-repeat="lis in res.lista">
+                      {{ lis | number }}<span> + </span>
+                    </p>
+                    = {{ res.suma | number }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!--Agrega los inputs-->
+            <ul class="list-group">
+              <li
+                class="list-group-item"
+                ng-repeat="(indice, contenido) in juego2.inputs track by indice"
+              >
+                <label for="numb">Número {{ contenido.id + 1 }}</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="numb"
+                  ng-model="contenido.numero"
+                  ng-keyup="juego2.validarNumero(indice, contenido)"
+                  placeholder="Digita un número..."
+                  autocomplete="off"
+                />
+              </li>
+            </ul>
+          </div>
+          <div class="panel-footer list-end">
+            <div class="row">
+              <!--Muestra la lista de numeros-->
+              <div class="col-sm-12 header">
+                <div class="well">
+                  <h4>Números:</h4>
+                  <div>
+                    <h3 ng-repeat="numero in juego2.principal.listaNumeros">
+                      {{ numero | number }}
+                      <span> + </span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <!--Muestra las sumas-->
+              <div class="col-sm-12">
+                <div class="col-sm-4 header bottom">
+                  <div class="well">
+                    <h4>Suma Total:</h4>
+                    <div>
+                      <h2>{{ juego2.principal.sumaTotal | number }}</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 header bottom">
+                  <div class="well">
+                    <h4>Suma Mínima:</h4>
+                    <div>
+                      <h2>{{ juego2.principal.sumaMinima | number }}</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 header bottom">
+                  <div class="well">
+                    <h4>Suma Máxima:</h4>
+                    <div>
+                      <h2>{{ juego2.principal.sumaMaxima | number }}</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
