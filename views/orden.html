@@ -7,6 +7,27 @@
   <!--Main-->
   <div class="row">
     <div class="col-sm-12 north-list">
+      <form>
+        <div class="form-group">
+          <h1>Orden ID</h1>
+          <input
+            type="text"
+            class="form-control"
+            ng-model="orden.ordenDato.id"
+            placeholder="Digita el ID de la orden que deseas buscar..."
+            ng-keyup="orden.buscarOrden(orden.ordenDato.id)"
+          />
+        </div>
+        <!--Error-->
+        <div
+          uib-alert
+          ng-class="'alert-danger'"
+          ng-show="orden.opciones.error"
+          close="orden.cerrarAlerta()"
+        >
+          <strong>{{ orden.opciones.error }}</strong>
+        </div>
+      </form>
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <thead>
@@ -21,10 +42,10 @@
             <th colspan="2">Acciones</th>
           </thead>
           <tbody>
-            <tr ng-repeat="datos in orden.opciones.misOrdenes">
+            <tr ng-repeat="datos in orden.ordenDato.misOrdenes | filter : orden.ordenDato.miOrden">
               <td>{{ datos.orderId }}</td>
               <td>{{ datos.customerId }}</td>
-              <td>{{ datos.employee.firstName }} {{ datos.employee.lastName }}</td>
+              <td>{{ datos.employeeId }}</td>
               <td>{{ datos.orderDate }}</td>
               <td>{{ datos.shipName }}</td>
               <td>{{ datos.shipAddress }}</td>

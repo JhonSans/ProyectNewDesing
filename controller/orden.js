@@ -2,25 +2,35 @@ app.controller("ordenCtrl", function ($http) {
   var vm = this;
 
   // Objetos
-  vm.ordenDato = { id: "" };
-  vm.opciones = { error: "", misOrdenes: [], miOrden: [], clienteArray: [] };
+  vm.ordenDato = { id: "", misOrdenes: [], miOrden: [] };
+  vm.opciones = { error: "" };
   vm.validacion = {
-    errorLetra: "Ingresaste valores invalidos o se encuentra vacío...",
+    errorDato:
+      "El dato que buscas no se encuentra registrado o se encuentra vacío...",
   };
 
   //////////////////////// METODO GET ORDENES ////////////////////////
   $http.get("https://localhost:7247/api/Orders").then(function (respuesta) {
-    vm.opciones.misOrdenes = respuesta.data;
-
-    for (let i = 0; i < vm.opciones.misOrdenes.length; i++) {
-
-      //////////// METODO GET CLIENTES ////////////
-      $http
-        .get("https://localhost:7247/api/Customers/" + vm.opciones.misOrdenes[i].customerId)
-        .then(function (respuesta) {
-          // Agrega los datos a la variable
-          vm.opciones.clienteArray = respuesta.data;
-        });
-    }
+    vm.ordenDato.misOrdenes = respuesta.data;
   });
+
+  //////////////////////// METODO GET ORDEN {ID} ////////////////////////
+  vm.buscarOrden = function (id) {
+    // Obtiene los datos de laorden solicitada por su id
+    $http
+      .get("https://localhost:7247/api/Orders/" + parseInt(id))
+      .then(function (respuesta) {
+        // Agrega los datos a la variable
+        vm.ordenDato.miOrden = respuesta.data;
+        // Limpia error
+        vm.opciones.error = "";
+      })
+      .catch(function (respuesta) {
+        // Capta el error
+        vm.opciones.error =
+          "Error " + respuesta.status + " - " + vm.validacion.errorDato;
+        // Limpia variables
+        vm.ordenDato.miOrden = [];
+      });
+  };
 });

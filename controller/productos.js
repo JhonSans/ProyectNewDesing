@@ -24,14 +24,6 @@ app.controller("productosCtrl", function ($http, $uibModal) {
         vm.productosDato.miProducto = respuesta.data;
         // Limpia error
         vm.opciones.error = "";
-      })
-      .catch(function (respuesta) {
-        // Capta el error
-        vm.opciones.error =
-          "Error " + respuesta.status + " - " + vm.validacion.errorDato;
-
-        // Limpia variables
-        vm.productosDato.miProducto = [];
       });
   };
 

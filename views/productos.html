@@ -43,7 +43,10 @@
             <th colspan="2">Acciones</th>
           </thead>
           <tbody>
-            <tr ng-repeat="items in productos.productosDato.misProductos">
+            <tr
+              ng-show="!(productos.productosDato.id)"
+              ng-repeat="items in productos.productosDato.misProductos"
+            >
               <td>{{ items.productId }}</td>
               <td>{{ items.productName }}</td>
               <td>{{ items.category.categoryName }}</td>
@@ -54,6 +57,29 @@
                 <button
                   class="btn btn-info"
                   ng-click="productos.detalle(items)"
+                >
+                  Ver
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger">
+                  Eliminar
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </td>
+            </tr>
+            <tr ng-show="(productos.productosDato.id)">
+              <td>{{ productos.productosDato.miProducto.productId }}</td>
+              <td>{{ productos.productosDato.miProducto.productName }}</td>
+              <td>{{ productos.productosDato.miProducto.category.categoryName }}</td>
+              <td>{{ productos.productosDato.miProducto.quantityPerUnit }}</td>
+              <td>{{ productos.productosDato.miProducto.unitPrice | currency }}</td>
+              <td>{{ productos.productosDato.miProducto.unitsInStock }}</td>
+              <td>
+                <button
+                  class="btn btn-info"
+                  ng-click="productos.detalle(productos.productosDato.miProducto)"
                 >
                   Ver
                   <span class="glyphicon glyphicon-search"></span>
