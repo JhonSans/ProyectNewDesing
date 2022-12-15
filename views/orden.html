@@ -11,39 +11,25 @@
         <table class="table table-bordered table-hover">
           <thead>
             <th>ID</th>
-            <th>Cliente ID</th>
-            <th>Empleado ID</th>
+            <th>Cliente</th>
+            <th>Empleado</th>
             <th>Fecha de Pedido</th>
-            <th>Fecha de Entrega</th>
-            <th>Fecha de Envío</th>
-            <th>Vía de Entrega</th>
-            <th>Flete</th>
-            <th>Nombre Expedidor</th>
+            <th>Empresa</th>
             <th>Dirección</th>
             <th>Ciudad</th>
-            <th>Region</th>
-            <th>Código Postal</th>
             <th>País</th>
-            <th>Detalles</th>
             <th colspan="2">Acciones</th>
           </thead>
           <tbody>
             <tr ng-repeat="datos in orden.opciones.misOrdenes">
               <td>{{ datos.orderId }}</td>
               <td>{{ datos.customerId }}</td>
-              <td>{{ datos.employeeId }}</td>
+              <td>{{ datos.employee.firstName }} {{ datos.employee.lastName }}</td>
               <td>{{ datos.orderDate }}</td>
-              <td>{{ datos.requiredDate }}</td>
-              <td>{{ datos.shippedDate }}</td>
-              <td>{{ datos.shipVia }}</td>
-              <td>{{ datos.freight }}</td>
               <td>{{ datos.shipName }}</td>
               <td>{{ datos.shipAddress }}</td>
               <td>{{ datos.shipCity }}</td>
-              <td>{{ datos.shipRegion }}</td>
-              <td>{{ datos.shipPostalCode }}</td>
               <td>{{ datos.shipCountry }}</td>
-              <td>{{ datos.orderDetails }}</td>
               <td>
                 <button class="btn btn-info">
                   Ver

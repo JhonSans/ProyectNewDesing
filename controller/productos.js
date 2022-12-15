@@ -24,8 +24,6 @@ app.controller("productosCtrl", function ($http, $uibModal) {
         vm.productosDato.miProducto = respuesta.data;
         // Limpia error
         vm.opciones.error = "";
-
-        console.log(vm.productosDato.miProducto);
       })
       .catch(function (respuesta) {
         // Capta el error
