@@ -1,3 +1,24 @@
-<div>
-    
+<div ng-controller="iniciarCtrl as sesion">
+    <!--Header-->
+    <div class="jumbotron">
+        <h1>Iniciar Sesión</h1>
+    </div>
+    <!--Main-->
+    <div class="row">
+        <div class="col-sm-6">
+            <form>
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" class="form-control" ng-model="sesion.input.usuario" placeholder="Digita un usuario...">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="text" class="form-control" ng-model="sesion.input.contrasena" placeholder="Digita la contraseña...">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" ng-click="sesion.validarDatos(sesion.input)">Validar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

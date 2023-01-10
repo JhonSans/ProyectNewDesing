@@ -6,3 +6,16 @@ var app = angular.module("MainApp", [
   "ui.bootstrap",
   "ngSanitize"
 ]);
+
+app.controller("mainCtrl", function($scope) {
+  var vm = this;
+
+  vm.logueado = false;
+
+  $scope.setLogueado = function(val)
+  {
+    vm.logueado = val;
+
+  }
+
+});

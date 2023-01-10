@@ -23,5 +23,9 @@ app.config(function ($routeProvider) {
     .when("/orden", {
       templateUrl: "views/orden.html",
       controller: "ordenCtrl"
+    })
+    .when("/iniciar-sesion", {
+      templateUrl: "views/iniciar-sesion.html",
+      controller: "iniciarCtrl"
     });
 });
