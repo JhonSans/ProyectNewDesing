@@ -104,7 +104,7 @@
                       <a
                         ng-class="{ active: isActive('/cliente') }"
                         href="#!cliente"
-                        >Cliente</a
+                        >Clientes</a
                       >
                     </li>
                     <li>
@@ -118,7 +118,7 @@
                       <a
                         ng-class="{ active: isActive('/orden') }"
                         href="#!orden"
-                        >Orden</a
+                        >Ordenes</a
                       >
                     </li>
                   </ul>
@@ -140,7 +140,7 @@
                     ng-show="main.logueado"
                     ng-click="main.logueado = false"
                     href="#!iniciar-sesion"
-                    ><span class="glyphicon glyphicon-log-in"></span> Cerrar
+                    ><span class="	glyphicon glyphicon-log-out"></span> Cerrar
                     Sesión</a
                   >
                 </li>
@@ -188,27 +188,27 @@
       <section>
         <ol class="breadcrumb" ng-controller="activeNav">
           <li><a ng-class="{ active: isActive('/') }" href="#/!">Inicio</a></li>
-          <li>
+          <li ng-show="main.logueado">
             <a ng-class="{ active: isActive('/game-1') }" href="#!game-1"
               >Juego 1</a
             >
           </li>
-          <li>
+          <li ng-show="main.logueado">
             <a ng-class="{ active: isActive('/game-2') }" href="#!game-2"
               >Juego 2</a
             >
           </li>
-          <li>
+          <li ng-show="main.logueado">
             <a ng-class="{ active: isActive('/cliente') }" href="#!cliente"
               >Cliente</a
             >
           </li>
-          <li>
+          <li ng-show="main.logueado">
             <a ng-class="{ active: isActive('/productos') }" href="#!productos"
               >Productos</a
             >
           </li>
-          <li>
+          <li ng-show="main.logueado">
             <a ng-class="{ active: isActive('/orden') }" href="#!orden"
               >Orden</a
             >
@@ -221,7 +221,7 @@
         <!--Información-->
         <div class="container">
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4" ng-show="main.logueado">
               <h4>Juegos</h4>
               <ul class="list-group">
                 <li class="list-group-item">
@@ -238,13 +238,13 @@
                 </li>
               </ul>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4" ng-show="main.logueado">
               <h4>Northwind</h4>
               <ul class="list-group">
                 <li class="list-group-item">
                   <a href="#!cliente"
                     ><span class="glyphicon glyphicon-list-alt"></span>
-                    Cliente</a
+                    Clientes</a
                   >
                 </li>
                 <li class="list-group-item">
@@ -255,7 +255,7 @@
                 </li>
                 <li class="list-group-item">
                   <a href="#!orden"
-                    ><span class="glyphicon glyphicon-list-alt"></span> Orden</a
+                    ><span class="glyphicon glyphicon-list-alt"></span> Ordenes</a
                   >
                 </li>
               </ul>

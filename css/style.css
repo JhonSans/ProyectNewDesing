@@ -77,6 +77,15 @@ a:focus {
   position: relative;
 }
 
+/*---------------------------------------*/
+/*-------------- Paginador --------------*/
+/*---------------------------------------*/
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  background-color: var(--verde);
+  border-color: var(--verde-claro);
+}
+
 /*-----------------------------------*/
 /*-------------- Index --------------*/
 /*-----------------------------------*/

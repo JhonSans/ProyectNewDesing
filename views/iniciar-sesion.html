@@ -1,14 +1,21 @@
 <div ng-controller="iniciarCtrl as sesion">
   <!--Header-->
   <div class="jumbotron">
+    <div style="background-image: url('/img/log-in.jpg')"></div>
     <h1>Iniciar Sesión</h1>
   </div>
   <!--Main-->
-  <div class="row">
-    <div class="col-sm-6">
+  <div
+    class="row"
+    style="display: flex; align-items: center; justify-content: center"
+  >
+    <div class="col-sm-7">
       <form>
-        <div class="form-group">
-          <label>Usuario</label>
+        <label>Usuario: </label>
+        <div class="input-group">
+          <span class="input-group-addon"
+            ><i class="glyphicon glyphicon-user"></i
+          ></span>
           <input
             type="text"
             class="form-control"
@@ -16,8 +23,11 @@
             placeholder="Digita un usuario..."
           />
         </div>
-        <div class="form-group">
-          <label>Contraseña</label>
+        <label style="margin-top: 15px">Contraseña: </label>
+        <div style="margin-bottom: 15px" class="input-group">
+          <span class="input-group-addon"
+            ><i class="glyphicon glyphicon-lock"></i
+          ></span>
           <input
             type="text"
             class="form-control"
@@ -33,7 +43,7 @@
         >
           <strong>{{ sesion.error }}</strong>
         </div>
-        <div>
+        <div class="text-center">
           <button
             type="button"
             class="btn btn-primary"

@@ -1,4 +1,4 @@
-app.controller("productosCtrl", function ($http, $uibModal) {
+app.controller("productosCtrl", function ($scope, $http, $uibModal, $location) {
   var vm = this;
 
   // Objetos
@@ -9,10 +9,33 @@ app.controller("productosCtrl", function ($http, $uibModal) {
       "El dato que buscas no se encuentra registrado o se encuentra vacío...",
   };
 
+  // Paginador
+  vm.paginador = {
+    totalItems: 0,
+    paginaActual: 0,
+    itemsPagina: 10,
+  };
+
+  // Funcion cambiar pagina
+  vm.cambiarPagina = function () {
+    //////////////////////// METODO GET PRODUCTOS PAGINADOR////////////////////////
+    $http
+      .get(
+        "https://localhost:7247/api/Products?pg=" + (vm.paginador.paginaActual - 1)
+      )
+      .then(function (respuesta) {
+        vm.productosDato.misProductos = respuesta.data.data;
+      });
+  };
+
   //////////////////////// METODO GET PRODUCTOS ////////////////////////
-  $http.get("https://localhost:7247/api/Products").then(function (respuesta) {
-    vm.productosDato.misProductos = respuesta.data;
-  });
+  $http
+    .get("https://localhost:7247/api/Products?pg=" + vm.paginador.paginaActual)
+    .then(function (respuesta) {
+      vm.productosDato.misProductos = respuesta.data.data;
+
+      vm.paginador.totalItems = respuesta.data.count;
+    });
 
   //////////////////////// METODO GET PRODUCTO {ID} ////////////////////////
   vm.buscarProducto = function (id) {

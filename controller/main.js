@@ -10,16 +10,21 @@ var app = angular.module("MainApp", [
 app.controller("mainCtrl", function ($scope) {
   var vm = this;
 
+  // Variable sesion
   vm.logueado = false;
 
+  // Variable error
   vm.error = true;
 
+  // Variable usuario
   vm.usuario = "";
 
+  // Funcion validar información
   $scope.setLogueado = function (val) {
     vm.logueado = val;
   };
 
+  // Funcion cerrar alerta
   vm.cerrarAlerta = function () {
     vm.error = false;
   };

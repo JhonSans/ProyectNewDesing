@@ -45,7 +45,7 @@
             <tr ng-repeat="datos in orden.ordenDato.misOrdenes | filter : orden.ordenDato.miOrden">
               <td>{{ datos.orderId }}</td>
               <td>{{ datos.customerId }}</td>
-              <td>{{ datos.employeeId }}</td>
+              <td>{{ datos.employee.firstName }}</td>
               <td>{{ datos.orderDate }}</td>
               <td>{{ datos.shipName }}</td>
               <td>{{ datos.shipAddress }}</td>
@@ -66,6 +66,24 @@
             </tr>
           </tbody>
         </table>
+        <!--Paginador-->
+        <div class="text-center">
+          <ul
+            uib-pagination
+            boundary-links="true"
+            boundary-link-numbers="true"
+            total-items="orden.paginador.totalItems"
+            ng-model="orden.paginador.paginaActual"
+            items-per-page="orden.paginador.itemsPagina"
+            ng-change="orden.cambiarPagina()"
+            max-size="orden.paginador.tamanoMax"
+            class="pagination-sm"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;"
+          ></ul>
+        </div>
       </div>
     </div>
   </div>

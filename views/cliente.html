@@ -2,7 +2,7 @@
   <!--Header-->
   <div class="jumbotron">
     <div style="background-image: url('../img/northwind/cliente-2.jpg')"></div>
-    <h1>Cliente</h1>
+    <h1>Clientes</h1>
   </div>
   <!--Main-->
   <div class="row">
@@ -10,7 +10,6 @@
     <div class="col-sm-12 north-list">
       <form>
         <div class="form-group">
-          <h1>Cliente ID</h1>
           <input
             type="text"
             class="form-control"
@@ -70,19 +69,23 @@
           </tbody>
         </table>
         <!--Paginador-->
-        <ul
-          uib-pagination
-          direction-links="false"
-          total-items="cliente.paginador.totalItems"
-          ng-model="cliente.paginador.paginaActual"
-          items-per-page="cliente.paginador.itemsPagina"
-        ></ul>
+        <div class="text-center">
+          <ul
+            uib-pagination
+            boundary-links="true"
+            total-items="cliente.paginador.totalItems"
+            ng-model="cliente.paginador.paginaActual"
+            items-per-page="cliente.paginador.itemsPagina"
+            ng-change="cliente.cambiarPagina()"
+            class="pagination-sm"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;"
+          ></ul>
+        </div>
       </div>
     </div>
-
-    Total de Items: {{ cliente.paginador.totalItems }} <br />
-    Pagina Actual: {{ cliente.paginador.paginaActual }} <br />
-    Datos x Pagina: {{ cliente.paginador.itemsPagina }}
 
     <!--Modal-->
     <div class="col-sm-12">
@@ -180,7 +183,7 @@
                                 </ul>
                               </td>
                               <td>
-                                
+
                               </td>
                               <td>
                                 <button ng-class="{ 'active' :  datos.orderId == cliente.detalle.id}" ng-click="cliente.detallePro(datos)" class="btn btn-nor btn-info">

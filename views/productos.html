@@ -11,7 +11,6 @@
     <div class="col-sm-12 north-list">
       <form>
         <div class="form-group">
-          <h1>Producto ID</h1>
           <input
             type="text"
             class="form-control"
@@ -72,9 +71,13 @@
             <tr ng-show="(productos.productosDato.id)">
               <td>{{ productos.productosDato.miProducto.productId }}</td>
               <td>{{ productos.productosDato.miProducto.productName }}</td>
-              <td>{{ productos.productosDato.miProducto.category.categoryName }}</td>
+              <td>
+                {{ productos.productosDato.miProducto.category.categoryName }}
+              </td>
               <td>{{ productos.productosDato.miProducto.quantityPerUnit }}</td>
-              <td>{{ productos.productosDato.miProducto.unitPrice | currency }}</td>
+              <td>
+                {{ productos.productosDato.miProducto.unitPrice | currency }}
+              </td>
               <td>{{ productos.productosDato.miProducto.unitsInStock }}</td>
               <td>
                 <button
@@ -94,6 +97,22 @@
             </tr>
           </tbody>
         </table>
+        <!--Paginador-->
+        <div class="text-center">
+          <ul
+            uib-pagination
+            boundary-links="true"
+            total-items="productos.paginador.totalItems"
+            ng-model="productos.paginador.paginaActual"
+            items-per-page="productos.paginador.itemsPagina"
+            ng-change="productos.cambiarPagina()"
+            class="pagination-sm"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;"
+          ></ul>
+        </div>
       </div>
     </div>
     <!--Modal-->

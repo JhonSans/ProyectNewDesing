@@ -1,10 +1,10 @@
 // Logica Northwind
-app.controller("clienteCtrl", function ($http, $uibModal) {
+app.controller("clienteCtrl", function ($http, $uibModal, $scope) {
   var vm = this;
-
+  
   // Objetos
   vm.clienteDet = { id: "", miCliente: [], misClientes: [] };
-  vm.opciones = { error: "", soloUna: true };
+  vm.opciones = { error: "", soloUna: true, sesion: "" };
 
   // Validacion de errores
   vm.validacion = {
@@ -15,18 +15,32 @@ app.controller("clienteCtrl", function ($http, $uibModal) {
   // Paginador
   vm.paginador = {
     totalItems: 0,
-    paginaActual: 1,
+    paginaActual: 0,
     itemsPagina: 10,
   };
 
-  //////////// METODO GET CLIENTES ////////////
-  $http.get("https://localhost:7247/api/Customers").then(function (respuesta) {
-    // Agrega los datos a la variable
-    vm.clienteDet.misClientes = respuesta.data;
+  // Funcion cambiar pagina
+  vm.cambiarPagina = function () {
+    //////////// METODO GET CLIENTES PAGINADOR ////////////
+    $http
+      .get(
+        "https://localhost:7247/api/Customers?pg=" + (vm.paginador.paginaActual - 1)
+      )
+      .then(function (respuesta) {
+        // Actualiza los datos a la variable
+        vm.clienteDet.misClientes = respuesta.data.data;
+      });
+  };
 
-    // Agrega el total de los items al paginador
-    vm.paginador.totalItems = vm.clienteDet.misClientes.length;
-  });
+  //////////// METODO GET CLIENTES ////////////
+  $http
+    .get("https://localhost:7247/api/Customers?pg=" + vm.paginador.paginaActual)
+    .then(function (respuesta) {
+      // Agrega los datos a la variable
+      vm.clienteDet.misClientes = respuesta.data.data;
+
+      vm.paginador.totalItems = respuesta.data.count;
+    });
 
   //////////// METODO GET CLIENTE {ID} ////////////
   vm.buscarCliente = function (id) {

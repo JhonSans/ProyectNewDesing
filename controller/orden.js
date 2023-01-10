@@ -9,10 +9,32 @@ app.controller("ordenCtrl", function ($http) {
       "El dato que buscas no se encuentra registrado o se encuentra vacío...",
   };
 
+  // Paginador
+  vm.paginador = {
+    totalItems: 0,
+    paginaActual: 0,
+    itemsPagina: 10,
+    tamanoMax: 5
+  };
+
+  // Funcion cambiar pagina
+  vm.cambiarPagina = function () {
+    //////////////////////// METODO GET ORDENES PAGINADOR ////////////////////////
+    $http
+      .get("https://localhost:7247/api/Orders?pg=" + (vm.paginador.paginaActual -1))
+      .then(function (respuesta) {
+        vm.ordenDato.misOrdenes = respuesta.data.data;
+      });
+  };
+
   //////////////////////// METODO GET ORDENES ////////////////////////
-  $http.get("https://localhost:7247/api/Orders").then(function (respuesta) {
-    vm.ordenDato.misOrdenes = respuesta.data;
-  });
+  $http
+    .get("https://localhost:7247/api/Orders?pg=" + vm.paginador.paginaActual)
+    .then(function (respuesta) {
+      vm.ordenDato.misOrdenes = respuesta.data.data;
+
+      vm.paginador.totalItems = respuesta.data.count;
+    });
 
   //////////////////////// METODO GET ORDEN {ID} ////////////////////////
   vm.buscarOrden = function (id) {

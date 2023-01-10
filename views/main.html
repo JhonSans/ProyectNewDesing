@@ -5,113 +5,118 @@
   </div>
   <!--Main-->
   <div ng-show="(!main.logueado)" class="container-fluid">
-    <h3>Debes ingresar para ver el contenido de la página...</h3>
+    <h3>Debes iniciar sesión para ver el contenido de la página...</h3>
   </div>
-  <div ng-show="main.logueado" class="row">
-    <div class="col-sm-12">
-      <div
-        uib-alert
-        ng-class="'alert-success'"
-        ng-show="main.error"
-        close="main.cerrarAlerta()"
-      >
-        <strong>Bienvenido</strong> {{ main.usuario }}
-      </div>
-    </div>
-
-    <!--Game 1-->
-    <div class="col-sm-6">
-      <div class="thumbnail">
+  <div ng-show="main.logueado">
+    <div class="row">
+      <div class="col-sm-12">
         <div
-          class="thumbnail-img"
-          style="background-image: url(/img/game1/game-1.jpg)"
-        ></div>
-        <div class="caption">
-          <h3>Piedra - Papel - Tijera - Lagarto - Spock</h3>
-          <p class="text-justify">
-            Piedra, Papel, Tijera, Lagarto o Spock es una expansión de los
-            clásicos método de selección de juego piedra-papel-tijeras.
-          </p>
-          <a href="#!game-1">
-            <button class="btn btn-primary">Ver</button>
-          </a>
+          uib-alert
+          ng-class="'alert-success'"
+          ng-show="main.error"
+          close="main.cerrarAlerta()"
+        >
+          <strong>Bienvenido</strong> {{ main.usuario }}
         </div>
       </div>
     </div>
+    <div class="row">
+      <!--Game 1-->
+      <div class="col-sm-6">
+        <div class="thumbnail">
+          <div
+            class="thumbnail-img"
+            style="background-image: url(/img/game1/game-1.jpg)"
+          ></div>
+          <div class="caption">
+            <h3>Piedra - Papel - Tijera - Lagarto - Spock</h3>
+            <p class="text-justify">
+              Piedra, Papel, Tijera, Lagarto o Spock es una expansión de los
+              clásicos método de selección de juego piedra-papel-tijeras.
+            </p>
+            <a href="#!game-1">
+              <button class="btn btn-primary">Ver</button>
+            </a>
+          </div>
+        </div>
+      </div>
 
-    <!--Game 2-->
-    <div class="col-sm-6">
-      <div class="thumbnail">
-        <div
-          class="thumbnail-img"
-          style="background-image: url(/img/game2/game-2.jpg)"
-        ></div>
-        <div class="caption">
-          <h3>Suma Mini-Max</h3>
-          <p class="text-justify">
-            Minimax es un método de decisión para minimizar la pérdida máxima
-            esperada en juegos con adversario y con información perfecta.
-          </p>
-          <a href="#!game-2">
-            <button class="btn btn-primary">Ver</button>
-          </a>
+      <!--Game 2-->
+      <div class="col-sm-6">
+        <div class="thumbnail">
+          <div
+            class="thumbnail-img"
+            style="background-image: url(/img/game2/game-2.jpg)"
+          ></div>
+          <div class="caption">
+            <h3>Suma Mini-Max</h3>
+            <p class="text-justify">
+              Minimax es un método de decisión para minimizar la pérdida máxima
+              esperada en juegos con adversario y con información perfecta.
+            </p>
+            <a href="#!game-2">
+              <button class="btn btn-primary">Ver</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
+    <div class="row">
+      <!--Cliente-->
+      <div class="col-sm-6">
+        <div class="thumbnail">
+          <div
+            class="thumbnail-img"
+            style="background-image: url(/img/northwind/cliente-1.jpg)"
+          ></div>
+          <div class="caption">
+            <h3>Northwind - Cliente</h3>
+            <p class="text-justify">
+              Lista de clientes almacenados en la base de datos.
+            </p>
+            <a href="#!cliente">
+              <button class="btn btn-primary">Ver</button>
+            </a>
+          </div>
+        </div>
+      </div>
 
-    <!--Cliente-->
-    <div class="col-sm-6">
-      <div class="thumbnail">
-        <div
-          class="thumbnail-img"
-          style="background-image: url(/img/northwind/cliente-1.jpg)"
-        ></div>
-        <div class="caption">
-          <h3>Northwind - Cliente</h3>
-          <p class="text-justify">
-            Lista de clientes almacenados en la base de datos.
-          </p>
-          <a href="#!cliente">
-            <button class="btn btn-primary">Ver</button>
-          </a>
+      <!--Productos-->
+      <div class="col-sm-6">
+        <div class="thumbnail">
+          <div
+            class="thumbnail-img"
+            style="background-image: url(/img/northwind/productos-1.jpg)"
+          ></div>
+          <div class="caption">
+            <h3>Northwind - Productos</h3>
+            <p class="text-justify">
+              Lista de productos almacenados en la base de datos.
+            </p>
+            <a href="#!productos">
+              <button class="btn btn-primary">Ver</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-
-    <!--Productos-->
-    <div class="col-sm-6">
-      <div class="thumbnail">
-        <div
-          class="thumbnail-img"
-          style="background-image: url(/img/northwind/productos-1.jpg)"
-        ></div>
-        <div class="caption">
-          <h3>Northwind - Productos</h3>
-          <p class="text-justify">
-            Lista de productos almacenados en la base de datos.
-          </p>
-          <a href="#!productos">
-            <button class="btn btn-primary">Ver</button>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!--Ordenes-->
-    <div class="col-sm-6">
-      <div class="thumbnail">
-        <div
-          class="thumbnail-img"
-          style="background-image: url(/img/northwind/orden-1.jpg)"
-        ></div>
-        <div class="caption">
-          <h3>Northwind - Ordenes</h3>
-          <p class="text-justify">
-            Lista de ordenes almacenadas en la base de datos.
-          </p>
-          <a href="#!orden">
-            <button class="btn btn-primary">Ver</button>
-          </a>
+    <div class="row">
+      <!--Ordenes-->
+      <div class="col-sm-6">
+        <div class="thumbnail">
+          <div
+            class="thumbnail-img"
+            style="background-image: url(/img/northwind/orden-1.jpg)"
+          ></div>
+          <div class="caption">
+            <h3>Northwind - Ordenes</h3>
+            <p class="text-justify">
+              Lista de ordenes almacenadas en la base de datos.
+            </p>
+            <a href="#!orden">
+              <button class="btn btn-primary">Ver</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
