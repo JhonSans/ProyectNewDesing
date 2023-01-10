@@ -128,7 +128,7 @@
                 <li>
                   <a
                     ng-class="{ active: isActive('/iniciar-sesion') }"
-                    ng-hidden="(!main.logueado)"
+                    ng-show="(!main.logueado)"
                     href="#!iniciar-sesion"
                     ><span class="glyphicon glyphicon-log-in"></span> Iniciar
                     Sesión</a
@@ -180,9 +180,6 @@
       <!--Main-->
       <main>
         <div class="container">
-          <div>
-            <h1>Estado: {{ main.logueado }}</h1>
-          </div>
           <div ng-view></div>
         </div>
       </main>

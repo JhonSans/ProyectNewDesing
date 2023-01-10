@@ -4,7 +4,21 @@
     <h1>Inicio</h1>
   </div>
   <!--Main-->
-  <div class="row">
+  <div ng-show="(!main.logueado)" class="container-fluid">
+    <h3>Debes ingresar para ver el contenido de la página...</h3>
+  </div>
+  <div ng-show="main.logueado" class="row">
+    <div class="col-sm-12">
+      <div
+        uib-alert
+        ng-class="'alert-success'"
+        ng-show="main.error"
+        close="main.cerrarAlerta()"
+      >
+        <strong>Bienvenido</strong> {{ main.usuario }}
+      </div>
+    </div>
+
     <!--Game 1-->
     <div class="col-sm-6">
       <div class="thumbnail">
@@ -101,6 +115,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

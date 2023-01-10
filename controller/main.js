@@ -4,18 +4,23 @@ var app = angular.module("MainApp", [
   "ngAnimate",
   "ngTouch",
   "ui.bootstrap",
-  "ngSanitize"
+  "ngSanitize",
 ]);
 
-app.controller("mainCtrl", function($scope) {
+app.controller("mainCtrl", function ($scope) {
   var vm = this;
 
   vm.logueado = false;
 
-  $scope.setLogueado = function(val)
-  {
+  vm.error = true;
+
+  vm.usuario = "";
+
+  $scope.setLogueado = function (val) {
     vm.logueado = val;
+  };
 
-  }
-
+  vm.cerrarAlerta = function () {
+    vm.error = false;
+  };
 });

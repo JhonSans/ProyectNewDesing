@@ -5,6 +5,8 @@ app.controller("iniciarCtrl", function ($scope, $location) {
 
   vm.input = { usuario: "", contrasena: "" };
 
+  vm.error = ""
+
   vm.validarDatos = function (data) {
     console.log(data);
 
@@ -12,12 +14,16 @@ app.controller("iniciarCtrl", function ($scope, $location) {
       vm.usuario.usuario === data.usuario &&
       vm.usuario.contrasena === data.contrasena
     ) {
-      console.log("Iguales");
       $scope.$parent.$parent.main.logueado = true;
+      $scope.$parent.$parent.main.usuario = vm.usuario.usuario;
       $location.path("/")
 
     } else {
-      console.log("Diferentes");
+        vm.error = "Los datos son incorrectos..."
     }
   };
+
+  vm.cerrarAlerta = function () {
+    vm.error = "";
+  }
 });
