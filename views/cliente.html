@@ -73,10 +73,12 @@
           <ul
             uib-pagination
             boundary-links="true"
+            boundary-link-numbers="true"
             total-items="cliente.paginador.totalItems"
             ng-model="cliente.paginador.paginaActual"
             items-per-page="cliente.paginador.itemsPagina"
             ng-change="cliente.cambiarPagina()"
+            max-size="cliente.paginador.tamanoMax"
             class="pagination-sm"
             previous-text="&lsaquo;"
             next-text="&rsaquo;"

@@ -51,6 +51,9 @@ span {
 .btn:focus {
   outline: none;
 }
+.input-group-btn > .btn {
+  font-size: 14px;
+} 
 a:focus {
   text-decoration: none;
 }

@@ -55,7 +55,7 @@
               <td>
                 <button
                   class="btn btn-info"
-                  ng-click="productos.detalle(items)"
+                  ng-click="productos.detalle(items.productId)"
                 >
                   Ver
                   <span class="glyphicon glyphicon-search"></span>
@@ -102,10 +102,12 @@
           <ul
             uib-pagination
             boundary-links="true"
+            boundary-link-numbers="true"
             total-items="productos.paginador.totalItems"
             ng-model="productos.paginador.paginaActual"
             items-per-page="productos.paginador.itemsPagina"
             ng-change="productos.cambiarPagina()"
+            max-size="productos.paginador.tamanoMax"
             class="pagination-sm"
             previous-text="&lsaquo;"
             next-text="&rsaquo;"
@@ -119,204 +121,204 @@
     <div class="col-sm-12">
       <script type="text/ng-template" id="productos.html">
         <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Producto ID: {{ producto.producto.id }}</h3>
+            <h3 class="modal-title" id="modal-title">Producto ID: {{ producto.productoInfo.productId }}</h3>
         </div>
         <div class="modal-body north-modal" id="modal-body">
-            <uib-tabset active="activeJustified" justified="true">
-                <!--Detalles del producto-->
-                <uib-tab index="0" heading="Detalles">
-                    <div class="container-fluid container-list">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" class="form-control" value="{{ producto.producto.nombre }}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Proveedor</label>
-                                    <select class="form-control" ng-model="producto.producto.proveedor">
-                                      <option ng-repeat="proveedor in producto.opciones.proveedoresArray" ng-value="{{ proveedor.supplierId }}">
-                                        {{ proveedor.companyName }}
-                                      </option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Categoría</label>
-                                    <select class="form-control" ng-model="producto.producto.categoria">
-                                      <option ng-repeat="categoria in producto.opciones.categoriasArray" ng-value="{{ categoria.categoryId }}">
-                                        {{ categoria.categoryName }}
-                                      </option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Detalle</label>
-                                    <input type="text" class="form-control" value="{{ producto.producto.cantidadUnidad }}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Precio Unitario</label>
-                                    <input type="text" class="form-control" value="{{ producto.producto.precioUnidad }}">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Unidades en Stock</label>
-                                    <input type="text" class="form-control" value="{{ producto.producto.unidadStock }}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Unidades Pedidas</label>
-                                    <input type="text" class="form-control" value="{{ producto.producto.unidadOrden }}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Nivel de Reabastecimiento</label>
-                                    <input type="text" class="form-control" value="{{ producto.producto.unidadReorden }}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Descontinuado</label>
-                                    <select class="form-control" ng-model="producto.producto.descontinuado">
-                                      <option ng-repeat="descontinuado in producto.opciones.descontinuadoArray" ng-value="{{ descontinuado.estado }}">
-                                        {{ descontinuado.info }}
-                                      </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 text-right">
-                                <button class="btn btn-primary btn-block" type="button">Guardar</button>
-                            </div>
-                        </div>
+          <uib-tabset active="activeJustified" justified="true">
+            <!--Detalles del producto-->
+            <uib-tab index="0" heading="Detalles">
+              <div class="container-fluid container-list">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Nombre:</label>
+                      <input type="text" class="form-control" value="{{ producto.productoInfo.productName }}">
                     </div>
-                </uib-tab>
-                <!--Datos del proveedor-->
-                <uib-tab index="1" heading="Proveedor">
-                    <div class="container-fluid container-list">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
+                    <div class="form-group">
+                      <label>Proveedor</label>
+                      <select class="form-control" ng-model="producto.productoInfo.supplierId">
+                        <option ng-repeat="proveedor in producto.proveedoresInfo" ng-value="{{ proveedor.supplierId }}">
+                          {{ proveedor.companyName }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Categoría</label>
+                      <select class="form-control" ng-model="producto.productoInfo.categoryId">
+                        <option ng-repeat="categoria in producto.categoriaInfo" ng-value="{{ categoria.categoryId }}">
+                          {{ categoria.categoryName }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Detalle</label>
+                        <input type="text" class="form-control" value="{{ producto.productoInfo.quantityPerUnit }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Precio Unitario</label>
+                        <input type="text" class="form-control" value="{{ producto.productoInfo.unitPrice }}">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Unidades en Stock</label>
+                      <input type="text" class="form-control" value="{{ producto.productoInfo.unitsInStock }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Unidades Pedidas</label>
+                        <input type="text" class="form-control" value="{{ producto.productoInfo.unitsOnOrder }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Nivel de Reabastecimiento</label>
+                        <input type="text" class="form-control" value="{{ producto.productoInfo.reorderLevel }}">
+                    </div>
+                    <div class="form-group">
+                      <label>Descontinuado</label>
+                      <select class="form-control" ng-model="producto.productoInfo.discontinued">
+                        <option ng-repeat="descontinuado in producto.descontinuadoInfo" ng-value="{{ descontinuado.estado }}">
+                          {{ descontinuado.info }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 text-right">
+                    <button class="btn btn-primary btn-block" type="button">Guardar</button>
+                </div>
+                </div>
+            </div>
+            </uib-tab>
+            <!--Datos del proveedor-->
+            <uib-tab index="1" heading="Proveedor" ng-click="producto.obtenerProveedor(producto.productoInfo.supplierId)">
+              <div class="container-fluid container-list">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <th>ID</th>
+                          <th>Empresa</th>
+                          <th>Ciudad</th>
+                          <th>País</th>
+                          <th>Teléfono</th>
+                          <th>Acciones</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ producto.proveedorInfo.supplierId }}</td>
+                            <td>{{ producto.proveedorInfo.companyName }}</td>
+                            <td>{{ producto.proveedorInfo.city }}</td>
+                            <td>{{ producto.proveedorInfo.country }}</td>
+                            <td>{{ producto.proveedorInfo.phone }}</td>
+                            <td>
+                              <button class="btn btn-info btn-nor" ng-class="{ 'active' : producto.productoBandera != 0 }" ng-click="producto.productosRelacionados(producto.proveedorInfo.supplierId)">
+                                Ver
+                                <span class="glyphicon glyphicon-search"></span>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <!--Proveedor-->
+                      <div ng-show="producto.productoBandera != 0">
+                        <uib-tabset active="activeJustified" justified="true" class="nor-det-list">
+                            <!--Detalles-->
+                            <uib-tab index="1" heading="Detalles">
+                              <div class="container-fluid container-list">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>ID</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.supplierId }}" ng-disabled="true">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Empresa</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.companyName }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.contactName }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Cargo</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.contactTitle }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Dirección</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.address }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ciudad</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.city }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Región</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.region }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Código Postal</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.postalCode }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>País</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.country }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Teléfono</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.phone }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>FAX</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.fax }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Sitio Web</label>
+                                            <input type="text" class="form-control" value="{{ producto.proveedorInfo.homePage }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-primary btn-block" type="button">Guardar</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </uib-tab>
+                            <!--Productos relacionados-->
+                            <uib-tab index="2" heading="Productos Relacionados">
+                              <div class="container-fluid container-list">
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                      <table class="table table-bordered table-hover">
                                         <thead>
-                                            <th>ID</th>
-                                            <th>Empresa</th>
-                                            <th>Ciudad</th>
-                                            <th>País</th>
-                                            <th>Teléfono</th>
-                                            <th>Acciones</th>
+                                          <th>ID</th>
+                                          <th>Nombre</th>
+                                          <th>Proveedor</th>
+                                          <th>Categoría</th>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="proveedor in producto.proveedor">
-                                                <td>{{ proveedor.supplierId }}</td>
-                                                <td>{{ proveedor.companyName }}</td>
-                                                <td>{{ proveedor.city }}</td>
-                                                <td>{{ proveedor.country }}</td>
-                                                <td>{{ proveedor.phone }}</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-nor" ng-class="{ 'active' :  proveedor.supplierId == producto.opciones.id }" ng-click="producto.buscarProveedor(proveedor.supplierId)">
-                                                      Ver
-                                                      <span class="glyphicon glyphicon-search"></span>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                          <tr ng-repeat="item in producto.productosProveedor">
+                                            <td>{{ item.productId }}</td>
+                                            <td>{{ item.productName }}</td>
+                                            <td>{{ producto.proveedorInfo.companyName }}</td>
+                                            <td>{{ item.category.categoryName }}</td>
+                                          </tr>
                                         </tbody>
-                                    </table>
+                                      </table>
+                                    </div>
+                                  </div>
                                 </div>
-
-                                <!--Proveedor-->
-                                <div ng-show="producto.opciones.id != 0">
-                                    <uib-tabset active="activeJustified" justified="true" class="nor-det-list">
-                                        <!--Detalles-->
-                                        <uib-tab index="1" heading="Detalles">
-                                            <div class="container-fluid container-list">
-                                                <div class="row" ng-repeat="item in producto.proveedor">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>ID</label>
-                                                            <input type="text" class="form-control" value="{{ item.supplierId }}" ng-disabled="true">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Empresa</label>
-                                                            <input type="text" class="form-control" value="{{ item.companyName }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Nombre</label>
-                                                            <input type="text" class="form-control" value="{{ item.contactName }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Cargo</label>
-                                                            <input type="text" class="form-control" value="{{ item.contactTitle }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Dirección</label>
-                                                            <input type="text" class="form-control" value="{{ item.address }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Ciudad</label>
-                                                            <input type="text" class="form-control" value="{{ item.city.region }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>Región</label>
-                                                            <input type="text" class="form-control" value="{{ item.region }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Código Postal</label>
-                                                            <input type="text" class="form-control" value="{{ item.postalCode }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>País</label>
-                                                            <input type="text" class="form-control" value="{{ item.country }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Teléfono</label>
-                                                            <input type="text" class="form-control" value="{{ item.phone }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>FAX</label>
-                                                            <input type="text" class="form-control" value="{{ item.fax }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Sitio Web</label>
-                                                            <input type="text" class="form-control" value="{{ item.homePage }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <button class="btn btn-primary btn-block" type="button">Guardar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </uib-tab>
-                                        <!--Productos relacionados-->
-                                        <uib-tab index="2" heading="Productos Relacionados">
-                                            <div class="container-fluid container-list">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-bordered table-hover">
-                                                                <thead>
-                                                                    <th>ID</th>
-                                                                    <th>Nombre</th>
-                                                                    <th>Proveedor</th>
-                                                                    <th>Categoría</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr ng-repeat="producto in producto.opciones.productosArray">
-                                                                        <td>{{ producto.productId }}</td>
-                                                                        <td>{{ producto.productName }}</td>
-                                                                        <td>{{ producto.supplier.companyName }}</td>
-                                                                        <td>{{ producto.category.categoryName }}</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </uib-tab>
-                                    </uib-tabset>
-                                </div>
-                            </div>
-                        </div>
+                              </div>
+                            </uib-tab>
+                        </uib-tabset>
+                      </div>
                     </div>
-                </uib-tab>
-            </uib-tabset>
+                  </div>
+                </div>
+              </div>
+            </uib-tab>
+          </uib-tabset>
         </div>
         <div class="modal-footer">
             <button class="btn btn-warning" type="button" ng-click="producto.cancelar()">Cancelar</button>

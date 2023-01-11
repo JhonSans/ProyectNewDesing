@@ -1,5 +1,5 @@
 // Logica Juego 1
-app.controller("miPrimerJuego", function ($scope, $uibModal) {
+app.controller("miPrimerJuego", function ($scope, $location, $uibModal) {
   var vm = this;
 
   //Objetos

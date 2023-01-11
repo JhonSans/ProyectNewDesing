@@ -19,7 +19,7 @@ app.controller("iniciarCtrl", function ($scope, $location) {
       // Envia la respuesta a el main
       $scope.$parent.$parent.main.logueado = true;
       $scope.$parent.$parent.main.usuario = vm.usuario.usuario;
-
+      
       // Redigire al inicio
       $location.path("/");
 

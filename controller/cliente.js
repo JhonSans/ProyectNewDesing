@@ -17,6 +17,7 @@ app.controller("clienteCtrl", function ($http, $uibModal, $scope) {
     totalItems: 0,
     paginaActual: 0,
     itemsPagina: 10,
+    tamanoMax: 5
   };
 
   // Funcion cambiar pagina
@@ -93,6 +94,8 @@ app.controller("clienteCtrl", function ($http, $uibModal, $scope) {
 // Controlador modal
 app.controller("modalCliente", function ($uibModalInstance, respuesta, $http) {
   var vm = this;
+
+  console.log(respuesta);
 
   // Objeto Cliente
   vm.clienteDato = {
