@@ -10,6 +10,8 @@ var app = angular.module("MainApp", [
 app.controller("mainCtrl", function ($scope) {
   var vm = this;
 
+  vm.fecha = new Date();
+
   // Variable sesion
   vm.logueado = false;
 
