@@ -39,6 +39,7 @@
     <script type="text/javascript" src="controller/orden.js"></script>
     <script type="text/javascript" src="controller/productos.js"></script>
     <script type="text/javascript" src="controller/iniciar-sesion.js"></script>
+    <script type="text/javascript" src="controller/orden-nueva.js"></script>
   </head>
 
   <body ng-app="MainApp" ng-controller="mainCtrl as main">
@@ -130,8 +131,7 @@
                     ng-class="{ active: isActive('/iniciar-sesion') }"
                     ng-show="(!main.logueado)"
                     href="#!iniciar-sesion"
-                    ><span class="glyphicon glyphicon-log-in"></span> Iniciar
-                    Sesión</a
+                    ><span class="glyphicon glyphicon-log-in"></span> Ingresar</a
                   >
                 </li>
                 <li>

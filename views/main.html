@@ -1,8 +1,4 @@
 <div>
-  <!--Header-->
-  <div class="jumbotron">
-    <h1>Inicio</h1>
-  </div>
   <!--Main-->
   <div ng-show="(!main.logueado)" class="container-fluid">
     <h3>Debes iniciar sesión para ver el contenido de la página...</h3>
@@ -15,9 +11,15 @@
           ng-class="'alert-success'"
           ng-show="main.error"
           close="main.cerrarAlerta()"
+          class="alert-main"
         >
           <strong>Bienvenido</strong> {{ main.usuario }}
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="page-header">Artículos</h1>
       </div>
     </div>
     <div class="row">

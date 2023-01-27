@@ -71,18 +71,14 @@
             <tr ng-show="(productos.productosDato.id)">
               <td>{{ productos.productosDato.miProducto.productId }}</td>
               <td>{{ productos.productosDato.miProducto.productName }}</td>
-              <td>
-                {{ productos.productosDato.miProducto.category.categoryName }}
-              </td>
+              <td>{{ productos.productosDato.miProducto.category.categoryName }}</td>
               <td>{{ productos.productosDato.miProducto.quantityPerUnit }}</td>
-              <td>
-                {{ productos.productosDato.miProducto.unitPrice | currency }}
-              </td>
+              <td>{{ productos.productosDato.miProducto.unitPrice | currency }}</td>
               <td>{{ productos.productosDato.miProducto.unitsInStock }}</td>
               <td>
                 <button
                   class="btn btn-info"
-                  ng-click="productos.detalle(productos.productosDato.miProducto)"
+                  ng-click="productos.detalle(productos.productosDato.miProducto.productId)"
                 >
                   Ver
                   <span class="glyphicon glyphicon-search"></span>
@@ -98,7 +94,7 @@
           </tbody>
         </table>
         <!--Paginador-->
-        <div class="text-center">
+        <div class="text-center" ng-show="productos.productosDato.id == ''">
           <ul
             uib-pagination
             boundary-links="true"
@@ -126,10 +122,14 @@
         <div class="modal-body north-modal" id="modal-body">
           <uib-tabset active="activeJustified" justified="true">
             <!--Detalles del producto-->
-            <uib-tab index="0" heading="Detalles">
+            <uib-tab index="0" heading="Detalles" ng-click="producto.productoBandera = 0">
               <div class="container-fluid container-list">
                 <div class="row">
                   <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>ID:</label>
+                      <input type="text" class="form-control" value="{{ producto.productoInfo.productId }}" ng-disabled="true">
+                    </div>
                     <div class="form-group">
                       <label>Nombre:</label>
                       <input type="text" class="form-control" value="{{ producto.productoInfo.productName }}">
@@ -154,12 +154,12 @@
                         <label>Detalle</label>
                         <input type="text" class="form-control" value="{{ producto.productoInfo.quantityPerUnit }}">
                     </div>
-                    <div class="form-group">
-                        <label>Precio Unitario</label>
-                        <input type="text" class="form-control" value="{{ producto.productoInfo.unitPrice }}">
-                    </div>
                   </div>
                   <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Precio Unitario</label>
+                      <input type="text" class="form-control" value="{{ producto.productoInfo.unitPrice }}">
+                    </div>
                     <div class="form-group">
                       <label>Unidades en Stock</label>
                       <input type="text" class="form-control" value="{{ producto.productoInfo.unitsInStock }}">

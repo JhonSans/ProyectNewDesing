@@ -53,7 +53,7 @@ span {
 }
 .input-group-btn > .btn {
   font-size: 14px;
-} 
+}
 a:focus {
   text-decoration: none;
 }
@@ -79,12 +79,22 @@ a:focus {
 .jumbotron > h1 {
   position: relative;
 }
-
+.panel-origin > .panel-heading {
+  background-color: var(--azul);
+  color: var(--blanco);
+  font-size: 20px;
+  text-align: center;
+}
 /*---------------------------------------*/
 /*-------------- Paginador --------------*/
 /*---------------------------------------*/
 
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
   background-color: var(--verde);
   border-color: var(--verde-claro);
 }
@@ -168,7 +178,9 @@ a:focus {
   margin: 1px;
   border-color: var(--blanco);
 }
-
+.activeBtn {
+  display: none;
+}
 /*------------------------------------*/
 /*-------------- Navbar --------------*/
 /*------------------------------------*/
@@ -289,7 +301,11 @@ a:focus {
 .thumbnail > .caption a button {
   padding: 6px 30px;
 }
-
+.alert-main {
+  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 0 !important;
+}
 /*--------------------------------------*/
 /*-------------- Juego #1 --------------*/
 /*--------------------------------------*/
@@ -602,8 +618,8 @@ table tbody tr td .btn-danger {
 .btn-nor.active,
 .btn-nor.active:focus,
 .btn-nor.active:hover {
-  background-color: #ec971f;
-  border-color: #d58512;
+  background-color: #ec971f !important;
+  border-color: #d58512 !important;
 }
 .nor-det-list > .nav-tabs.nav-justified {
   background-color: var(--azul);

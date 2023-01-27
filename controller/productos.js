@@ -1,4 +1,4 @@
-app.controller("productosCtrl", function ($scope, $http, $uibModal, $location) {
+app.controller("productosCtrl", function ($http, $uibModal) {
   var vm = this;
 
   // Objetos
@@ -68,6 +68,7 @@ app.controller("productosCtrl", function ($scope, $http, $uibModal, $location) {
 
   // Opciones modal
   vm.detalle = function (id) {
+
     $uibModal.open({
       animation: vm.animationsEnabled,
       ariaLabelledBy: "modal-title",
