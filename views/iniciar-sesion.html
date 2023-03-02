@@ -8,60 +8,60 @@
   <div class="container-fluid my-game-one">
     <div class="row" style="display: flex; justify-content: center; align-items: center; min-height: 65vh;">
       <div class="col-sm-7">
-        <div class="panel panel-default ">
-          <div class="panel-heading">
-            <h1>Ingresar</h1>
-          </div>
-          <div class="panel-body">
-            <div>
-              <form>
-                <label>Usuario: </label>
-                <div class="input-group">
-                  <span class="input-group-addon"
-                    ><i class="glyphicon glyphicon-user"></i
-                  ></span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    ng-model="sesion.input.usuario"
-                    placeholder="Digita un usuario..."
-                  />
+        <form>
+          <div class="panel panel-default ">
+            <div class="panel-heading">
+              <h1>Ingresar</h1>
+            </div>
+            <div class="panel-body">
+              <div>
+                  <label>Usuario: </label>
+                  <div class="input-group">
+                    <span class="input-group-addon"
+                      ><i class="glyphicon glyphicon-user"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      ng-model="sesion.input.usuario"
+                      placeholder="Digita un usuario..."
+                    />
+                  </div>
+                  <label style="margin-top: 15px">Contraseña: </label>
+                  <div style="margin-bottom: 15px" class="input-group">
+                    <span class="input-group-addon"
+                      ><i class="glyphicon glyphicon-lock"></i
+                    ></span>
+                    <input
+                      type="password"
+                      class="form-control"
+                      ng-model="sesion.input.contrasena"
+                      placeholder="Digita la contraseña..."
+                    />
+                  </div>
+                  <div
+                    uib-alert
+                    ng-class="'alert-danger'"
+                    ng-show="sesion.error"
+                    close="sesion.cerrarAlerta()"
+                  >
+                    <strong>{{ sesion.error }}</strong>
+                  </div>
                 </div>
-                <label style="margin-top: 15px">Contraseña: </label>
-                <div style="margin-bottom: 15px" class="input-group">
-                  <span class="input-group-addon"
-                    ><i class="glyphicon glyphicon-lock"></i
-                  ></span>
-                  <input
-                    type="password"
-                    class="form-control"
-                    ng-model="sesion.input.contrasena"
-                    placeholder="Digita la contraseña..."
-                  />
-                </div>
-                <div
-                  uib-alert
-                  ng-class="'alert-danger'"
-                  ng-show="sesion.error"
-                  close="sesion.cerrarAlerta()"
-                >
-                  <strong>{{ sesion.error }}</strong>
-                </div>
-              </form>
+              </div>
+              <div class="panel-footer">
+                <div class="text-center">
+                  <button
+                  type="submit"
+                  class="btn btn-primary"
+                  ng-click="sesion.validarDatos(sesion.input)"
+                  >
+                  Validar
+                </button>
+              </div>
             </div>
           </div>
-          <div class="panel-footer">
-            <div class="text-center">
-              <button
-                type="button"
-                class="btn btn-primary"
-                ng-click="sesion.validarDatos(sesion.input)"
-              >
-                Validar
-              </button>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

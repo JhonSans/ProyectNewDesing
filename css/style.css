@@ -367,9 +367,7 @@ a:focus {
 }
 .my-game-one > .row .panel-default .panel-body input[type="radio"] {
   position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
+
 }
 .my-game-one > .row .panel-default .panel-body input[type="radio"] + img {
   cursor: pointer;
@@ -643,11 +641,11 @@ table tbody tr td .btn-danger {
 /*----------------------------------------*/
 /*-------------- Responsive --------------*/
 /*----------------------------------------*/
-@media (min-width: 1200px) {
+/*@media (min-width: 1200px) {
   .container {
     width: 1250px;
   }
-}
+}*/
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color: var(--blanco);
