@@ -4,6 +4,10 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     // Cargando
     vm.cargando = 0;
 
+    // Pausa
+    vm.pause = false;
+    vm.pauseMostrar = false;
+
     // Cambios de estado
     vm.vista = 1;
 
@@ -26,7 +30,7 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     vm.jugadores = [];
 
     // Daño inflingido
-    vm.hit = { dano: "", valor: "" };
+    vm.hit = { dano: "", valor: "", objetivo: "" };
 
     // Reglas del juego
     vm.reglas = [
@@ -114,14 +118,23 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     };
 
     // Funcion cambiar vista del juego
-    vm.cambioVista = function (id) {
+    vm.cambioVista = function (vista) {
         // Limpia los jugadores
         vm.jugadores = [];
 
-        // Cambia la vista segun el id
-        if (id == 1) vm.vista = id;
-        else if (id == 2) vm.vista = id;
-        else vm.vista = id;
+        console.log(vista);
+
+        switch (vista) {
+            case "inicio":
+                vm.vista = 0;
+                break;
+            case "comenzar":
+                vm.vista = 1;
+                break;    
+            case "creditos":
+                vm.vista = 3;
+                break;
+        }
     };
 
     // Funcion regresar vista anterior
@@ -169,41 +182,14 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     // Funcion asignar elecciones del jugador
     vm.jugadorElecciones = function (dato) {
 
-        // Valida si se inicio la funcion con un click o un keypress 
-        if (dato.code != undefined) {
-            // Asigna el valor de cada tecla a un tipo de estrategia
-            switch (dato.code) {
-                case "KeyQ":
-                    vm.seleccionado.estrategia = vm.estrategias[0].id;
-                    vm.seleccionado.icono = vm.estrategias[0].icono;
-                    break;
-                case "KeyW":
-                    vm.seleccionado.estrategia = vm.estrategias[1].id;
-                    vm.seleccionado.icono = vm.estrategias[1].icono;
-                    break;
-                case "KeyE":
-                    vm.seleccionado.estrategia = vm.estrategias[2].id;
-                    vm.seleccionado.icono = vm.estrategias[2].icono;
-                    break;
-                case "KeyR":
-                    vm.seleccionado.estrategia = vm.estrategias[3].id;
-                    vm.seleccionado.icono = vm.estrategias[3].icono;
-                    break;
-                case "KeyT":
-                    vm.seleccionado.estrategia = vm.estrategias[4].id;
-                    vm.seleccionado.icono = vm.estrategias[4].icono;
-                    break;
-            }
-        } else {
-            // Asigna el valor del click a la estrategia
-            vm.seleccionado.estrategia = dato;
+        // Asigna el valor del click a la estrategia
+        vm.seleccionado.estrategia = dato;
 
-            // Recorre las estrategias y agrega el icono a el jugador
-            _.each(vm.estrategias, function (e) {
-                if (e.id == dato)
-                    vm.seleccionado.icono = e.icono;
-            });
-        }
+        // Recorre las estrategias y agrega el icono a el jugador
+        _.each(vm.estrategias, function (e) {
+            if (e.id == dato)
+                vm.seleccionado.icono = e.icono;
+        });
 
         // Valida si la cantidad de jugadores es 1
         if (vm.cantidad == 1) {
@@ -234,12 +220,16 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
         }
     };
 
-    // Funcion para comnezar el juego
+    // Funcion para comenzar el juego
     vm.comenzarJuego = function () {
 
-        // Limpia la variable
-        vm.estado = { condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
-        vm.hit = { dano: "", valor: "" };
+        // Si el juego no esta pausado, cambia el icono de play a pause
+        vm.pause = true;
+
+        // Limpia los resultados
+        /*vm.estado = { condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
+        vm.hit = { dano: "", valor: "", objetivo: "" };
+        vm.seleccionado.estrategia = "";*/
 
         // Realiza el conteo para comenzar a jugar
         $interval(function (i) {
@@ -250,25 +240,38 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
             if (i == 5) vm.conteo = "";
         }, 1000);
 
-        // Recorre los jugadores, si el jugador es CPU le asigna un valor de estrategia aleatorio
-        _.each(vm.jugadores, function (p) {
-            if (p.nombre == "CPU") {
-                _.each(vm.estrategias, function (e) {
-                    var r = Math.ceil(Math.random() * 5);
+        if (!vm.pauseMostrar) {
+            // Recorre los jugadores, si el jugador es CPU le asigna un valor de estrategia aleatorio
+            _.each(vm.jugadores, function (p) {
+                if (p.nombre == "CPU") {
+                    _.each(vm.estrategias, function (e) {
+                        var r = Math.ceil(Math.random() * 5);
 
-                    if (e.id == r.toString()) {
-                        p.estrategia = e.id;
-                        p.img = e.icono;
-                    }
-                });
-            }
-        });
+                        if (e.id == r.toString()) {
+                            p.estrategia = e.id;
+                            p.img = e.icono;
+                        }
+                    });
+                }
+            });
 
-        // Espera 5 segundos para ejecutar la funcion
-        $timeout(function () {
-            vm.partidaJugada();
-        }, 5000);
+            // Espera 5 segundos para ejecutar la funcion
+            $timeout(function () {
+                // Ejecuta la funcion de partida
+                vm.partidaJugada();
+            }, 5000);
+
+            // Espera 6 segundos para ejecutar la funcion
+            /*$timeout(function () {
+                vm.comenzarJuego();
+            }, 6000);*/
+        }
     };
+
+    // Funcion pausar
+    vm.pausarJuego = function () {
+        vm.pauseMostrar = !vm.pauseMostrar;
+    }
 
     // Funcion obtener ganador
     vm.partidaJugada = function () {
@@ -436,6 +439,10 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
                 vm.estado.iconoJ1 = vm.estrategias[4].icono;
                 vm.estado.iconoJ2 = vm.estrategias[4].icono;
                 break;
+            // Default
+            default:
+                vm.estado.razon = "";
+                vm.estado.resultado = "¡PERDEDOR!";
         }
 
         vm.hit.dano = Math.ceil(Math.random() * (25 - 7) + 7);
@@ -447,31 +454,30 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
         switch (vm.estado.resultado) {
             case "¡GANADOR!":
                 vm.jugadores[1].vida = vm.jugadores[1].vida - vm.hit.dano;
+                vm.hit.objetivo = vm.jugadores[1].nombre;
                 break;
             case "¡PERDEDOR!":
                 vm.jugadores[0].vida = vm.jugadores[0].vida - vm.hit.dano;
+                vm.hit.objetivo = vm.jugadores[0].nombre;
                 break;
         }
         
         if (vm.jugadores[0].vida == 0 || vm.jugadores[1].vida == 0)
         {
-            console.log();
+            console.log("Fin del juego");
         }
-
-        console.log(vm.hit);
-        console.log(vm.jugadores)
     }
 
     // Funcion de carga
     vm.cargandoJuego = function () {
-        vm.cargando = 0;
+        vm.cargando = 100;
         // Altera el estado de la barra
-        $interval(function () {
+        /*$interval(function () {
             // Agrega un numero aleatorio a la barra de progreso
             vm.cargando = Math.ceil(
                 Math.random() * (100 - vm.cargando) + vm.cargando
             );
-        }, 2000);
+        }, 2000);*/
     };
 
     vm.init();

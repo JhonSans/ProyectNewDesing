@@ -24,15 +24,15 @@ var app = angular
         controller: "pptslController",
         controllerAs: "pptsl",
       })
-      .when("/Juegos/Suma", {
-        templateUrl: "views/Juegos/Suma/suma.html",
-        controller: "sumaController",
-        controllerAs: "sumaMM",
-      })
       .when("/Juegos/PPTLS/Jugar", {
         templateUrl: "views/Juegos/PPTLS/jugar.html",
         controller: "pptslController",
         controllerAs: "pptsl",
+      })
+      .when("/Juegos/Suma", {
+        templateUrl: "views/Juegos/Suma/suma.html",
+        controller: "sumaController",
+        controllerAs: "sumaMM",
       })
       .otherwise({
         redirectTo: "/IniciarSesion",

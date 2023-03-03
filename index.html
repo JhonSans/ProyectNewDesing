@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="/styles/style-new.css" />
         <!-- Font Awesome -->
         <link rel="stylesheet" href="/styles/font-awesome-4.7.0/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.css" />
     </head>
 </head>
 <body ng-app="MainApp" ng-controller="mainController">
@@ -51,9 +51,9 @@
                     {{ contenido.titulo }}
                     <i class="{{ contenido.drop }}"></i>
                 </button>
-                <ul ng-if="contenido.items.length > 0" class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                    <li role="menuItem" ng-repeat="item in contenido.items">
-                        <a href="#!{{ item.url }}" ng-class="{ 'active' : isActive('{{ item.url }}') }" ng-click="actualizarContenido(item.url)">{{ item.titulo }}</a>
+                <ul ng-if="contenido.articulos.length > 0" class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                    <li role="menuItem" ng-repeat="articulo in contenido.articulos">
+                        <a href="#!{{ articulo.url }}" ng-class="{ 'active' : isActive('{{ articulo.url }}') }" ng-click="actualizarContenido(articulo.url)">{{ articulo.titulo }}</a>
                     </li>
                 </ul>
             </div>

@@ -2,1152 +2,1259 @@
 /*-------------- Variables --------------*/
 /*---------------------------------------*/
 :root {
-  --azul: #1f6ce0;
-  --azul-claro: #5896f3;
-  --blanco: #fff;
-  --gris: #9d9d9d;
-  --gris-claro: #ddd;
-  --gris-oscuro: #3b3b3b;
-  --verde: #04aa6d;
-  --verde-claro: #3fbd8f;
+    --azul: #1f6ce0;
+    --azul-claro: #5896f3;
+    --blanco: #fff;
+    --gris: #9d9d9d;
+    --gris-claro: #ddd;
+    --gris-oscuro: #3b3b3b;
+    --verde: #04aa6d;
+    --verde-claro: #3fbd8f;
 
-  --pptsl-window: #030321;
-  --pptsl-progress: #840037;
-  --pptsl-font: #bd0034;
-  --pptsl-btn: #fdb731;
-  --pptsl-btn-border: #4d163d;
+    --pptsl-window: #030321;
+    --pptsl-progress: #840037;
+    --pptsl-font: #bd0034;
+    --pptsl-btn: #fdb731;
+    --pptsl-btn-border: #4d163d;
 }
 /*------------------------------------*/
 /*-------------- Global --------------*/
 /*------------------------------------*/
 * {
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
 }
 body {
-  background-color: var(--gris-claro);
-  position: relative;
+    background-color: var(--gris-claro);
+    position: relative;
+}
+.page-header {
+    border-color: var(--gris);
 }
 .panel-default .panel-heading {
-  background-color: var(--azul);
-  color: var(--blanco);
+    background-color: var(--azul);
+    color: var(--blanco);
 }
 .btn-default {
-  background-color: var(--gris-claro);
-  color: var(--gris-oscuro);
-  border: none;
-  transition: all 0.2s ease-in-out;
+    background-color: var(--gris-claro);
+    color: var(--gris-oscuro);
+    border: none;
+    transition: all 0.2s ease-in-out;
 }
 .btn-default:hover,
 .btn-default:focus,
 .btn-default:active {
-  background-color: var(--gris) !important;
-  border: none;
-  outline: none !important;
+    background-color: var(--gris) !important;
+    border: none;
+    outline: none !important;
 }
 .btn-primary {
-  background-color: var(--verde);
-  color: var(--blanco);
-  font-weight: bold;
-  border: none;
-  transition: all 0.2s ease-in-out;
+    background-color: var(--verde);
+    color: var(--blanco);
+    font-weight: bold;
+    border: none;
+    transition: all 0.2s ease-in-out;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: var(--verde-claro) !important;
-  border: none;
-  outline: none !important;
+    background-color: var(--verde-claro) !important;
+    border: none;
+    outline: none !important;
 }
 input[type="text"],
 input[type="password"] {
-  border: none;
-  border-bottom: solid 1px var(--gris);
-  border-radius: 0;
-  box-shadow: none;
-  margin-bottom: 30px;
+    border: none;
+    border-bottom: solid 1px var(--gris);
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 30px;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border-color: var(--gris);
-  box-shadow: none;
+    border-color: var(--gris);
+    box-shadow: none;
 }
 .form-group {
-  position: relative;
+    position: relative;
 }
 .form-group > input {
-  padding-right: 35px;
+    padding-right: 35px;
 }
 .form-group > i {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 9px 12px;
-  color: var(--gris);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 9px 12px;
+    color: var(--gris);
 }
 /*------------------------------------*/
 /*-------------- Header --------------*/
 /*------------------------------------*/
 header {
-  background-color: var(--gris-oscuro);
-  height: 40px;
-  transition: all 0.2s ease;
-  overflow: hidden;
+    background-color: var(--gris-oscuro);
+    height: 40px;
+    transition: all 0.2s ease;
+    overflow: hidden;
 }
 header.active {
-  height: 0;
+    height: 0;
 }
 header > div ul {
-  list-style: none;
+    list-style: none;
 }
 header > div ul {
-  float: left;
-  padding: 10px 0;
-  margin-bottom: 0;
+    float: left;
+    padding: 10px 0;
+    margin-bottom: 0;
 }
 header > div ul li {
-  float: left;
-  display: block;
-  position: relative;
+    float: left;
+    display: block;
+    position: relative;
 }
 header > div ul li a {
-  line-height: 20px;
-  padding: 10px;
-  font-size: 20px;
-  color: var(--blanco);
-  transition: all 0.2s ease;
+    line-height: 20px;
+    padding: 10px;
+    font-size: 20px;
+    color: var(--blanco);
+    transition: all 0.2s ease;
 }
 header > div ul li a:hover,
 header > div ul li a:focus {
-  background-color: var(--verde);
-  color: var(--gris-oscuro);
+    background-color: var(--verde);
+    color: var(--gris-oscuro);
 }
 /*------------------------------------*/
 /*-------------- Navbar --------------*/
 /*------------------------------------*/
 .navbar {
-  position: sticky;
-  margin-bottom: 0;
-  border-radius: initial;
-  border: none;
-  background-color: var(--azul);
-  min-height: 90px;
-  -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 1);
+    position: sticky;
+    margin-bottom: 0;
+    border-radius: initial;
+    border: none;
+    background-color: var(--azul);
+    min-height: 90px;
+    -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 1);
 }
 .navbar > .navbar-header {
-  min-height: 90px;
+    min-height: 90px;
 }
 .navbar > .navbar-header button {
-  margin-top: 27px;
-  position: relative;
-  height: 30px;
-  width: 30px;
-  padding: 0;
-  border: none;
+    margin-top: 27px;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    border: none;
 }
 .navbar > .navbar-header button:hover,
 .navbar > .navbar-header button:focus,
 .navbar-header button:active {
-  background-color: transparent;
+    background-color: transparent;
 }
 .navbar > .navbar-header button span {
-  position: absolute;
-  width: 100%;
-  margin: 0 !important;
-  transition: all 0.3s ease;
-  transform: rotate(0deg);
+    position: absolute;
+    width: 100%;
+    margin: 0 !important;
+    transition: all 0.3s ease;
+    transform: rotate(0deg);
 }
 .navbar > .navbar-header button span:nth-child(1) {
-  bottom: 4px;
+    bottom: 4px;
 }
 .navbar > .navbar-header button span:nth-child(3) {
-  top: 5px;
+    top: 5px;
 }
 .navbar > .navbar-header button:hover span {
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 1);
 }
 .navbar > .navbar-header button:hover span:nth-child(1) {
-  bottom: 1px;
+    bottom: 1px;
 }
 .navbar > .navbar-header button:hover span:nth-child(3) {
-  top: 2px;
+    top: 2px;
 }
 .navbar > .navbar-header button span:nth-child(1).active {
-  bottom: 13px;
-  transform: rotate(-45deg);
+    bottom: 13px;
+    transform: rotate(-45deg);
 }
 .navbar > .navbar-header button span:nth-child(3).active,
 .navbar > .navbar-header button span:nth-child(2).active {
-  top: 15px;
-  transform: rotate(45deg);
+    top: 15px;
+    transform: rotate(45deg);
 }
 .navbar > .navbar-header a img {
-  width: 100px;
+    width: 100px;
 }
 .navbar > .navbar-header a img:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 .navbar > .navbar-collapse {
-  height: 0;
-  display: block;
-  overflow: hidden;
-  border-top: none;
-  transition: all 0.3s linear;
-  padding: 0 30px;
+    height: 0;
+    display: block;
+    overflow: hidden;
+    border-top: none;
+    transition: all 0.3s linear;
+    padding: 0 30px;
 }
 .navbar > .navbar-collapse.in {
-  height: 100vh !important;
-  max-height: 100vh;
-  border-top: solid 1px #101010;
+    height: 100vh !important;
+    max-height: 100vh;
+    border-top: solid 1px #101010;
 }
 .navbar > .navbar-collapse ul,
 .navbar > .navbar-collapse .navbar-btn-drop {
-  padding-top: 18px;
+    padding-top: 18px;
 }
 .navbar > .navbar-collapse .navbar-btn-drop {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 .navbar > .navbar-collapse .navbar-btn-drop button,
 .navbar > .navbar-collapse ul.nav li a {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  height: 52px;
-  border-radius: 0;
-  background-color: transparent;
-  border: 1px solid var(--blanco);
-  font-size: 18px;
-  line-height: 20px;
-  font-weight: bold;
-  color: var(--blanco);
-  outline: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 52px;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid var(--blanco);
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: bold;
+    color: var(--blanco);
+    outline: none;
 }
 .navbar > .navbar-collapse .navbar-btn-drop button:hover,
 .navbar > .navbar-collapse ul.nav li a:hover {
-  background-color: var(--verde-claro);
-  border-color: var(--blanco);
-  color: var(--blanco);
+    background-color: var(--verde-claro);
+    border-color: var(--blanco);
+    color: var(--blanco);
 }
 .navbar > .navbar-collapse .navbar-btn-drop button.active,
 .navbar > .navbar-collapse ul.nav li a.active {
-  background-color: var(--verde);
-  border: 1px solid var(--blanco);
-  color: var(--blanco);
+    background-color: var(--verde);
+    border: 1px solid var(--blanco);
+    color: var(--blanco);
 }
 .navbar > .navbar-collapse .navbar-btn-drop button i {
-  transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 .navbar > .navbar-collapse .navbar-btn-drop button i:nth-child(2) {
-  margin-left: 5px;
+    margin-left: 5px;
 }
 .navbar > .navbar-collapse .navbar-btn-drop.open button i:nth-child(2) {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 .navbar > .navbar-collapse .navbar-btn-drop ul {
-  padding: 0;
-  border-radius: 0;
-  margin: 0;
-  border: none;
-  display: block;
-  height: 0;
-  overflow: hidden;
-  transition: all 0.2s linear;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    border: none;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.2s linear;
 }
 .navbar > .navbar-collapse .navbar-btn-drop.open ul {
-  border: 1px solid var(--gris-claro);
-  height: calc(34px * 2);
+    border: 1px solid var(--gris-claro);
+    height: calc(34px * 2);
 }
 .navbar > .navbar-collapse .navbar-btn-drop ul li a {
-  padding: 6px 20px;
+    padding: 6px 20px;
 }
 .navbar > .navbar-collapse .navbar-btn-drop ul li a:hover {
-  background-color: var(--verde-claro);
+    background-color: var(--verde-claro);
 }
 .navbar > .navbar-collapse .navbar-btn-drop ul li a.active {
-  background-color: var(--verde);
-  color: var(--blanco);
-  font-weight: bold;
+    background-color: var(--verde);
+    color: var(--blanco);
+    font-weight: bold;
 }
 /*--------------------------------------*/
 /*-------------- Carrusel --------------*/
 /*--------------------------------------*/
 .carousel-container,
 .carousel-container.active {
-  height: 50vh;
-  transition: all 0.1s ease-in;
+    height: 50vh;
+    transition: all 0.1s ease-in;
 }
 .carousel-container > div img,
 .carousel-container.active > div img {
-  height: 50vh;
-  width: 100%;
-  object-fit: cover;
-  filter: brightness(0.7);
-  transition: all 0.1s ease-in;
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    transition: all 0.1s ease-in;
 }
 .carousel-container.inactive,
 .carousel-container.inactive > div img {
-  height: 0;
-  overflow: hidden;
-  transition: all 0.1s ease-out;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.1s ease-out;
 }
 .carousel-indicators > li {
-  width: 25px;
-  height: 3px;
-  border-radius: 0;
-  background-color: var(--gris);
-  border-color: var(--gris);
+    width: 25px;
+    height: 3px;
+    border-radius: 0;
+    background-color: var(--gris);
+    border-color: var(--gris);
 }
 .carousel-indicators .active {
-  width: 25px;
-  height: 3px;
-  margin: 1px;
-  border-color: var(--blanco);
+    width: 25px;
+    height: 3px;
+    margin: 1px;
+    border-color: var(--blanco);
 }
 .carousel-control > span {
-  font-size: 25px;
+    font-size: 25px;
 }
 /*-------------------------------------*/
 /*-------------- MAIN --------------*/
 /*-------------------------------------*/
 article {
-  background-color: var(--blanco);
-  position: relative;
+    background-color: var(--blanco);
+    position: relative;
 }
 /*------------- Articulos -------------*/
 .thumbnail {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
-  filter: contrast(75%);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+    filter: contrast(75%);
 }
 .thumbnail:hover {
-  filter: contrast(100%);
+    filter: contrast(100%);
 }
 .thumbnail > .thumbnail-img {
-  width: 100%;
-  height: 350px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+    width: 100%;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
 }
 .thumbnail > .caption {
-  padding: 20px;
+    padding: 20px;
 }
 .thumbnail > .caption h3 {
-  margin: 0;
-  font-size: 19px;
-  font-weight: 300;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+    margin: 0;
+    font-size: 19px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 .thumbnail > .caption p {
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-  color: var(--gris-oscuro);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    color: var(--gris-oscuro);
 }
 .thumbnail > .caption a {
-  text-decoration-line: none;
-  float: right;
+    text-decoration-line: none;
+    float: right;
 }
 .thumbnail > .caption a button {
-  padding: 6px 30px;
+    padding: 6px 30px;
 }
 /*--------------- Login ---------------*/
 .panel-login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 155px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 155px 0;
 }
 .panel-login > .panel {
-  width: 50%;
+    width: 50%;
 }
 .panel-login > .panel .panel-body {
-  padding: 30px 50px;
+    padding: 30px 50px;
 }
 .panel-login > .panel .panel-body button {
-  width: 100%;
-  border-radius: 50px;
-  padding: 10px 0;
+    width: 100%;
+    border-radius: 50px;
+    padding: 10px 0;
 }
 /*---------------- Juegos ----------------*/
 .jumbotron {
-  background-color: var(--azul-claro);
-  color: var(--blanco);
-  border-top-right-radius: 0 !important;
-  border-top-left-radius: 0 !important;
-  position: relative;
-  overflow: hidden;
+    background-color: var(--azul-claro);
+    color: var(--blanco);
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    position: relative;
+    overflow: hidden;
 }
 .jumbotron > div {
-  position: absolute;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  filter: brightness(0.4);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    filter: brightness(0.4);
 }
 .jumbotron > h1 {
-  position: relative;
-  font-size: 50px;
+    position: relative;
+    font-size: 50px;
 }
 .content-game > div p.lead {
-  font-weight: bold;
+    font-weight: bold;
 }
 .content-game > div img {
-  width: 100%;
-  margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 .content-game > div span blockquote p {
-  font-size: 17.5px;
+    font-size: 17.5px;
 }
 .content-game > div span blockquote footer {
-  background-color: transparent;
+    background-color: transparent;
 }
 /*---------------- PPTSL ----------------*/
-.pptsl-container > .panel-reglas,
-.pptsl-container > .panel-reglas .panel-heading {
-  border-radius: 0;
-  border: none;
+.pptsl-container > .panel.rules,
+.pptsl-container > .panel.rules .panel-heading {
+    border-radius: 0;
+    border: none;
 }
-.pptsl-container > .panel-reglas .panel-heading span {
-  font-weight: bold;
+.pptsl-container > .panel.rules .panel-heading span {
+    font-weight: bold;
 }
-.pptsl-container > .panel-reglas .panel-body,
-.panel-reglas-open > div .panel-body {
-  padding: 0;
+.pptsl-container > .panel.rules .panel-body,
+.pptsl-container > .panel.rules .panel-body ul {
+    margin: 0;
+    padding: 0;
 }
-.pptsl-container > .panel-reglas .panel-body ul,
-.panel-reglas-open > div .panel-body ul {
-  margin: 0;
-}
-.pptsl-container > .panel-reglas .panel-body ul li,
-.panel-reglas-open > div .panel-body ul li {
-  border-radius: 0;
+.pptsl-container > .panel.rules .panel-body ul li {
+    border-radius: 0;
 }
 .pptsl-container > div button {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
-.pptsl-jugar-container > div button.title {
-  margin: 20px 0;
+.pptsl-game-container > .header {
+    margin: 20px 0;
 }
-.pptsl-jugar-container > div button.title i {
-  margin-right: 5px;
+.pptsl-game-container > .header i {
+    margin-right: 5px;
 }
-.pptsl-jugar-container > .game-window {
-  position: relative;
-  width: 100%;
-  height: 700px;
-  margin-bottom: 30px;
-  background: var(--pptsl-window);
-  overflow: hidden;
-  z-index: 0;
-  border-width: 30px;
-  border-style: outset;
-  border-color: var(--pptsl-btn);
+.pptsl-game-container > .game-window {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    margin-bottom: 30px;
+    background: var(--pptsl-window);
+    overflow: hidden;
+    z-index: 0;
+    border-width: 30px;
+    border-style: outset;
+    border-color: var(--pptsl-btn);
 }
-.pptsl-jugar-container > .game-window .game-loading,
-.pptsl-jugar-container > .game-window .game-home {
-  border-width: 10px;
-  border-style: inset;
-  border-color: var(--pptsl-btn-border);
-  padding: 30px;
+.pptsl-game-container > .game-window h1,
+.pptsl-game-container > .game-window h2,
+.pptsl-game-container > .game-window h3,
+.pptsl-game-container > .game-window h4,
+.pptsl-game-container > .game-window p,
+.pptsl-game-container > .game-window strong,
+.pptsl-game-container > .game-window span,
+.pptsl-game-container > .game-window button {
+    font-family: fantasy;
+    text-transform: uppercase;
 }
-.pptsl-jugar-container > .game-window .game-loading.inactive,
-.pptsl-jugar-container > .game-window .game-home.inactive {
-  filter: opacity(0);
-  transition: all 0.5s ease-out;
+.pptsl-game-container > .game-window button {
+    display: inline-block;
+    font-size: 25px;
+    text-transform: uppercase;
+    background-color: var(--pptsl-btn);
+    color: var(--pptsl-btn-border);
+    margin: 0 10px;
+    border-radius: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: relative;
+    box-shadow: 0 5px 5px var(--pptsl-btn-border),
+        0 9px 0 var(--pptsl-btn-border), 0px 9px 10px rgba(0, 0, 0, 0.4),
+        inset 0px 2px 9px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 9px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--gris-claro);
+    animation-duration: 2s;
+    animation-fill-mode: both;
 }
-.pptsl-jugar-container > .game-window .game-loading.active,
-.pptsl-jugar-container > .game-window .game-home.active {
-  filter: opacity(1);
-  transition: all 2.5s ease-in;
+.pptsl-game-container > .game-window button:hover,
+.pptsl-game-container > .game-window button:focus {
+    box-shadow: 0 5px 5px var(--pptsl-btn-border),
+        0 9px 0 var(--pptsl-btn-border), 0px 9px 10px rgba(0, 0, 0, 0.4),
+        inset 0px 2px 15px var(--pptsl-btn-border),
+        inset 0 -2px 9px rgba(0, 0, 0, 0.2);
+    background-color: var(--pptsl-btn) !important;
+    color: var(--pptsl-btn-border);
 }
-.pptsl-jugar-container > .game-window .game-loading {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.pptsl-game-container > .game-window button:active,
+.pptsl-game-container > .game-window button.active {
+    top: 7px;
+    box-shadow: 0 2px 0 var(--gris-oscuro), 0px 4px 4px rgba(0, 0, 0, 0.4),
+        inset 0px 2px 5px var(--pptsl-btn-border);
+    color: var(--pptsl-btn-border);
+    animation-name: flash;
 }
-.pptsl-jugar-container > .game-window .game-loading h4 {
-  color: var(--blanco);
-  font-size: 25px;
-  letter-spacing: 2px;
-  font-family: fantasy;
+@keyframes flash { 
+    0%, 30%, 60%, 90% {
+        opacity: 1;
+    } 15%, 45%, 75%, 100% {
+        opacity: 0.5;
+    }
 }
-.pptsl-jugar-container > .game-window .game-loading .progress-bar-content {
-  width: 100%;
-  position: relative;
+.pptsl-game-container > .game-window .game-loading,
+.pptsl-game-container > .game-window .game-home {
+    position: relative;
+    border-width: 10px;
+    border-style: inset;
+    border-color: var(--pptsl-btn-border);
+    padding: 30px;
+    filter: opacity(0);
+    transition: all 0.5s ease-out;
+    z-index: -1;
 }
-.pptsl-jugar-container > .game-window .game-loading .progress-bar-content .progress {
-  border-radius: 0;
-  height: auto;
-  border-width: 2px;
-  border-style: ridge;
-  border-color: var(--pptsl-btn);
+.pptsl-game-container > .game-window .game-loading.active,
+.pptsl-game-container > .game-window .game-home.active {
+    filter: opacity(1);
+    transition: all 0s ease-in; /*------------------------------------------------------------------*/
+    z-index: 2;
 }
-.pptsl-jugar-container > .game-window .game-loading .progress-bar-content .progress .progress-bar {
-  background-color: var(--pptsl-progress);
-  height: 20px;
-  transition: width 1s linear;
+.pptsl-game-container > .game-window .game-loading {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.pptsl-jugar-container > .game-window .game-loading .progress-bar-content .progress .progress-bar i {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+.pptsl-game-container > .game-window .game-loading h4 {
+    color: var(--blanco);
+    font-size: 25px;
+    letter-spacing: 2px;
 }
-.pptsl-jugar-container > .game-window .game-loading.inactive .progress .progress-bar {
-  transition: none;
+.pptsl-game-container > .game-window .game-loading .progress-bar-content {
+    width: 100%;
+    position: relative;
 }
-.pptsl-jugar-container > .game-window .game-home {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.pptsl-game-container > .game-window .game-loading .progress-bar-content .progress {
+    border-radius: 0;
+    height: auto;
+    border-width: 2px;
+    border-style: ridge;
+    border-color: var(--pptsl-btn);
 }
-.pptsl-jugar-container > .game-window .game-home .title h1 {
-  font-family: fantasy;
-  color: var(--pptsl-font);
-  font-size: 100px;
-  text-shadow: 0 1px 0 var(--pptsl-progress), 0 4px 0 var(--pptsl-btn-border),
-    0 6px 0 var(--pptsl-btn-border), 0 8px 0 var(--pptsl-btn-border),
-    0 10px 0 var(--pptsl-btn-border), 0 12px 0 var(--pptsl-btn-border),
-    3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
+.pptsl-game-container > .game-window .game-loading .progress-bar-content .progress .progress-bar {
+    background-color: var(--pptsl-progress);
+    height: 20px;
+    transition: width 1.5s linear;
 }
-.pptsl-jugar-container > .game-window .game-home .game-menu,
-.pptsl-jugar-container > .game-window .game-home .game-options {
-  position: relative;
-  margin-top: 60px;
+.pptsl-game-container > .game-window .game-loading .progress-bar-content .progress .progress-bar i {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
-.pptsl-jugar-container > .game-window .game-home button {
-  display: inline-block;
-  font-family: fantasy;
-  font-size: 25px;
-  text-transform: uppercase;
-  background-color: var(--pptsl-btn);
-  color: var(--pptsl-btn-border);
-  margin: 0 10px;
-  border-radius: 5px;
-  padding-left: 25px;
-  padding-right: 25px;
-  position: relative;
-  box-shadow: 0 5px 5px var(--pptsl-btn-border), 0 9px 0 var(--pptsl-btn-border),
-    0px 9px 10px rgba(0, 0, 0, 0.4), inset 0px 2px 9px rgba(255, 255, 255, 0.2),
-    inset 0 -2px 9px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid var(--gris-claro);
+.pptsl-game-container > .game-window .game-home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.pptsl-jugar-container > .game-window .game-home button:hover,
-.pptsl-jugar-container > .game-window .game-home button:focus {
-  box-shadow: 0 5px 5px var(--pptsl-btn-border), 0 9px 0 var(--pptsl-btn-border),
-    0px 9px 10px rgba(0, 0, 0, 0.4), inset 0px 2px 15px var(--pptsl-btn-border),
-    inset 0 -2px 9px rgba(0, 0, 0, 0.2);
-  background-color: var(--pptsl-btn) !important;
+.pptsl-game-container > .game-window .game-home .title h1 {
+    color: var(--pptsl-font);
+    font-size: 100px;
+    text-shadow: 0 1px 0 var(--pptsl-progress), 0 4px 0 var(--pptsl-btn-border),
+        0 6px 0 var(--pptsl-btn-border), 0 8px 0 var(--pptsl-btn-border),
+        0 10px 0 var(--pptsl-btn-border), 0 12px 0 var(--pptsl-btn-border),
+        3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
 }
-.pptsl-jugar-container > .game-window .game-home button:active {
-  top: 7px;
-  box-shadow: 0 2px 0 var(--gris-oscuro), 0px 4px 4px rgba(0, 0, 0, 0.4),
-    inset 0px 2px 5px var(--pptsl-btn-border);
+.pptsl-game-container > .game-window .game-home .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.pptsl-jugar-container > .game-window .game-home .btn-back {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 10px;
-  margin-right: 10px;
+.pptsl-game-container > .game-window .game-home .content .game-menu,
+.pptsl-game-container > .game-window .game-home .content .start {
+    position: relative;
+    width: 100%;
+    margin-top: 60px;
 }
-.pptsl-jugar-container > .game-window .game-home .btn-back button {
-  padding: 0;
-  background-color: var(--pptsl-btn);
-  color: #4d163d;
-  border-radius: 100%;
-  width: 30px;
-  height: 30px;
-  transition: none;
+.pptsl-game-container > .game-window .game-home .content .start button i {
+    margin: 0 5px;
 }
-.pptsl-jugar-container > .game-window .game-home .btn-back button i {
-  position: absolute;
-  top: 3px;
-  left: 10px;
+.pptsl-game-container > .game-window .game-home .content .start .btn-vs.active {
+    animation: none;
 }
-.pptsl-jugar-container > .game-window .game-home .content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.pptsl-game-container > .game-window .game-home .content .btn-back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 10px;
 }
-.pptsl-jugar-container > .game-window .game-home .game-options {
-  margin-top: 0;
+.pptsl-game-container > .game-window .game-home .content .btn-back button {
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    transition: none;
 }
-.pptsl-jugar-container > .game-window .game-home .game-options button i {
-  margin: 0 5px;
+.pptsl-game-container > .game-window .game-home .content .btn-back button i {
+    position: absolute;
+    top: 3px;
+    left: 10px;
 }
-.pptsl-jugar-container > .game-window .game-home .rules {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: calc(100% - 40px);
-  margin: 20px;
-  height: 0;
-  overflow: hidden;
-  transition: height 0.5s linear;
+.pptsl-game-container > .game-window .game-home .content .rules {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+    display: none;
 }
-.pptsl-jugar-container > .game-window .game-home .rules.active {
-  height: 100%;
+.pptsl-game-container > .game-window .game-home .content .rules.active {
+    display: flex;
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel,
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-heading {
-  border: none;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+.pptsl-game-container > .game-window .game-home .content .rules::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--pptsl-window);
+    filter: opacity(0.5);
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-heading {
-  background-color: var(--pptsl-btn);
-  box-shadow: 0 5px 5px var(--pptsl-btn-border), 0 9px 0 var(--pptsl-btn-border),
-    0px 9px 10px rgba(0, 0, 0, 0.4), inset 0px 2px 9px rgba(255, 255, 255, 0.2),
-    inset 0 -2px 9px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid var(--gris-claro);
+.pptsl-game-container > .game-window .game-home .content .rules .panel {
+    position: relative;
+    width: 50%;
+    z-index: 1;
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-heading h1 {
-  font-family: fantasy;
-  font-size: 50px;
-  color: var(--pptsl-btn-border);
-  margin: 0;
-  text-transform: uppercase;
+.pptsl-game-container > .game-window .game-home .content .rules .panel,
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-heading {
+    border: none;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-heading .btn-back {
-  margin-top: 10px;
-  margin-right: 10px;
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-heading {
+    background-color: var(--pptsl-btn);
+    box-shadow: 0 5px 5px var(--pptsl-btn-border),
+        0 9px 0 var(--pptsl-btn-border), 0px 9px 10px rgba(0, 0, 0, 0.4),
+        inset 0px 2px 9px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 9px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--gris-claro);
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-heading .btn-back button i {
-  left: 1px;
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-heading h1 {
+    font-size: 50px;
+    color: var(--pptsl-btn-border);
+    margin: 0;
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-body,
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-body ul {
-  padding: 0;
-  margin: 0;
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-heading .btn-back {
+    margin-top: 10px;
+    margin-right: 10px;
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-body ul {
-  box-shadow: 0 5px 5px var(--pptsl-btn-border), 0 9px 0 var(--pptsl-btn-border),
-    0px 9px 10px rgba(0, 0, 0, 0.4), inset 0px 2px 9px rgba(255, 255, 255, 0.2),
-    inset 0 -2px 9px rgba(0, 0, 0, 0.2);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-heading .btn-back button i {
+    left: 5px;
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-body ul li {
-  border-radius: 0;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  font-family: fantasy;
-  font-size: 20px;
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-body,
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-body ul {
+    padding: 0;
+    margin: 0;
 }
-.pptsl-jugar-container > .game-window .game-home .rules .panel .panel-body ul li:first-of-type {
-  box-shadow: inset 0px 10px 14px -8px rgba(0,0,0,0.75);
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-body ul {
+    box-shadow: 0 5px 5px var(--pptsl-btn-border),
+        0 9px 0 var(--pptsl-btn-border), 0px 9px 10px rgba(0, 0, 0, 0.4),
+        inset 0px 2px 9px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 9px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
-.pptsl-jugar-container > .game-window .game-home .credits p {
-  color: var(--pptsl-btn) !important;
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-body ul li {
+    border-radius: 0;
+    font-family: fantasy;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 20px;
 }
-.pptsl-jugar-container > .game-window .game-home .credits h2,
-.pptsl-jugar-container > .game-window .game-home .credits p,
-.pptsl-jugar-container > .game-window .game-home .credits p strong {
-  font-family: fantasy;
-  font-size: 50px;
-  color: var(--pptsl-font);
-  text-shadow: 0 1px 0 var(--pptsl-progress), 0 2px 0 var(--pptsl-btn-border), 0 3px 0 var(--pptsl-btn-border), 0 4px 0 var(--pptsl-btn-border);
+.pptsl-game-container > .game-window .game-home .content .rules .panel .panel-body ul li:first-of-type {
+    box-shadow: inset 0px 10px 14px -8px rgba(0, 0, 0, 0.75);
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: -60px;
+.pptsl-game-container > .game-window .game-home .content .credits p {
+    color: var(--pptsl-btn) !important;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character h2 {
-  width: 100%;
-  font-family: fantasy;
-  font-size: 70px;
-  text-transform: uppercase;
-  color: var(--pptsl-font);
-  text-shadow: 0 1px 0 var(--pptsl-progress), 0 2px 0 var(--pptsl-btn-border), 0 3px 0 var(--pptsl-btn-border), 0 4px 0 var(--pptsl-btn-border);
-  transition: all 0.5s linear;
+.pptsl-game-container > .game-window .game-home .content .credits h2,
+.pptsl-game-container > .game-window .game-home .content .credits p,
+.pptsl-game-container > .game-window .game-home .content .credits p strong,
+.pptsl-game-container > .game-window .game-home .content .in-game h2 {
+    font-size: 50px;
+    color: var(--pptsl-font);
+    text-shadow: 0 1px 0 var(--pptsl-progress), 0 2px 0 var(--pptsl-btn-border),
+        0 3px 0 var(--pptsl-btn-border), 0 4px 0 var(--pptsl-btn-border);
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character h2.ng-hide {
-  font-size: 0;
-  margin: 0;
-  transition: none;
+.pptsl-game-container > .game-window .game-home .content .in-game {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -60px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .nombre {
-  height: 50px;
-  margin-bottom: 30px;
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-title {
+    width: 100%;
+    font-size: 70px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .nombre h3 {
-  font-family: fantasy;
-  color: var(--blanco);
-  font-size: 50px;
-  text-transform: uppercase;
-  text-shadow: 0 1px 0 var(--gris), 0 2px 0 var(--gris-oscuro), 0 3px 0 var(--gris-oscuro), 0 4px 0 var(--gris-oscuro);
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-name .name {
+    height: 50px;
+    margin-bottom: 30px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .nombre.game h3 {
-  position: absolute;
-  top: 0;
-  transition: all 0.5s linear;
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-name .name h3 {
+    color: var(--blanco);
+    font-size: 50px;
+    text-shadow: 0 1px 0 var(--gris), 0 2px 0 var(--gris-oscuro),
+        0 3px 0 var(--gris-oscuro), 0 4px 0 var(--gris-oscuro);
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character div:nth-child(2) .nombre.game h3 {
-  left: 0;
-  margin-left: 25px;
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-name .name.game h3 {
+    position: absolute;
+    top: 0;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character div:nth-child(3) .nombre.game h3 {
-  right: 0;
-  margin-right: 25px;
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-name:nth-child(2) .name.game h3 {
+    left: 0;
+    margin-left: 25px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-name:nth-child(3) .name.game h3 {
+    right: 0;
+    margin-right: 25px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .personajes,
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias {
-  width: 100%;
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .personajes.ng-hide,
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias.ng-hide {
-  overflow: hidden;
-  height: 0;
+.pptsl-game-container > .game-window .game-home .content .in-game .characters,
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies {
+    width: 100%;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .personajes ul,
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 15px;
+.pptsl-game-container > .game-window .game-home .content .in-game .characters.ng-hide,
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies.ng-hide {
+    overflow: hidden;
+    height: 0;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .personajes ul li {
-  width: 75px;
-  height: 48px;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 15px;
+.pptsl-game-container > .game-window .game-home .content .in-game .characters ul,
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 15px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .personajes ul li button {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 48px;
-  animation-duration: 2s;
-  animation-fill-mode: both;
-  cursor: pointer;
+.pptsl-game-container > .game-window .game-home .content .in-game .characters ul li,
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li {
+    margin-right: 5px;
+    margin-left: 5px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .personajes button.active,
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias button.active,
-.pptsl-jugar-container > .game-window .game-home .game-options button.active {
-  top: 7px;
-  box-shadow: 0 2px 0 var(--gris-oscuro), 0px 4px 4px rgba(0, 0, 0, 0.4),
-    inset 0px 2px 5px var(--pptsl-btn-border);
-  animation-name: flash;
+.pptsl-game-container > .game-window .game-home .content .in-game .characters ul li {
+    width: 75px;
+    height: 48px;
+    margin-bottom: 15px;
 }
-@keyframes flash {
-  0%, 30%, 60%, 90% {
-    opacity: 1;
-  }
-  15%, 45%, 75%, 100% {
+.pptsl-game-container > .game-window .game-home .content .in-game .characters ul li button {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 48px;
+    cursor: pointer;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li {
+    width: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li button {
+    border-radius: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 70px;
+    height: 70px;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li button i {
+    font-size: 35px;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li span {
+    color: var(--pptsl-font);
+    font-size: 20px;
+    text-shadow: 0 1px 0 var(--pptsl-btn-border),
+        0 2px 0 var(--pptsl-btn-border);
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .options {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin-top: 15px;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .options button {
+    animation: none;
+    transition: none;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .pause {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .pause::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--gris-oscuro);
     opacity: 0.5;
-  }
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias ul li {
-  width: 70px;
-  margin-right: 5px;
-  margin-left: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+.pptsl-game-container > .game-window .game-home .content .in-game .pause .pause-content {
+    width: auto;
+    height: calc(100% - 140px);
+    margin: 50px;
+    background-color: var(--pptsl-window);
+    border-width: 20px;
+    border-style: outset;
+    border-color: var(--pptsl-btn);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias ul li button {
-  border-radius: 100%;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 70px;
-  height: 70px;
+.pptsl-game-container > .game-window .game-home .content .in-game .pause .pause-content button {
+    margin: 20px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias ul li button i {
-  font-size: 35px;
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby {
+    width: calc(100% - 50px);
+    height: 320px;
+    position: absolute;
+    left: 0;
+    margin-left: 25px;
+    margin-right: 25px;
+    border-width: 20px;
+    border-style: outset;
+    border-color: var(--pptsl-btn);
+    top: 0;
+    margin-top: 100px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategias ul li span {
-  font-family: fantasy;
-  text-transform: uppercase;
-  color: var(--pptsl-font);
-  font-size: 20px;
-  text-shadow: 0 1px 0 var(--pptsl-btn-border), 0 2px 0 var(--pptsl-btn-border);
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content {
+    width: 100%;
+    height: 100%;
+    background-image: url("/content/pictures/Juegos/PPTLS/pptsl-start-back-3.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .opciones {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  margin-top: 15px;
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle {
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategia-juego {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  margin-bottom: 130px;
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .progress-bar-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .estrategia-juego input {
-  display: inline-block;
-  width: 400px;
-  border-width: 5px;
-  border-style: outset;
-  border-color: var(--pptsl-btn);
-  background-color: var(--pptsl-window);
-  color: var(--blanco);
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .progress-bar-content .progress {
+    border-width: 10px;
+    border-style: outset;
+    border-color: var(--pptsl-btn);
+    height: 40px;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala {
-  width: calc(100% - 50px);
-  height: 320px;
-  position: absolute;
-  left: 0;
-  margin-left: 25px;
-  margin-right: 25px;
-  border-width: 20px;
-  border-style: outset;
-  border-color: var(--pptsl-btn);
-  top: 0;
-  margin-top: 100px;
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .progress-bar-content .progress .progress-bar {
+    background-color: var(--pptsl-progress);
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content {
-  width: 100%;
-  height: 100%;
-  background-image: url("/content/pictures/Juegos/PPTLS/pptsl-start-back-3.jpg");
-  background-size: cover;
-  background-position: center;
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle i.fa {
+    font-size: 100px;
+    margin-bottom: 15px;
+    color: var(--pptsl-btn);
+    z-index: 1;
+    text-shadow: 0 0 4px var(--pptsl-window);
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj {
-  width: 50%;
-  height: 100%;
-  padding: 30px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj .progress-bar-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 15px;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj .progress-bar-content .progress {
-  border-width: 10px;
-  border-style: outset;
-  border-color: var(--pptsl-btn);
-  height: 40px;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj .progress-bar-content .progress .progress-bar {
-  background-color: var(--pptsl-progress);
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj i.fa {
-  font-size: 100px;
-  margin-bottom: 15px;
-  color: var(--pptsl-btn);
-  z-index: 1;
-  text-shadow: 0 0 4px var(--pptsl-window);
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj i.back {
-  position: absolute;
-  font-size: 90px;
-  bottom: 35px;
-  color: var(--pptsl-btn-border);
-  z-index: 0;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj:nth-child(2) i.back {
-  bottom: 36px;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj .shadow {
-  width: 70px;
-  height: 10px;
-  background-color: var(--pptsl-window);
-  position: absolute;
-  bottom: 40px;
-  filter: blur(5px);
-  border-radius: 100%;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .content .jugador-pj:nth-child(2) .shadow {
-  bottom: 45px;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .conteo {
-  position: absolute;
-  width: 100%;
-  left: 0;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .conteo h1 {
-  font-family: fantasy;
-  font-size: 90px;
-  color: var(--pptsl-btn);
-  text-shadow: 0 1px 0 var(--pptsl-progress), 0 2px 0 var(--pptsl-btn-border), 0 3px 0 var(--pptsl-btn-border), 0 4px 0 var(--pptsl-btn-border);
-  transition: all 0.3s ease-in-out;
-  animation-duration: 4s;
-  animation-fill-mode: both;
-}
-.pptsl-jugar-container > .game-window .game-home .choose-character .sala .conteo h1.active {
-  animation-name: time;
-}
-@keyframes time {
-  0%, 25%, 28%, 50%, 75%, 100% {
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle i.fa.selected {
+    position: absolute;
+    top: 120px;
+    font-size: 50px;
     transform: scale(0);
-  }
-  12.5%, 37.5%, 35%, 62.5%, 87.5% {
-    transform: scale(2);
-  }
+    color: var(--gris-oscuro);
+    text-shadow: -1px -1px 0 var(--gris-oscuro), 1px 1px 0 var(--gris-oscuro);
+    animation-duration: 2s;
+    animation-fill-mode: both;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .icono-juego {
-  width: 50%;
-  display: flex;
-  justify-content: flex-start;
-  color: var(--pptsl-btn);
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle i.fa.selected.active {
+    animation-name: icon-tag;
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .icono-juego:last-of-type {
-  justify-content: flex-end;
+@keyframes icon-tag {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+        top: 90px;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+        top: 50px;
+    }
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .icono-juego i {
-  position: absolute;
-  font-size: 30px;
-  bottom: 0;
-  margin-bottom: 25px;
-  left: 0;
-  margin-left: 25px;
-  text-shadow: 0 1px 0 var(--pptsl-btn-border), 0 2px 0 var(--pptsl-btn-border), 0 3px 0 var(--pptsl-btn-border), 0 4px 0 var(--pptsl-btn-border);
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .damage {
+    position: absolute;
+    z-index: 2;
+    font-size: 50px;
+    font-family: fantasy;
+    top: 100px;
+    margin-left: 60px;
+    color: var(--gris-claro);
+    text-shadow: 1px 1px 0 var(--pptsl-btn-border),
+        -1px -1px 0 var(--pptsl-btn-border), 0 0 4px var(--pptsl-window);
 }
-.pptsl-jugar-container > .game-window .game-home .choose-character .icono-juego:last-of-type i {
-  right: 0;
-  margin-right: 25px;
-  left: auto;
-  margin-left: 0;
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .damage.critic {
+    font-size: 60px;
+    color: var(--pptsl-font);
+    top: 90px;
+    margin-left: 80px;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle i.back {
+    position: absolute;
+    font-size: 90px;
+    bottom: 35px;
+    color: var(--pptsl-btn-border);
+    z-index: 0;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content  .battle:nth-child(2) i.back {
+    bottom: 36px;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .shadow { 
+    width: 70px;
+    height: 10px;
+    background-color: var(--pptsl-window);
+    position: absolute;
+    bottom: 40px;
+    filter: blur(5px);
+    border-radius: 100%;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle:nth-child(2) .shadow {
+    bottom: 45px;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .count {
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content h1 {
+    font-family: fantasy;
+    font-size: 90px;
+    color: var(--pptsl-btn);
+    text-shadow: 0 1px 0 var(--pptsl-progress), 0 2px 0 var(--pptsl-btn-border),
+        0 3px 0 var(--pptsl-btn-border), 0 4px 0 var(--pptsl-btn-border);
+    animation-duration: 4s;
+    animation-fill-mode: both;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content  h1.active {
+    animation-name: time;
+}
+@keyframes time { 
+    0%, 25%, 28%, 50%, 75%, 100% {
+        transform: scale(0);
+    } 12.5%, 37.5%, 35%, 62.5%, 87.5% {
+        transform: scale(2);
+    }
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-icon {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    color: var(--pptsl-btn);
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-icon:last-of-type {
+    justify-content: flex-end;
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-icon i {
+    position: absolute;
+    font-size: 30px;
+    bottom: 0;
+    margin-bottom: 25px;
+    left: 0;
+    margin-left: 25px;
+    text-shadow: 0 1px 0 var(--pptsl-btn-border),
+        0 2px 0 var(--pptsl-btn-border), 0 3px 0 var(--pptsl-btn-border),
+        0 4px 0 var(--pptsl-btn-border);
+}
+.pptsl-game-container > .game-window .game-home .content .in-game .in-game-icon:last-of-type i {
+    right: 0;
+    margin-right: 25px;
+    left: auto;
+    margin-left: 0;
 }
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/
 /*----------------------------------------*/
 .breadcrumb {
-  margin: 0;
-  border-radius: 0;
+    margin: 0;
+    border-radius: 0;
 }
 .breadcrumb > li a.active {
-  color: var(--verde);
+    color: var(--verde);
 }
 /*------------------------------------*/
 /*-------------- FOOTER --------------*/
 /*------------------------------------*/
 footer {
-  background-color: var(--azul);
+    background-color: var(--azul);
 }
 footer > .row h4 {
-  color: var(--blanco);
+    color: var(--blanco);
 }
 footer > .row i {
-  margin-right: 10px;
-  color: var(--verde);
+    margin-right: 10px;
+    color: var(--verde);
 }
 footer > .row ul.siguenos a i {
-  font-size: 25px;
-  margin: 0;
-  transition: all 0.2s ease-in-out;
-  margin: 0 12px;
+    font-size: 25px;
+    margin: 0;
+    transition: all 0.2s ease-in-out;
+    margin: 0 12px;
 }
 footer > .row ul.siguenos a:hover,
 footer > .row ul.siguenos a:hover i {
-  text-decoration: none;
-  color: var(--gris-oscuro);
+    text-decoration: none;
+    color: var(--gris-oscuro);
 }
 section.copyright {
-  background-color: var(--verde);
-  padding: 6px 12px;
-  text-align: center;
-  margin-bottom: 37.42px;
+    background-color: var(--verde);
+    padding: 6px 12px;
+    text-align: center;
+    margin-bottom: 37.42px;
 }
 section.copyright p {
-  margin: 0;
+    margin: 0;
 }
 /*----------------------------------------*/
 /*-------------- Responsive --------------*/
 /*----------------------------------------*/
 @media (max-width: 1200px) {
-  /* Calcula el tamaño de los objetos a medida que cambia el ancho de la pantalla */
-  /* Operacion : ([minimum size] + ([maximum size] - [minimum size]) * 
+    /* Calcula el tamaño de los objetos a medida que cambia el ancho de la pantalla */
+    /* Operacion : ([minimum size] + ([maximum size] - [minimum size]) * 
 ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))); */
 
-  .pptsl-jugar-container > .game-window {
-    border-width: calc(10px + 20 * ((100vw - 280px) / 920));
-  }
-  .pptsl-jugar-container > .game-window .game-loading,
-  .pptsl-jugar-container > .game-window .game-home {
-    border-width: calc(5px + 5 * ((100vw - 280px) / 920));
-  }
-  .pptsl-jugar-container > .game-window .game-home .title h1 {
-    font-size: calc(40px + 60 * ((100vw - 280px) / 920));
-  }
-  .pptsl-jugar-container > .game-window .game-home .rules .panel .panel-heading h1 {
-    font-size: calc(40px + 10 * ((100vw - 280px) / 920));
-  }
-  .pptsl-jugar-container > .game-window .game-home .rules .panel .panel-body ul li {
-    font-size: calc(14.5px + 5.5 * ((100vw - 280px) / 920));
-  }
-  .pptsl-jugar-container > .game-window .game-home .credits h2,
-  .pptsl-jugar-container > .game-window .game-home .credits p,
-  .pptsl-jugar-container > .game-window .game-home .credits p strong,
-  .pptsl-jugar-container > .game-window .game-home .choose-character h2 {
-    font-size: calc(25px + 25 * ((100vw - 280px) / 920));
-  }  
-  .pptsl-jugar-container > .game-window .game-home .choose-character .nombre h3 {
-    font-size: calc(18px + 32 * ((100vw - 280px) / 920));
-  }
+    .pptsl-game-container > .game-window {
+        border-width: calc(10px + 20 * ((100vw - 280px) / 920));
+    }
+    .pptsl-game-container > .game-window .game-loading,
+    .pptsl-game-container > .game-window .game-home {
+        border-width: calc(5px + 5 * ((100vw - 280px) / 920));
+    }
+    .pptsl-game-container > .game-window .game-home .title h1 {
+        font-size: calc(40px + 60 * ((100vw - 280px) / 920));
+    }
+    .pptsl-game-container > .game-window .game-home .rules .panel.panel-heading h1 {
+        font-size: calc(40px + 10 * ((100vw - 280px) / 920));
+    }
+    .pptsl-game-container > .game-window .game-home .rules .panel .panel-body ul li {
+        font-size: calc(14.5px + 5.5 * ((100vw - 280px) / 920));
+    }
+    .pptsl-game-container > .game-window .game-home .credits h2,
+    .pptsl-game-container > .game-window .game-home .credits p,
+    .pptsl-game-container > .game-window .game-home .credits p strong,
+    .pptsl-game-container > .game-window .game-home .content .in-game h2 {
+        font-size: calc(25px + 25 * ((100vw - 280px) / 920));
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .name h3 {
+        font-size: calc(18px + 32 * ((100vw - 280px) / 920));
+    }
 }
 @media (max-width: 1023px) {
-  .pptsl-jugar-container > .game-window .game-home .choose-character .opciones button {
-    width: auto;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .estrategia-juego {
-    display: none;
-  }
+    .pptsl-game-container > .game-window .game-home .content .in-game .options button {
+        width: auto;
+    }
 }
 @media (max-width: 767px) {
-  /*------------------------------------*/
-  /*-------------- Global --------------*/
-  /*------------------------------------*/
-  body > .container {
-    padding: 0;
-  }
-  .btn {
-    width: 100%;
-  }
-  /*------------------------------------*/
-  /*-------------- Navbar --------------*/
-  /*------------------------------------*/
-  .navbar-nav {
-    padding-top: 0 !important;
-  }
-  .navbar > .navbar-collapse {
-    padding: 0 20px;
-  }
-  .navbar > .navbar-collapse .navbar-btn-drop,
-  .navbar > .navbar-collapse ul {
-    width: 100%;
-    padding: 0;
-    margin: 7.5px 0;
-  }
-  .navbar > .navbar-collapse .navbar-btn-drop button {
-    width: 100%;
-    margin: 0;
-    text-align: left;
-  }
-  .navbar > .navbar-collapse .navbar-btn-drop button i:nth-child(2) {
-    float: right;
-  }
-  /*--------------------------------------*/
-  /*-------------- Carrusel --------------*/
-  /*--------------------------------------*/
-  .carousel-container,
-  .carousel-container.active {
-    height: 30vh;
-    transition: none;
-  }
-  .carousel-container > div img,
-  .carousel-container.active > div img {
-    height: 30vh;
-    transition: none;
-  }
-  .carousel-container.inactive,
-  .carousel-container.inactive > div img {
-    transition: none;
-  }
-  /*-------------------------------------*/
-  /*---------------- Main ---------------*/
-  /*-------------------------------------*/
-  /*---------------- Login --------------*/
-  .panel-login {
-    padding: 60px 0;
-  }
-  .panel-login > .panel {
-    width: 100%;
-  }
-  /*---------------- Juegos -------------*/
-  .jumbotron > h1 {
-    font-size: 30px;
-  }
-  /*---------------- PPTLS --------------*/
-  .pptsl-container > div button {
-    width: 100%;
-  }
-  .pptsl-jugar-container > .game-window .game-home button {
-    margin: 10px 0;
-  }
-  .pptsl-jugar-container > .game-window .game-home .btn-back button {
-    margin: 0;
-  }
-  .pptsl-jugar-container > .game-window .game-home .game-options .btn-vs {
-    display: none;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .nombre {
-    margin-bottom: 0;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .estrategias {
-    position: relative;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .opciones {
-    bottom: 0;
-    top: auto;
-    margin-top: 0;
-    margin-bottom: 65px;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .conteo {
-    display: none;
-  }
+    /*------------------------------------*/
+    /*-------------- Global --------------*/
+    /*------------------------------------*/
+    body > .container {
+        padding: 0;
+    }
+    .btn {
+        width: 100%;
+    }
+    /*------------------------------------*/
+    /*-------------- Navbar --------------*/
+    /*------------------------------------*/
+    .navbar-nav {
+        padding-top: 0 !important;
+    }
+    .navbar > .navbar-collapse {
+        padding: 0 20px;
+    }
+    .navbar > .navbar-collapse .navbar-btn-drop,
+    .navbar > .navbar-collapse ul {
+        width: 100%;
+        padding: 0;
+        margin: 7.5px 0;
+    }
+    .navbar > .navbar-collapse .navbar-btn-drop button {
+        width: 100%;
+        margin: 0;
+        text-align: left;
+    }
+    .navbar > .navbar-collapse .navbar-btn-drop button i:nth-child(2) {
+        float: right;
+    }
+    /*--------------------------------------*/
+    /*-------------- Carrusel --------------*/
+    /*--------------------------------------*/
+    .carousel-container,
+    .carousel-container.active {
+        height: 30vh;
+        transition: none;
+    }
+    .carousel-container > div img,
+    .carousel-container.active > div img {
+        height: 30vh;
+        transition: none;
+    }
+    .carousel-container.inactive,
+    .carousel-container.inactive > div img {
+        transition: none;
+    }
+    /*-------------------------------------*/
+    /*---------------- Main ---------------*/
+    /*-------------------------------------*/
+    /*---------------- Login --------------*/
+    .panel-login {
+        padding: 60px 0;
+    }
+    .panel-login > .panel {
+        width: 100%;
+    }
+    /*---------------- Juegos -------------*/
+    .jumbotron > h1 {
+        font-size: 30px;
+    }
+    /*---------------- PPTLS --------------*/
+    .pptsl-container > div button {
+        width: 100%;
+    }
+    .pptsl-game-container > .game-window .game-home button {
+        margin: 10px 0;
+    }
+    .pptsl-game-container > .game-window .game-home .btn-back button {
+        margin: 0;
+    }
+    .pptsl-game-container > .game-window .game-home .start .btn-vs {
+        display: none;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .name {
+        margin-bottom: 0;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .strategies {
+        position: relative;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .options {
+        bottom: 0;
+        top: auto;
+        margin-top: 0;
+        margin-bottom: 65px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .count {
+        display: none;
+    }
+
+    .pptsl-game-container > .game-window .game-home .content .rules .panel {
+        width: 100%;
+    }
 }
 @media (max-width: 410px) {
-  .pptsl-jugar-container > .game-window .game-loading, 
-  .pptsl-jugar-container > .game-window .game-home {
-    padding: 10px;
-  }
-  .pptsl-jugar-container > .game-window .game-home .game-options button i {
-    display: none;
-  }
-  .pptsl-jugar-container > .game-window .game-home .game-options.rules button i {
-    display: block;
-  }
-  .pptsl-jugar-container > .game-window .game-home .rules .panel .panel-heading .btn-back {
-    margin: 0;
-    position: relative;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .nombre {
-    height: 30px;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .personajes ul, 
-  .pptsl-jugar-container > .game-window .game-home .choose-character .estrategias ul {
-    margin: 0;
-  }
-  .pptsl-jugar-container > .game-window .game-home .choose-character .estrategias ul li button {
-    width: 55px;
-    height: 55px;
-  }
+    .pptsl-game-container > .game-window .game-loading,
+    .pptsl-game-container > .game-window .game-home {
+        padding: 10px;
+    }
+    .pptsl-game-container > .game-window .game-home .game-options button i {
+        display: none;
+    }
+    .pptsl-game-container
+        > .game-window
+        .game-home
+        .game-options.rules
+        button
+        i {
+        display: block;
+    }
+    .pptsl-game-container
+        > .game-window
+        .game-home
+        .rules
+        .panel
+        .panel-heading
+        .btn-back {
+        margin: 0;
+        position: relative;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .name {
+        height: 30px;
+    }
+    .pptsl-game-container
+        > .game-window
+        .game-home
+        .content .in-game
+        .characters
+        ul,
+    .pptsl-game-container
+        > .game-window
+        .game-home
+        .content .in-game
+        .strategies
+        ul {
+        margin: 0;
+    }
+    .pptsl-game-container
+        > .game-window
+        .game-home
+        .content .in-game
+        .strategies
+        ul
+        li
+        button {
+        width: 55px;
+        height: 55px;
+    }
+
+    .pptsl-game-container > .game-window .game-home .content .rules {
+        padding: 10px;
+    }
 }

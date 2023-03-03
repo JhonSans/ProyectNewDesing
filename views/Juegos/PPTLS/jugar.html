@@ -1,13 +1,13 @@
-<div class="pptsl-jugar-container">
-    <div>
-        <button class="btn btn-default title" ng-click="redirectLink('/Juegos/PPTLS')">
+<div class="pptsl-game-container">
+    <div class="header">
+        <button class="btn btn-default" ng-click="actualizarContenido('/Juegos/PPTLS')">
             <i class="fa fa-chevron-left"></i>
             <span>Regresar</span>
         </button>
     </div>
     <div class="game-window">
         <!--
-        <div class="game-loading text-center" ng-class="pptsl.cargando == 100 ? 'inactive' : 'active'">
+        <div class="game-loading text-center" ng-class="{ 'active' : pptsl.cargando != 100 }">
             <h4>CARGANDO</h4>
             <div class="progress-bar-content">
                 <uib-progressbar max="100" value="pptsl.cargando">
@@ -15,18 +15,18 @@
                 </uib-progressbar>
             </div>
         </div>
-    -->
-        <div class="game-home text-center"><!--ng-class="pptsl.cargando != 100 ? 'inactive' : 'active'">-->
+        -->
+        <div class="game-home text-center" ng-class="{ 'active' : pptsl.cargando == 100 }">
             <div class="title" ng-if="pptsl.vista == 0">
                 <h1>PIEDRA PAPEL TIJERA LAGARTO SPOCK</h1>
             </div>
             <div class="content">
                 <div class="game-menu" ng-if="pptsl.vista == 0">
-                    <button class="btn btn-default" ng-click="pptsl.cambioVista(1)">Comenzar</button>
+                    <button class="btn btn-default" ng-click="pptsl.cambioVista('comenzar')">Comenzar</button>
                     <button class="btn btn-default" ng-click="pptsl.cerrar()">Reglas</button>
-                    <button class="btn btn-default" ng-click="pptsl.cambioVista(3)">Creditos</button>
+                    <button class="btn btn-default" ng-click="pptsl.cambioVista('creditos')">Creditos</button>
                 </div>
-                <div class="game-options" ng-if="pptsl.vista == 1">
+                <div class="start" ng-if="pptsl.vista == 1">
                     <button class="btn btn-default" ng-click="pptsl.agregarJugadores(1)">
                         <i class="fa fa-gamepad"></i>
                         Un Jugador
@@ -38,16 +38,16 @@
                         <i class="fa fa-gamepad"></i>
                     </button>
                 </div>
-                <div class="choose-character" ng-if="pptsl.vista == 2">
-                    <h2 ng-hide="pptsl.seleccionado.personaje != ''">
+                <div class="in-game" ng-if="pptsl.vista == 2">
+                    <h2 class="in-game-title" ng-hide="pptsl.seleccionado.personaje != ''">
                         Selección de Personaje
                     </h2>
-                    <div style="width: 50%;" ng-repeat="jugador in pptsl.jugadores">
-                        <div class="nombre" ng-class="{ 'game' : pptsl.seleccionado.personaje != '' }">
+                    <div class="in-game-name" style="width: 50%;" ng-repeat="jugador in pptsl.jugadores">
+                        <div class="name" ng-class="{ 'game' : pptsl.seleccionado.personaje != '' }">
                             <h3>{{ jugador.nombre = jugador.nombre.replace("fa-", "").replace("-o", "").replace("-", " ") }}</h3>
                         </div>
                     </div>
-                    <div class="personajes" ng-hide="pptsl.seleccionado.personaje != ''">
+                    <div class="characters" ng-hide="pptsl.seleccionado.personaje != ''">
                         <ul>
                             <li ng-repeat="personaje in pptsl.personajes" ng-if="personaje != 'fa-desktop'">
                                 <div class="personaje-icon">
@@ -58,7 +58,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="estrategias" ng-hide="pptsl.seleccionado.personaje == ''">
+                    <div class="strategies" ng-hide="pptsl.seleccionado.personaje == ''">
                         <ul>
                             <li class="text-center" ng-repeat="estrategia in pptsl.estrategias">
                                 <div class="estrategia-img">
@@ -70,38 +70,53 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="opciones" ng-hide="pptsl.seleccionado.personaje == ''">
-                        <button class="btn btn-default" ng-click="pptsl.seleccionado.personaje = ''; pptsl.seleccionado.opcion = ''">
-                            <i class="fa fa-caret-left"></i>
+                    <div class="options" ng-hide="pptsl.seleccionado.personaje == ''">
+                        <button class="btn btn-default" ng-click="pptsl.comenzarJuego()" ng-if="!pptsl.pause">
+                            <i class="fa fa-play"></i>
                         </button>
-                        <button class="btn btn-default" ng-click="pptsl.comenzarJuego()">Listo!</button>
+                        <button class="btn btn-default" ng-click="pptsl.pausarJuego()" ng-if="pptsl.pause">
+                            <i class="fa fa-pause"></i>
+                        </button>
                     </div>
-                    <div class="estrategia-juego" ng-hide="pptsl.seleccionado.personaje == ''">
-                        <input type="text" class="form-control" ng-keypress="pptsl.jugadorElecciones($event)">
+                    <div class="pause" ng-show="pptsl.pauseMostrar">
+                        <div class="pause-content">
+                            <button class="btn btn-default" ng-click="pptsl.cambioVista(2); pptsl.agregarJugadores(1); pptsl.pause = false">
+                                Volver a selección de personaje
+                            </button>
+                            <button class="btn btn-default" ng-click="pptsl.cambioVista('inicio')">
+                                Ir al inicio
+                            </button>
+                            <button class="btn btn-default cerrar" ng-click="pptsl.pause = false; pptsl.pauseMostrar = false">
+                                Reanudar
+                            </button>
+                        </div>
                     </div>
-                    <div class="sala" ng-hide="pptsl.seleccionado.personaje == ''">
-                        <div class="content">
-                            <div class="jugador-pj" ng-repeat="jugador in pptsl.jugadores">
+                    <div class="lobby" ng-hide="pptsl.seleccionado.personaje == ''">
+                        <div class="lobby-content">
+                            <div class="battle" ng-repeat="jugador in pptsl.jugadores">
                                 <div>
                                     <div class="progress-bar-content">
                                         <uib-progressbar max="100" value="jugador.vida">
                                         </uib-progressbar>
                                     </div>
                                 </div>
-                                <i class="fa {{ jugador.icono }}"></i>
+                                <i class="fa {{ jugador.img }} selected" ng-class="{ 'active' : pptsl.hit.dano != '' }"></i>
+                                <span class="damage" ng-if="pptsl.hit.objetivo == jugador.nombre && pptsl.hit.valor == ''" >{{ pptsl.hit.dano }}</span>
+                                <span class="damage critic" ng-if="pptsl.hit.objetivo == jugador.nombre && pptsl.hit.valor != ''" >{{ pptsl.hit.dano }}!!</span>
+                                <i class="fa {{ jugador.icono }} player"></i>
                                 <i class="fa {{ jugador.icono }} back"></i>
                                 <div class="shadow"></div>
                             </div>
-                            <div class="conteo" ng-hide="pptsl.seleccionado.personaje == ''">
+                            <div class="count" ng-hide="pptsl.seleccionado.personaje == ''">
                                 <h1 ng-class="{ 'active' : pptsl.conteo != 'VS' && pptsl.conteo != '' }">{{ pptsl.conteo }}</h1>
                             </div>
                         </div>
                     </div>
-                    <div class="icono-juego" ng-repeat="jugador in pptsl.jugadores">
+                    <div class="in-game-icon" ng-repeat="jugador in pptsl.jugadores">
                         <i class="fa {{ jugador.icono }}"></i>
                     </div>
                 </div>
-                <div class="game-options rules" ng-class="{ 'active' : pptsl.toggle }">
+                <div class="rules" ng-class="{ 'active' : pptsl.toggle }">
                     <div class="panel">
                         <div class="panel-heading">
                             <h1>Reglas</h1>
@@ -120,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="game-options credits" ng-if="pptsl.vista == 3">
+                <div class="credits" ng-if="pptsl.vista == 3">
                     <h2>Jhonatan Santanilla C.</h2>
                     <p>
                         <i class="fa fa-copyright"></i>
