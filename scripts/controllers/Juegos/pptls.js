@@ -24,7 +24,7 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     vm.cantidad = "";
 
     // Condicion de victoria
-    vm.estado = { condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
+    vm.estado = { partida: false, condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
 
     // Jugadores
     vm.jugadores = [];
@@ -122,8 +122,7 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
         // Limpia los jugadores
         vm.jugadores = [];
 
-        console.log(vista);
-
+        // Cambia a la vista indicada
         switch (vista) {
             case "inicio":
                 vm.vista = 0;
@@ -184,6 +183,13 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
 
         // Asigna el valor del click a la estrategia
         vm.seleccionado.estrategia = dato;
+
+        if (typeof dato === "string") {
+            console.log("Es texto");
+        }
+        else {
+            console.log("Es numero");
+        }
 
         // Recorre las estrategias y agrega el icono a el jugador
         _.each(vm.estrategias, function (e) {
@@ -441,7 +447,6 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
                 break;
             // Default
             default:
-                vm.estado.razon = "";
                 vm.estado.resultado = "¡PERDEDOR!";
         }
 

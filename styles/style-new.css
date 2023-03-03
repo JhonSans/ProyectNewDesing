@@ -612,6 +612,7 @@ article {
     width: 30px;
     height: 30px;
     transition: none;
+    animation: none;
 }
 .pptsl-game-container > .game-window .game-home .content .btn-back button i {
     position: absolute;
