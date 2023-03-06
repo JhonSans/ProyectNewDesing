@@ -66,38 +66,38 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     // Opciones del juego
     vm.estrategias = [
         {
-            id: "1",
+            id: 1,
             titulo: "Piedra",
             img: "/content/pictures/Juegos/PPTLS/piedra.png",
             icono: "fa-hand-rock-o",
         },
         {
-            id: "2",
+            id: 2,
             titulo: "Papel",
             img: "/content/pictures/Juegos/PPTLS/papel.png",
             icono: "fa-hand-paper-o",
         },
         {
-            id: "3",
+            id: 3,
             titulo: "Tijera",
             img: "/content/pictures/Juegos/PPTLS/tijera.png",
             icono: "fa-hand-scissors-o",
         },
         {
-            id: "4",
+            id: 4,
             titulo: "Lagarto",
             img: "/content/pictures/Juegos/PPTLS/lagarto.png",
             icono: "fa-hand-lizard-o",
         },
         {
-            id: "5",
+            id: 5,
             titulo: "Spock",
             img: "/content/pictures/Juegos/PPTLS/spock.png",
             icono: "fa-hand-spock-o",
         },
     ];
 
-    // INIT
+    // Funcion inicial
     vm.init = function () {
         vm.cargandoJuego();
     };
@@ -148,7 +148,6 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
 
     // Funcion agregar jugadores
     vm.agregarJugadores = function (n) {
-
         // Asigna el numero de jugadores a la cantidad
         vm.cantidad = n;
 
@@ -179,48 +178,43 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     };
 
     // Funcion asignar elecciones del jugador
-    vm.jugadorElecciones = function (dato) {
-
-        // Asigna el valor del click a la estrategia
-        vm.seleccionado.estrategia = dato;
-
-        if (typeof dato === "string") {
-            console.log("Es texto");
-        }
-        else {
-            console.log("Es numero");
-        }
-
-        // Recorre las estrategias y agrega el icono a el jugador
-        _.each(vm.estrategias, function (e) {
-            if (e.id == dato)
-                vm.seleccionado.icono = e.icono;
-        });
-
+    vm.jugadorElecciones = function (dato) {      
         // Valida si la cantidad de jugadores es 1
         if (vm.cantidad == 1) {
-            // Recorre a los jugadores, si el jugador es diferente a la CPU, valida que el personaje del jugador este vacio y luego le asigna un valor
-            _.each(vm.jugadores, function (j) {
-                if (j.nombre != "CPU") { 
-                    if (vm.seleccionado.personaje == "") {
+            // Valida si el dato recibido es int o un string
+            if (typeof dato === "string") {
+                // Recorre a los jugadores, si el jugador es diferente a la CPU, agrega el personaje a el jugador
+                _.each(vm.jugadores, function (j) {
+                    if (j.nombre != "CPU") { 
                         j.icono = dato;
                         j.nombre = dato;
                         vm.seleccionado.opcion = dato;
-
-                        vm.jugadores[0].vida = "100";
-                        vm.jugadores[1].vida = "100";
 
                         // Espera 2 segundos para asignar el dato a la variable personaje
                         $timeout(function () {
                             vm.seleccionado.personaje = dato;
                         }, 2000);
-                    } else {
-                        // Asigna el valor de la estrategia
-                        j.estrategia = vm.seleccionado.estrategia;
-                        j.img = vm.seleccionado.icono;
                     }
-                }
-            });
+                });
+            }
+            else {
+                // Asigna el valor del click a la estrategia
+                vm.seleccionado.estrategia = dato;
+
+                // Recorre las estrategias y agrega el icono a la variable
+                _.each(vm.estrategias, function (e) {
+                    if (e.id == dato)
+                        vm.seleccionado.icono = e.icono;
+                });
+
+                // Recorre a los jugadores, si el jugador es diferente a la CPU, agrega la estrategia a el jugador
+                _.each(vm.jugadores, function (e) {
+                    if (e.nombre != "CPU") { 
+                        e.estrategia = vm.seleccionado.estrategia;
+                        e.img = vm.seleccionado.icono;
+                    }
+                });
+            }
         } else {
             // VS
         }
@@ -232,10 +226,8 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
         // Si el juego no esta pausado, cambia el icono de play a pause
         vm.pause = true;
 
-        // Limpia los resultados
-        /*vm.estado = { condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
-        vm.hit = { dano: "", valor: "", objetivo: "" };
-        vm.seleccionado.estrategia = "";*/
+        // Bloquea el boton pause
+        vm.estado.partida = true;
 
         // Realiza el conteo para comenzar a jugar
         $interval(function (i) {
@@ -251,7 +243,7 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
             _.each(vm.jugadores, function (p) {
                 if (p.nombre == "CPU") {
                     _.each(vm.estrategias, function (e) {
-                        var r = Math.ceil(Math.random() * 5);
+                        var r = Math.ceil(Math.random() * (5 - 1) + 1);
 
                         if (e.id == r.toString()) {
                             p.estrategia = e.id;
@@ -266,11 +258,14 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
                 // Ejecuta la funcion de partida
                 vm.partidaJugada();
             }, 5000);
-
+            
             // Espera 6 segundos para ejecutar la funcion
-            /*$timeout(function () {
+            $timeout(function () {
                 vm.comenzarJuego();
-            }, 6000);*/
+                vm.seleccionado.estrategia = "";
+                vm.estado = { partida: false, condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
+                vm.hit = { dano: "", valor: "", objetivo: "" };
+            }, 7000);
         }
     };
 

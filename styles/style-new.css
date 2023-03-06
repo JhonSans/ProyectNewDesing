@@ -795,6 +795,9 @@ article {
     width: 70px;
     height: 70px;
 }
+.pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li button:disabled {
+    cursor: pointer;
+}
 .pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li button i {
     font-size: 35px;
 }
@@ -845,7 +848,7 @@ article {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 300;
 }
 .pptsl-game-container > .game-window .game-home .content .in-game .pause .pause-content button {
     margin: 20px;
@@ -922,7 +925,7 @@ article {
 }
 @keyframes icon-tag {
     0% {
-        transform: scale(0);
+        transform: scale(0.5);
         opacity: 1;
         top: 90px;
     }
@@ -942,6 +945,9 @@ article {
     color: var(--gris-claro);
     text-shadow: 1px 1px 0 var(--pptsl-btn-border),
         -1px -1px 0 var(--pptsl-btn-border), 0 0 4px var(--pptsl-window);
+    animation-name: icon-tag;
+    animation-duration: 3s;
+    animation-fill-mode: both;
 }
 .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .damage.critic {
     font-size: 60px;

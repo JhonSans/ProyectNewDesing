@@ -74,19 +74,19 @@
                         <button class="btn btn-default" ng-click="pptsl.comenzarJuego()" ng-if="!pptsl.pause">
                             <i class="fa fa-play"></i>
                         </button>
-                        <button class="btn btn-default" ng-click="pptsl.pausarJuego()" ng-if="pptsl.pause">
+                        <button class="btn btn-default" ng-click="pptsl.pausarJuego()" ng-if="pptsl.pause" ng-disabled="pptsl.estado.partida">
                             <i class="fa fa-pause"></i>
                         </button>
                     </div>
                     <div class="pause" ng-show="pptsl.pauseMostrar">
                         <div class="pause-content">
-                            <button class="btn btn-default" ng-click="pptsl.cambioVista(2); pptsl.agregarJugadores(1); pptsl.pause = false">
+                            <button class="btn btn-default" ng-click="pptsl.cambioVista(2); pptsl.agregarJugadores(1); pptsl.pause = false; pptsl.pauseMostrar = false">
                                 Volver a selección de personaje
                             </button>
                             <button class="btn btn-default" ng-click="pptsl.cambioVista('inicio')">
                                 Ir al inicio
                             </button>
-                            <button class="btn btn-default cerrar" ng-click="pptsl.pause = false; pptsl.pauseMostrar = false">
+                            <button class="btn btn-default cerrar" ng-click="pptsl.pauseMostrar = false; pptsl.comenzarJuego()">
                                 Reanudar
                             </button>
                         </div>
@@ -101,8 +101,9 @@
                                     </div>
                                 </div>
                                 <i class="fa {{ jugador.img }} selected" ng-class="{ 'active' : pptsl.hit.dano != '' }"></i>
-                                <span class="damage" ng-if="pptsl.hit.objetivo == jugador.nombre && pptsl.hit.valor == ''" >{{ pptsl.hit.dano }}</span>
-                                <span class="damage critic" ng-if="pptsl.hit.objetivo == jugador.nombre && pptsl.hit.valor != ''" >{{ pptsl.hit.dano }}!!</span>
+                                <span class="damage" ng-if="pptsl.hit.objetivo == jugador.nombre" ng-class="{ 'critic' : pptsl.hit.valor != '' }">
+                                    {{ pptsl.hit.dano }}
+                                </span>
                                 <i class="fa {{ jugador.icono }} player"></i>
                                 <i class="fa {{ jugador.icono }} back"></i>
                                 <div class="shadow"></div>
