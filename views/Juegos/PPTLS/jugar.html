@@ -6,7 +6,6 @@
         </button>
     </div>
     <div class="game-window">
-        <!--
         <div class="game-loading text-center" ng-class="{ 'active' : pptsl.cargando != 100 }">
             <h4>CARGANDO</h4>
             <div class="progress-bar-content">
@@ -15,7 +14,6 @@
                 </uib-progressbar>
             </div>
         </div>
-        -->
         <div class="game-home text-center" ng-class="{ 'active' : pptsl.cargando == 100 }">
             <div class="title" ng-if="pptsl.vista == 0">
                 <h1>PIEDRA PAPEL TIJERA LAGARTO SPOCK</h1>
@@ -71,23 +69,17 @@
                         </ul>
                     </div>
                     <div class="options" ng-hide="pptsl.seleccionado.personaje == ''">
-                        <button class="btn btn-default" ng-click="pptsl.comenzarJuego()" ng-if="!pptsl.pause">
+                        <button class="btn btn-default" ng-click="pptsl.comenzarJuego()" ng-disabled="pptsl.partida">
                             <i class="fa fa-play"></i>
                         </button>
-                        <button class="btn btn-default" ng-click="pptsl.pausarJuego()" ng-if="pptsl.pause" ng-disabled="pptsl.estado.partida">
-                            <i class="fa fa-pause"></i>
-                        </button>
                     </div>
-                    <div class="pause" ng-show="pptsl.pauseMostrar">
-                        <div class="pause-content">
-                            <button class="btn btn-default" ng-click="pptsl.cambioVista(2); pptsl.agregarJugadores(1); pptsl.pause = false; pptsl.pauseMostrar = false">
+                    <div class="fin" ng-show="pptsl.fin">
+                        <div class="fin-content">
+                            <button class="btn btn-default" ng-click="pptsl.cambioVista(2); pptsl.agregarJugadores(1); pptsl.fin = false">
                                 Volver a selección de personaje
                             </button>
-                            <button class="btn btn-default" ng-click="pptsl.cambioVista('inicio')">
+                            <button class="btn btn-default" ng-click="pptsl.cambioVista('inicio'); pptsl.fin = false">
                                 Ir al inicio
-                            </button>
-                            <button class="btn btn-default cerrar" ng-click="pptsl.pauseMostrar = false; pptsl.comenzarJuego()">
-                                Reanudar
                             </button>
                         </div>
                     </div>

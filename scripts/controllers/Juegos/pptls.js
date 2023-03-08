@@ -4,33 +4,35 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
     // Cargando
     vm.cargando = 0;
 
-    // Pausa
-    vm.pause = false;
-    vm.pauseMostrar = false;
+    // Vista
+    vm.vista = 0;
 
-    // Cambios de estado
-    vm.vista = 1;
-
-    // Toggle accion cerrar/abrir
+    // Toggle accion abrir/cerrar
     vm.toggle = false;
-    
-    // Seleccionado
-    vm.seleccionado = { personaje: "", estrategia: "", opcion: "", icono: "" };
-    
-    // Conteo para jugar
-    vm.conteo = "VS";
 
     // Cantidad de jugadores
     vm.cantidad = "";
 
-    // Condicion de victoria
-    vm.estado = { partida: false, condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
-
     // Jugadores
     vm.jugadores = [];
 
+    // Seleccionado
+    vm.seleccionado = { personaje: "", estrategia: "", opcion: "", icono: "" };
+
+    // Conteo para jugar
+    vm.conteo = "VS";
+
+    // Condicion de victoria
+    vm.estado = { condicion: "", razon: "", resultado: "", iconoJ1: "", ganador: "" };
+
     // Daño inflingido
     vm.hit = { dano: "", valor: "", objetivo: "" };
+
+    // Juego actual
+    vm.partida = false;
+
+    // Fin juego
+    vm.fin = false;
 
     // Reglas del juego
     vm.reglas = [
@@ -102,17 +104,7 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
         vm.cargandoJuego();
     };
 
-    // Funcion ir a pagina del juego
-    vm.jugar = function () {
-        return $location.url("/Juegos/PPTLS/Jugar");
-    };
-
-    // Funcion regresar
-    vm.regresar = function () {
-        return $location.url("/Juegos/PPTLS");
-    };
-
-    // Cerrar ventanas
+    // Cerrar ventana reglas
     vm.cerrar = function () {
         vm.toggle = !vm.toggle;
     };
@@ -129,7 +121,7 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
                 break;
             case "comenzar":
                 vm.vista = 1;
-                break;    
+                break;
             case "creditos":
                 vm.vista = 3;
                 break;
@@ -153,9 +145,13 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
 
         // Limpia las variables
         vm.jugadores = [];
-        vm.seleccionado = { personaje: "", estrategia: "", opcion: "", icono: "" };
+        vm.seleccionado = {
+            personaje: "",
+            estrategia: "",
+            opcion: "",
+            icono: "",
+        };
 
-        // Pantalla de carga
         vm.cargandoJuego();
 
         // Cambia la vista
@@ -166,26 +162,32 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
         // Valida si van a jugar 1 o 2 jugadores y los agrega al abjeto
         if (vm.cantidad == 1) {
             vm.jugadores.push(
-                { nombre: "", icono: "", estrategia: "", img: "", vida: "100" },
-                { nombre: "CPU", icono: "fa-desktop", estrategia: "", img: "", vida: "100" }
+                { nombre: "", icono: "", estrategia: "", img: "", vida: 100 },
+                {
+                    nombre: "CPU",
+                    icono: "fa-desktop",
+                    estrategia: "",
+                    img: "",
+                    vida: 100,
+                }
             );
         } else {
             vm.jugadores.push(
-                { nombre: "", icono: "", estrategia: "", img: "", vida: "100" },
-                { nombre: "", icono: "", estrategia: "", img: "", vida: "100" }
+                { nombre: "", icono: "", estrategia: "", img: "", vida: 100 },
+                { nombre: "", icono: "", estrategia: "", img: "", vida: 100 }
             );
         }
     };
 
     // Funcion asignar elecciones del jugador
-    vm.jugadorElecciones = function (dato) {      
+    vm.jugadorElecciones = function (dato) {
         // Valida si la cantidad de jugadores es 1
         if (vm.cantidad == 1) {
             // Valida si el dato recibido es int o un string
             if (typeof dato === "string") {
                 // Recorre a los jugadores, si el jugador es diferente a la CPU, agrega el personaje a el jugador
                 _.each(vm.jugadores, function (j) {
-                    if (j.nombre != "CPU") { 
+                    if (j.nombre != "CPU") {
                         j.icono = dato;
                         j.nombre = dato;
                         vm.seleccionado.opcion = dato;
@@ -196,20 +198,18 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
                         }, 2000);
                     }
                 });
-            }
-            else {
+            } else {
                 // Asigna el valor del click a la estrategia
                 vm.seleccionado.estrategia = dato;
 
                 // Recorre las estrategias y agrega el icono a la variable
                 _.each(vm.estrategias, function (e) {
-                    if (e.id == dato)
-                        vm.seleccionado.icono = e.icono;
+                    if (e.id == dato) vm.seleccionado.icono = e.icono;
                 });
 
                 // Recorre a los jugadores, si el jugador es diferente a la CPU, agrega la estrategia a el jugador
                 _.each(vm.jugadores, function (e) {
-                    if (e.nombre != "CPU") { 
+                    if (e.nombre != "CPU") {
                         e.estrategia = vm.seleccionado.estrategia;
                         e.img = vm.seleccionado.icono;
                     }
@@ -222,12 +222,39 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
 
     // Funcion para comenzar el juego
     vm.comenzarJuego = function () {
+        // Valida que la vida no sea inferior a 0
+        if (vm.jugadores[0].vida <= 0 || vm.jugadores[1].vida <= 0) {
+            _.each(vm.jugadores, function (j) {
+                if (j.vida <= 0)
+                {
+                    vm.fin = true;
+                }
+            });
+            
+            // desbloquea el btn jugar
+            vm.partida = false;
 
-        // Si el juego no esta pausado, cambia el icono de play a pause
-        vm.pause = true;
+            return;
+        }
 
-        // Bloquea el boton pause
-        vm.estado.partida = true;
+        // Bloquea el btn de jugar
+        vm.partida = true;
+
+        // Limpia los valores
+        vm.hit = { dano: "", valor: "", objetivo: "" };
+        vm.estado = { condicion: "", razon: "", resultado: "", ganador: "" };
+        vm.seleccionado.estrategia = "";
+        _.each(vm.jugadores, function (p) {
+            p.estrategia = "";
+            p.img = "";
+        });
+
+        // Ejecuta funcion jugar
+        vm.jugar();
+    };
+
+    // Funcion Play
+    vm.jugar = function () {
 
         // Realiza el conteo para comenzar a jugar
         $interval(function (i) {
@@ -238,208 +265,168 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
             if (i == 5) vm.conteo = "";
         }, 1000);
 
-        if (!vm.pauseMostrar) {
-            // Recorre los jugadores, si el jugador es CPU le asigna un valor de estrategia aleatorio
-            _.each(vm.jugadores, function (p) {
-                if (p.nombre == "CPU") {
-                    _.each(vm.estrategias, function (e) {
-                        var r = Math.ceil(Math.random() * (5 - 1) + 1);
+        // Obtiene un numero aleatorio entre 1 - 5
+        var r = Math.ceil(Math.random() * (5 - 1) + 1);
 
-                        if (e.id == r.toString()) {
-                            p.estrategia = e.id;
-                            p.img = e.icono;
-                        }
-                    });
-                }
-            });
+        // Recorre los jugadores, si el jugador es CPU le asigna un valor de estrategia aleatorio
+        _.each(vm.jugadores, function (p) {
+            if (p.nombre == "CPU") {
+                _.each(vm.estrategias, function (e) {
+                    if (e.id == r) {
+                        p.estrategia = e.id;
+                        p.img = e.icono;
+                    }
+                });
+            }
+        });
 
-            // Espera 5 segundos para ejecutar la funcion
-            $timeout(function () {
-                // Ejecuta la funcion de partida
-                vm.partidaJugada();
-            }, 5000);
-            
-            // Espera 6 segundos para ejecutar la funcion
-            $timeout(function () {
-                vm.comenzarJuego();
-                vm.seleccionado.estrategia = "";
-                vm.estado = { partida: false, condicion: "", razon: "", resultado: "", iconoJ1: "", iconoJ2: "" };
-                vm.hit = { dano: "", valor: "", objetivo: "" };
-            }, 7000);
-        }
+        // Espera 5 segundos para ejecutar la funcion
+        $timeout(function () {
+            // Ejecuta la funcion de partida
+            vm.partidaJugada();
+        }, 5000);
+
+        // Espera 6 segundos para ejecutar la funcion
+        $timeout(function () {
+            vm.comenzarJuego();
+        }, 7000);
     };
-
-    // Funcion pausar
-    vm.pausarJuego = function () {
-        vm.pauseMostrar = !vm.pauseMostrar;
-    }
 
     // Funcion obtener ganador
     vm.partidaJugada = function () {
-
         // Recorre los jugadores asigna las estrategias a la condicion
-        _.each(vm.jugadores, function(p) {
+        _.each(vm.jugadores, function (p) {
             vm.estado.condicion += p.estrategia;
         });
 
         // Condiciones
         switch (vm.estado.condicion) {
-
-            // Victoria
+            // Victoria J1
             case "32":
                 vm.estado.razon = vm.reglas[0];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[2].icono;
-                vm.estado.iconoJ2 = vm.estrategias[1].icono;
+                vm.estado.ganador = vm.estrategias[2].icono;
                 break;
             case "21":
                 vm.estado.razon = vm.reglas[1];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[1].icono;
-                vm.estado.iconoJ2 = vm.estrategias[0].icono;
+                vm.estado.ganador = vm.estrategias[1].icono;
                 break;
             case "14":
                 vm.estado.razon = vm.reglas[2];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[0].icono;
-                vm.estado.iconoJ2 = vm.estrategias[3].icono;
+                vm.estado.ganador = vm.estrategias[0].icono;
                 break;
             case "45":
                 vm.estado.razon = vm.reglas[3];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[3].icono;
-                vm.estado.iconoJ2 = vm.estrategias[4].icono;
+                vm.estado.ganador = vm.estrategias[3].icono;                
                 break;
             case "53":
                 vm.estado.razon = vm.reglas[4];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[4].icono;
-                vm.estado.iconoJ2 = vm.estrategias[2].icono;
+                vm.estado.ganador = vm.estrategias[4].icono;
                 break;
             case "34":
                 vm.estado.razon = vm.reglas[5];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[2].icono;
-                vm.estado.iconoJ2 = vm.estrategias[3].icono;
+                vm.estado.ganador = vm.estrategias[2].icono;
                 break;
             case "42":
                 vm.estado.razon = vm.reglas[6];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[3].icono;
-                vm.estado.iconoJ2 = vm.estrategias[1].icono;
+                vm.estado.ganador = vm.estrategias[3].icono;
                 break;
             case "25":
                 vm.estado.razon = vm.reglas[7];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[1].icono;
-                vm.estado.iconoJ2 = vm.estrategias[4].icono;
+                vm.estado.ganador = vm.estrategias[1].icono;
                 break;
             case "51":
                 vm.estado.razon = vm.reglas[8];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[4].icono;
-                vm.estado.iconoJ2 = vm.estrategias[0].icono;
+                vm.estado.ganador = vm.estrategias[4].icono;
                 break;
             case "13":
                 vm.estado.razon = vm.reglas[9];
                 vm.estado.resultado = "¡GANADOR!";
-                vm.estado.iconoJ1 = vm.estrategias[0].icono;
-                vm.estado.iconoJ2 = vm.estrategias[2].icono;
+                vm.estado.ganador = vm.estrategias[0].icono;
                 break;
 
-            // Derrota
+            // Victoria J2
             case "23":
                 vm.estado.razon = vm.reglas[0];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[1].icono;
-                vm.estado.iconoJ2 = vm.estrategias[2].icono;
+                vm.estado.ganador = vm.estrategias[1].icono;
                 break;
             case "12":
                 vm.estado.razon = vm.reglas[1];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[0].icono;
-                vm.estado.iconoJ2 = vm.estrategias[1].icono;
+                vm.estado.ganador = vm.estrategias[0].icono;
                 break;
             case "41":
                 vm.estado.razon = vm.reglas[2];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[3].icono;
-                vm.estado.iconoJ2 = vm.estrategias[0].icono;
+                vm.estado.ganador = vm.estrategias[3].icono;
                 break;
             case "54":
                 vm.estado.razon = vm.reglas[3];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[4].icono;
-                vm.estado.iconoJ2 = vm.estrategias[3].icono;
+                vm.estado.ganador = vm.estrategias[4].icono;
                 break;
             case "35":
                 vm.estado.razon = vm.reglas[4];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[2].icono;
-                vm.estado.iconoJ2 = vm.estrategias[4].icono;
+                vm.estado.ganador = vm.estrategias[2].icono;
                 break;
             case "43":
                 vm.estado.razon = vm.reglas[5];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[3].icono;
-                vm.estado.iconoJ2 = vm.estrategias[2].icono;
+                vm.estado.ganador = vm.estrategias[3].icono;
                 break;
             case "24":
                 vm.estado.razon = vm.reglas[6];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[1].icono;
-                vm.estado.iconoJ2 = vm.estrategias[3].icono;
+                vm.estado.ganador = vm.estrategias[1].icono;
                 break;
             case "52":
                 vm.estado.razon = vm.reglas[7];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[4].icono;
-                vm.estado.iconoJ2 = vm.estrategias[1].icono;
+                vm.estado.ganador = vm.estrategias[4].icono;
                 break;
             case "15":
                 vm.estado.razon = vm.reglas[8];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[0].icono;
-                vm.estado.iconoJ2 = vm.estrategias[4].icono;
+                vm.estado.ganador = vm.estrategias[0].icono;
                 break;
             case "31":
                 vm.estado.razon = vm.reglas[9];
                 vm.estado.resultado = "¡PERDEDOR!";
-                vm.estado.iconoJ1 = vm.estrategias[2].icono;
-                vm.estado.iconoJ2 = vm.estrategias[0].icono;
+                vm.estado.ganador = vm.estrategias[2].icono;
                 break;
 
             // Empate
             case "11":
                 vm.estado.razon = "Ambos sacáron Piedra.";
                 vm.estado.resultado = "¡EMPATE!";
-                vm.estado.iconoJ1 = vm.estrategias[0].icono;
-                vm.estado.iconoJ2 = vm.estrategias[0].icono;
                 break;
             case "22":
                 vm.estado.razon = "Ambos sacáron Papel";
                 vm.estado.resultado = "¡EMPATE!";
-                vm.estado.iconoJ1 = vm.estrategias[1].icono;
-                vm.estado.iconoJ2 = vm.estrategias[1].icono;
                 break;
             case "33":
                 vm.estado.razon = "Ambos sacáron Tijera";
                 vm.estado.resultado = "¡EMPATE!";
-                vm.estado.iconoJ1 = vm.estrategias[2].icono;
-                vm.estado.iconoJ2 = vm.estrategias[2].icono;
                 break;
             case "44":
                 vm.estado.razon = "Ambos sacáron Lagarto";
                 vm.estado.resultado = "¡EMPATE!";
-                vm.estado.iconoJ1 = vm.estrategias[3].icono;
-                vm.estado.iconoJ2 = vm.estrategias[3].icono;
                 break;
             case "55":
                 vm.estado.razon = "Ambos sacáron Spock";
                 vm.estado.resultado = "¡EMPATE!";
-                vm.estado.iconoJ1 = vm.estrategias[4].icono;
-                vm.estado.iconoJ2 = vm.estrategias[4].icono;
                 break;
+
             // Default
             default:
                 vm.estado.resultado = "¡PERDEDOR!";
@@ -448,7 +435,7 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
         vm.hit.dano = Math.ceil(Math.random() * (25 - 7) + 7);
 
         if (vm.hit.dano >= 20) {
-            vm.hit.valor = "Critico!!"
+            vm.hit.valor = "Critico!!";
         }
 
         switch (vm.estado.resultado) {
@@ -461,23 +448,19 @@ app.controller("pptslController", function ($location, $interval, $timeout) {
                 vm.hit.objetivo = vm.jugadores[0].nombre;
                 break;
         }
-        
-        if (vm.jugadores[0].vida == 0 || vm.jugadores[1].vida == 0)
-        {
-            console.log("Fin del juego");
-        }
-    }
+    };
 
     // Funcion de carga
     vm.cargandoJuego = function () {
-        vm.cargando = 100;
+        vm.cargando = 0;
+
         // Altera el estado de la barra
-        /*$interval(function () {
+        $interval(function () {
             // Agrega un numero aleatorio a la barra de progreso
             vm.cargando = Math.ceil(
                 Math.random() * (100 - vm.cargando) + vm.cargando
             );
-        }, 2000);*/
+        }, 2000);
     };
 
     vm.init();

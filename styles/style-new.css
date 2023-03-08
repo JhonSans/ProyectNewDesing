@@ -526,7 +526,7 @@ article {
 .pptsl-game-container > .game-window .game-loading.active,
 .pptsl-game-container > .game-window .game-home.active {
     filter: opacity(1);
-    transition: all 0s ease-in; /*------------------------------------------------------------------*/
+    transition: all 1.5s ease-in;
     z-index: 2;
 }
 .pptsl-game-container > .game-window .game-loading {
@@ -554,10 +554,13 @@ article {
     border-style: ridge;
     border-color: var(--pptsl-btn);
 }
+.pptsl-game-container > .game-window .game-loading.active .progress-bar-content .progress .progress-bar {
+    transition: width 1.5s linear;
+}
 .pptsl-game-container > .game-window .game-loading .progress-bar-content .progress .progress-bar {
     background-color: var(--pptsl-progress);
     height: 20px;
-    transition: width 1.5s linear;
+    transition: none;
 }
 .pptsl-game-container > .game-window .game-loading .progress-bar-content .progress .progress-bar i {
     position: absolute;
@@ -818,7 +821,7 @@ article {
     animation: none;
     transition: none;
 }
-.pptsl-game-container > .game-window .game-home .content .in-game .pause {
+.pptsl-game-container > .game-window .game-home .content .in-game .fin {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -828,15 +831,16 @@ article {
     justify-content: center;
     align-items: center;
 }
-.pptsl-game-container > .game-window .game-home .content .in-game .pause::before {
+.pptsl-game-container > .game-window .game-home .content .in-game .fin::before {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: var(--gris-oscuro);
     opacity: 0.5;
+    z-index: 2;
 }
-.pptsl-game-container > .game-window .game-home .content .in-game .pause .pause-content {
+.pptsl-game-container > .game-window .game-home .content .in-game .fin .fin-content {
     width: auto;
     height: calc(100% - 140px);
     margin: 50px;
@@ -850,7 +854,7 @@ article {
     justify-content: center;
     z-index: 300;
 }
-.pptsl-game-container > .game-window .game-home .content .in-game .pause .pause-content button {
+.pptsl-game-container > .game-window .game-home .content .in-game .fin .fin-content button {
     margin: 20px;
 }
 .pptsl-game-container > .game-window .game-home .content .in-game .lobby {
@@ -1088,24 +1092,24 @@ section.copyright p {
     .pptsl-game-container > .game-window .game-home .title h1 {
         font-size: calc(40px + 60 * ((100vw - 280px) / 920));
     }
-    .pptsl-game-container > .game-window .game-home .rules .panel.panel-heading h1 {
+    .pptsl-game-container > .game-window .game-home .content .rules .panel.panel-heading h1 {
         font-size: calc(40px + 10 * ((100vw - 280px) / 920));
     }
-    .pptsl-game-container > .game-window .game-home .rules .panel .panel-body ul li {
+    .pptsl-game-container > .game-window .game-home .content .rules .panel .panel-body ul li {
         font-size: calc(14.5px + 5.5 * ((100vw - 280px) / 920));
     }
-    .pptsl-game-container > .game-window .game-home .credits h2,
-    .pptsl-game-container > .game-window .game-home .credits p,
-    .pptsl-game-container > .game-window .game-home .credits p strong,
-    .pptsl-game-container > .game-window .game-home .content .in-game h2 {
+    .pptsl-game-container > .game-window .game-home .content .credits h2,
+    .pptsl-game-container > .game-window .game-home .content .credits p,
+    .pptsl-game-container > .game-window .game-home .content .credits p strong,
+    .pptsl-game-container > .game-window .game-home .content .in-game .in-game-title {
         font-size: calc(25px + 25 * ((100vw - 280px) / 920));
     }
-    .pptsl-game-container > .game-window .game-home .content .in-game .name h3 {
+    .pptsl-game-container > .game-window .game-home .content .in-game .in-game-name .name h3 {
         font-size: calc(18px + 32 * ((100vw - 280px) / 920));
     }
 }
 @media (max-width: 1023px) {
-    .pptsl-game-container > .game-window .game-home .content .in-game .options button {
+    .pptsl-game-container > .game-window .game-home .content .in-game .in-game-name .options button {
         width: auto;
     }
 }
@@ -1189,21 +1193,44 @@ section.copyright p {
     .pptsl-game-container > .game-window .game-home .content .in-game .name {
         margin-bottom: 0;
     }
-    .pptsl-game-container > .game-window .game-home .content .in-game .strategies {
-        position: relative;
-    }
     .pptsl-game-container > .game-window .game-home .content .in-game .options {
-        bottom: 0;
-        top: auto;
         margin-top: 0;
-        margin-bottom: 65px;
     }
-    .pptsl-game-container > .game-window .game-home .content .in-game .count {
-        display: none;
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content h1 {
+        font-size: 50px;
     }
-
     .pptsl-game-container > .game-window .game-home .content .rules .panel {
         width: 100%;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .options button {
+        width: auto;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .characters ul, .pptsl-game-container > .game-window .game-home .content .in-game .strategies ul {
+        margin-bottom: 50px;
+    }
+}
+@media (max-width: 520px) {
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby {
+        margin-left: 10px;
+        margin-right: 10px;
+        border-width: 15px;
+        width: calc(100% - 20px);
+        height: 225px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .progress-bar-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .progress-bar-content .progress {
+        border-width: 5px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle i.fa,
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle:nth-child(2) i.back {
+        font-size: 80px;
+        bottom: 30px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content h1 {
+        font-size: 30px;
     }
 }
 @media (max-width: 410px) {
@@ -1211,57 +1238,46 @@ section.copyright p {
     .pptsl-game-container > .game-window .game-home {
         padding: 10px;
     }
-    .pptsl-game-container > .game-window .game-home .game-options button i {
+    .pptsl-game-container > .game-window .game-home .content .start button i {
         display: none;
     }
-    .pptsl-game-container
-        > .game-window
-        .game-home
-        .game-options.rules
-        button
-        i {
-        display: block;
-    }
-    .pptsl-game-container
-        > .game-window
-        .game-home
-        .rules
-        .panel
-        .panel-heading
-        .btn-back {
+    .pptsl-game-container > .game-window .game-home .content .rules .panel .panel-heading .btn-back {
         margin: 0;
         position: relative;
     }
-    .pptsl-game-container > .game-window .game-home .content .in-game .name {
+    .pptsl-game-container > .game-window .game-home .content .in-game .in-game-name .name {
         height: 30px;
     }
-    .pptsl-game-container
-        > .game-window
-        .game-home
-        .content .in-game
-        .characters
-        ul,
-    .pptsl-game-container
-        > .game-window
-        .game-home
-        .content .in-game
-        .strategies
-        ul {
+    .pptsl-game-container > .game-window .game-home .content .in-game .characters ul,
+    .pptsl-game-container > .game-window .game-home .content .in-game .strategies ul {
         margin: 0;
     }
-    .pptsl-game-container
-        > .game-window
-        .game-home
-        .content .in-game
-        .strategies
-        ul
-        li
-        button {
+    .pptsl-game-container > .game-window .game-home .content .in-game .strategies ul li button {
         width: 55px;
         height: 55px;
     }
-
     .pptsl-game-container > .game-window .game-home .content .rules {
         padding: 10px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .progress-bar-content .progress {
+        height: 30px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle .progress-bar-content {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle i.fa, 
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content .battle:nth-child(2) i.back {
+        font-size: 40px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .lobby {
+        height: 200px;
+        border-width: 5px;
+    }
+    .pptsl-game-container > .game-window .game-home .content .in-game .options button {
+        padding: 5px 0;
+        font-size: 15px;
+        margin-top: 45px;
+        width: 100%;
     }
 }
