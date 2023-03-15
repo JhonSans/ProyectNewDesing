@@ -304,6 +304,7 @@ header > div ul li a:focus {
     border-radius: 0;
     background-color: var(--gris);
     border-color: var(--gris);
+    transition: all 0.3s ease-in;
 }
 .carousel-indicators .active {
     width: 25px;
