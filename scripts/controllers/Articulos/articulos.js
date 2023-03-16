@@ -13,6 +13,24 @@ app.controller("articulosController", function () {
       titulo: "Suma Mini - Max",
       cont: "Minimax es un método de decisión para minimizar la pérdida máxima esperada en juegos con adversario y con información perfecta.",
       url: "/Juegos/Suma",
+    },
+    {
+      img: "/content/pictures/Northwind/Clientes/clientes.jpg",
+      titulo: "Clientes - Northwind",
+      cont: "Listado de clientes registrados en la base de datos de Northwind",
+      url: "/Northwind/Clientes",
+    },
+    {
+      img: "/content/pictures/Northwind/Productos/productos.jpg",
+      titulo: "Productos - Northwind",
+      cont: "Listado de productos registrados en la base de datos de Northwind",
+      url: "/Northwind/Productos",
+    },
+    {
+      img: "/content/pictures/Northwind/Ordenes/ordenes.jpg",
+      titulo: "Ordenes - Northwind",
+      cont: "Listado de ordenes registradas en la base de datos de Northwind",
+      url: "/Northwind/Ordenes",
     }
   ];
 });

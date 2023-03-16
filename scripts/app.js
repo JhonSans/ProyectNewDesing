@@ -11,7 +11,7 @@ var app = angular
   .config(function ($routeProvider) {
     $routeProvider
       .when("/Inicio", {
-        templateUrl: "views/Principal/articulos.html",
+        templateUrl: "views/articulos.html",
         controller: "articulosController",
         controllerAs: "ar",
       })
@@ -33,6 +33,26 @@ var app = angular
         templateUrl: "views/Juegos/Suma/suma.html",
         controller: "sumaController",
         controllerAs: "sumaMM",
+      })
+      .when("/Juegos/Suma/Probar", {
+        templateUrl: "views/Juegos/Suma/probar.html",
+        controller: "sumaController",
+        controllerAs: "sumaMM",
+      })
+      .when("/Northwind/Clientes", {
+        templateUrl: "views/Northwind/Clientes/index.html",
+        controller: "clientesController",
+        controllerAs: "clientesN",
+      })
+      .when("/Northwind/Productos", {
+        templateUrl: "views/Northwind/Productos/index.html",
+        controller: "productosController",
+        controllerAs: "productosN",
+      })
+      .when("/Northwind/Ordenes", {
+        templateUrl: "views/Northwind/Ordenes/index.html",
+        controller: "ordenesController",
+        controllerAs: "ordenesN",
       })
       .otherwise({
         redirectTo: "/IniciarSesion",

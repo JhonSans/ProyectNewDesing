@@ -1,3 +1,4 @@
+/* CSS EXAMPLES https://freefrontend.com/css-gallery/ */
 /*---------------------------------------*/
 /*-------------- Variables --------------*/
 /*---------------------------------------*/
@@ -258,12 +259,16 @@ header > div ul li a:focus {
     border: none;
     display: block;
     height: 0;
+    width: 100%;
     overflow: hidden;
     transition: all 0.2s linear;
 }
 .navbar > .navbar-collapse .navbar-btn-drop.open ul {
     border: 1px solid var(--gris-claro);
     height: calc(34px * 2);
+}
+.navbar > .navbar-collapse .navbar-btn-drop.open ul.northwind {
+    height: calc(34px * 3);
 }
 .navbar > .navbar-collapse .navbar-btn-drop ul li a {
     padding: 6px 20px;
@@ -438,13 +443,16 @@ article {
 .pptsl-container > .panel.rules .panel-body ul li {
     border-radius: 0;
 }
-.pptsl-container > div button {
+.pptsl-container > div button,
+.suma-container > div button {
     margin-bottom: 20px;
 }
-.pptsl-game-container > .header {
+.pptsl-game-container > .header,
+.suma-probar-container > .header {
     margin: 20px 0;
 }
-.pptsl-game-container > .header i {
+.pptsl-game-container > .header i,
+.suma-probar-container > .header i {
     margin-right: 5px;
 }
 .pptsl-game-container > .game-window {
@@ -1032,6 +1040,94 @@ article {
     left: auto;
     margin-left: 0;
 }
+/*----------------- SUMA -----------------*/
+.suma-probar-container > .panel,
+.suma-probar-container > .panel .panel-body .panel-collapse {
+    -webkit-box-shadow: 0px 5px 15px -5px rgba(138, 138, 138, 0.75);
+    -moz-box-shadow: 0px 5px 15px -5px rgba(138, 138, 138, 0.75);
+    box-shadow: 0px 5px 15px -5px rgba(138, 138, 138, 0.75);
+}
+.suma-probar-container > .panel .panel-heading {
+    border: none;
+}
+.suma-probar-container > .panel .panel-heading form {
+    position: relative;
+}
+.suma-probar-container > .panel .panel-heading form .btn-end {
+    position: absolute;
+    right: 0;
+    top: -5px;
+}
+.suma-probar-container > .panel .panel-heading form .btn-end button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+.suma-probar-container > .panel .panel-heading form .btn-end button span {
+    font-size: 20px;
+    top: 0;
+    margin-right: 5px;
+}
+.suma-probar-container > .panel .panel-heading form input {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+}
+.suma-probar-container > .panel .panel-body {
+    padding: 0;
+    position: relative;
+}
+.suma-probar-container > .panel .panel-body .list-group,
+.suma-probar-container > .panel .panel-body .panel-collapse .well,
+.suma-probar-container > .panel .panel-body .list-group .list-group-item input,
+.suma-probar-container > .panel .panel-body .panel-collapse .well .list-group .list-group-item p {
+    margin-bottom: 0;
+}
+.suma-probar-container > .panel .panel-body .panel-collapse .well {
+    padding: 0;
+    min-height: auto;
+    border: none;
+}
+.suma-probar-container > .panel .panel-body .panel-collapse .well .list-group .list-group-item,
+.suma-probar-container > .panel .panel-footer .lista-numeros .numeros {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: none;
+}
+.suma-probar-container > .panel .panel-body .panel-collapse .well .list-group .list-group-item p:last-child span,
+.suma-probar-container > .panel .panel-footer .lista-numeros .numeros h3:last-child span {
+    display: none;
+}
+.suma-probar-container > .panel .panel-footer .lista-numeros .numeros,
+.suma-probar-container > .panel .panel-footer .resultado .numero {
+    display: flex;
+    justify-content: flex-end;
+}
+.suma-probar-container > .panel .panel-footer .lista-numeros .numeros h3,
+.suma-probar-container > .panel .panel-footer .resultado .numero h2 {
+    margin: 0;
+}
+.suma-probar-container > .panel .panel-footer .lista-numeros .numeros h3 span {
+    font-size: 24px;
+}
+.suma-probar-container > .panel .panel-body .list-number .list-group {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 5px;
+}
+.suma-probar-container > .panel .panel-body .list-number .list-group li {
+    width: calc((100% - 20px) / 5);
+}
+.suma-probar-container > .panel .well {
+    background-color: var(--blanco);
+    border-radius: 30px;
+}
+.suma-probar-container > .panel .panel-footer .resultado .numero h2 {
+    font-size: 40px;
+}
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/
 /*----------------------------------------*/
@@ -1055,16 +1151,23 @@ footer > .row i {
     margin-right: 10px;
     color: var(--verde);
 }
+footer > .row ul li,
+footer > .row ul li a {
+    color: var(--gris-oscuro);
+}
 footer > .row ul.siguenos a i {
     font-size: 25px;
     margin: 0;
     transition: all 0.2s ease-in-out;
     margin: 0 12px;
 }
-footer > .row ul.siguenos a:hover,
-footer > .row ul.siguenos a:hover i {
+footer > .row ul a:hover i {
     text-decoration: none;
     color: var(--gris-oscuro);
+}
+footer > .row ul a:hover {
+    text-decoration: none;
+    color: var(--verde-claro);
 }
 section.copyright {
     background-color: var(--verde);
@@ -1209,6 +1312,10 @@ section.copyright p {
     .pptsl-game-container > .game-window .game-home .content .in-game .characters ul, .pptsl-game-container > .game-window .game-home .content .in-game .strategies ul {
         margin-bottom: 50px;
     }
+    /*-----------SUMA------------*/
+    .suma-probar-container > .panel .panel-body .list-number .list-group li {
+        width: calc((100% - 10px) / 3);
+    }
 }
 @media (max-width: 520px) {
     .pptsl-game-container > .game-window .game-home .content .in-game .lobby {
@@ -1232,6 +1339,10 @@ section.copyright p {
     }
     .pptsl-game-container > .game-window .game-home .content .in-game .lobby .lobby-content h1 {
         font-size: 30px;
+    }
+    /*-----------SUMA------------*/
+    .suma-probar-container > .panel .panel-body .list-number .list-group li {
+        width: calc((100% - 5px) / 2);
     }
 }
 @media (max-width: 410px) {
@@ -1279,6 +1390,10 @@ section.copyright p {
         padding: 5px 0;
         font-size: 15px;
         margin-top: 45px;
+        width: 100%;
+    }
+    /*-----------SUMA------------*/
+    .suma-probar-container > .panel .panel-body .list-number .list-group li {
         width: 100%;
     }
 }

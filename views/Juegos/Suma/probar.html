@@ -1,0 +1,89 @@
+<div class="suma-probar-container">
+    <div class="header">
+        <button class="btn btn-default" ng-click="actualizarContenido('/Juegos/Suma')">
+            <i class="fa fa-chevron-left"></i>
+            <span>Regresar</span>
+        </button>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <form>
+                <h3>Campos:</h3>
+                <div class="btn-end" ng-if="sumaMM.listaFinal.length == sumaMM.campos && sumaMM.campos">
+                    <button class="btn btn-primary" type="button" ng-click="sumaMM.isCollapse = !sumaMM.isCollapse">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        Resultados
+                    </button>
+                </div>
+                <div>
+                    <input type="text" class="form-control" ng-model="sumaMM.campos" ng-keyup="sumaMM.agregarCampos()" placeholder="Digite el numero de campos, mínimo 5" />
+                </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            <div uib-collapse="!sumaMM.isCollapse" class="panel-collapse">
+                <div class="well">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="res in sumaMM.listaFinal">
+                            Si sumamos todos excepto&nbsp;
+                            <strong>{{ res.numero }}</strong>
+                            , tenemos&nbsp;
+                            <p ng-repeat="numeros in res.lista">
+                                {{ numeros }}<span>&nbsp;+&nbsp;</span>
+                            </p>
+                            &nbsp;= {{ res.suma }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list-number" ng-if="sumaMM.campos >= 5">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="(indice, contenido) in sumaMM.inputs track by indice">
+                        <label for="campo">Número {{ contenido.id + 1 }}</label>
+                        <input type="text" class="form-control" ng-model="contenido.numero" ng-keyup="sumaMM.agregarNumero(indice, contenido.numero)" id="campo" placeholder="Digite un número" autocomplete="off" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-12 lista-numeros">
+                    <div class="well">
+                        <h4>Números:</h4>
+                        <div class="numeros">
+                            <h3 ng-repeat="numero in sumaMM.listaNumeros track by $index">
+                                {{ numero }}<span>&nbsp;+&nbsp;</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="resultado">
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h4>Suma Total:</h4>
+                            <div class="numero">
+                                <h2>{{ sumaMM.suma.total }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h4>Suma Mínima:</h4>
+                            <div class="numero">
+                                <h2>{{ sumaMM.suma.min }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h4>Suma Máxima:</h4>
+                            <div class="numero">
+                                <h2>{{ sumaMM.suma.max }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

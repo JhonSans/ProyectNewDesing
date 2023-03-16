@@ -51,7 +51,7 @@
                     {{ contenido.titulo }}
                     <i class="{{ contenido.drop }}"></i>
                 </button>
-                <ul ng-if="contenido.articulos.length > 0" class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <ul ng-if="contenido.articulos.length > 0" class="dropdown-menu" ng-class="{ 'northwind' : contenido.titulo == 'Northwind' }" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                     <li role="menuItem" ng-repeat="articulo in contenido.articulos">
                         <a href="#!{{ articulo.url }}" ng-class="{ 'active' : isActive('{{ articulo.url }}') }" ng-click="actualizarContenido(articulo.url)">{{ articulo.titulo }}</a>
                     </li>
@@ -124,6 +124,17 @@
                         </li>
                     </ul>
                 </div>
+                <div class="col-sm-6">
+                    <h4>Artículos</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="cont in contenidos[1].articulos">
+                            <i class="fa {{ cont.icon }}"></i>
+                            <a href="#!{{ cont.url }}" ng-click="actualizarContenido(cont.url)">
+                                {{ cont.titulo }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </footer>
         <section class="copyright">
@@ -148,12 +159,15 @@
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.tpls.js"></script>
-    <script type="text/javascript" src="controller/ui-bootstrap-tpls-2.5.0.min.js"></script>
     <!-- Scripts -->
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/controllers/main.js"></script>
     <script type="text/javascript" src="scripts/controllers/Articulos/articulos.js"></script>
     <script type="text/javascript" src="scripts/controllers/Juegos/pptls.js"></script>
     <script type="text/javascript" src="scripts/controllers/Juegos/suma.js"></script>
+    <script type="text/javascript" src="scripts/controllers/Northwind/Clientes/clientes.js"></script>
+    <script type="text/javascript" src="scripts/controllers/Northwind/Clientes/services.js"></script>
+    <script type="text/javascript" src="scripts/controllers/Northwind/Ordenes/ordenes.js"></script>
+    <script type="text/javascript" src="scripts/controllers/Northwind/Productos/productos.js"></script>
 </body>
 </html>

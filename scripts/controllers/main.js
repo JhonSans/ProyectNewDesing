@@ -23,6 +23,7 @@ app.controller("mainController", function ($scope, $location) {
             articulos: [
                 {
                     url: "/Juegos/PPTLS",
+                    icon: "fa-gamepad",
                     titulo: "PPTLS",
                     detalle: "PIEDRA - PAPEL - TIJERA - LAGARTO - SPOCK",
                     img: "/content/pictures/Juegos/PPTLS/banner.jpg",
@@ -32,6 +33,7 @@ app.controller("mainController", function ($scope, $location) {
                 },
                 {
                     url: "/Juegos/Suma",
+                    icon: "fa-calculator",
                     titulo: "Suma Mini - Max",
                     detalle: "SUMA MINI - MAX",
                     img: "/content/pictures/Juegos/Suma/banner.jpg",
@@ -41,6 +43,44 @@ app.controller("mainController", function ($scope, $location) {
                 },
             ],
         },
+        {
+            url: "",
+            icono: "fa fa-list-alt",
+            titulo: "Northwind",
+            drop: "fa fa-chevron-right",
+            articulos: [
+                {
+                    url: "/Northwind/Clientes",
+                    icon: "",
+                    titulo: "Clientes",
+                    detalle: "Northwind - Clientes",
+                    img: "/content/pictures/Northwind/Clientes/banner.jpg",
+                    lead: "",
+                    contenidoImg: "",
+                    contenido: "",
+                },
+                {
+                    url: "/Northwind/Productos",
+                    icon: "",
+                    titulo: "Productos",
+                    detalle: "Northwind - Productos",
+                    img: "/content/pictures/Northwind/Productos/banner.jpg",
+                    lead: "",
+                    contenidoImg: "",
+                    contenido: ""
+                },
+                {
+                    url: "/Northwind/Ordenes",
+                    icon: "",
+                    titulo: "Ordenes",
+                    detalle: "Northwind - Ordenes",
+                    img: "/content/pictures/Northwind/Ordenes/banner.jpeg",
+                    lead: "",
+                    contenidoImg: "",
+                    contenido: "",
+                }
+            ]
+        }
     ];
 
     // Var contenido
