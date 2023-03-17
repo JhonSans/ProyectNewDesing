@@ -6,6 +6,7 @@ var app = angular
     "ngTouch",
     "ui.bootstrap",
     "ngSanitize",
+    "ngResource",
     "toastr",
   ])
   .config(function ($routeProvider) {
@@ -43,6 +44,11 @@ var app = angular
         templateUrl: "views/Northwind/Clientes/index.html",
         controller: "clientesController",
         controllerAs: "clientesN",
+      })
+      .when("/Northwind/Clientes/:id", {
+        templateUrl: "views/Northwind/Clientes/editar.html",
+        controller: "editarClienteController",
+        controllerAs: "clientesN"
       })
       .when("/Northwind/Productos", {
         templateUrl: "views/Northwind/Productos/index.html",

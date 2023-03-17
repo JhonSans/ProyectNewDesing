@@ -11,6 +11,7 @@
     --gris-oscuro: #3b3b3b;
     --verde: #04aa6d;
     --verde-claro: #3fbd8f;
+    --rojo: #a00000;
 
     --pptsl-window: #030321;
     --pptsl-progress: #840037;
@@ -22,6 +23,7 @@
 /*-------------- Global --------------*/
 /*------------------------------------*/
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-size: 15px;
@@ -35,6 +37,8 @@ body {
 }
 .page-header {
     border-color: var(--gris);
+    margin-top: 20px;
+    position: relative;
 }
 .panel-default .panel-heading {
     background-color: var(--azul);
@@ -92,6 +96,22 @@ input[type="password"]:focus {
     right: 0;
     padding: 9px 12px;
     color: var(--gris);
+}
+.pagination > .active a,
+.pagination > .active a:hover,
+.pagination > .active a:focus {
+    background-color: var(--verde);
+    border-color: var(--verde-claro);
+}
+.header {
+    margin: 20px 0;
+}
+.header.cut {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+.header i {
+    margin-right: 5px;
 }
 /*------------------------------------*/
 /*-------------- Header --------------*/
@@ -328,6 +348,11 @@ article {
     position: relative;
 }
 /*------------- Articulos -------------*/
+.articles-container {
+    display: grid;
+    grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+    column-gap: 20px;
+}
 .thumbnail {
     display: flex;
     flex-direction: column;
@@ -446,14 +471,6 @@ article {
 .pptsl-container > div button,
 .suma-container > div button {
     margin-bottom: 20px;
-}
-.pptsl-game-container > .header,
-.suma-probar-container > .header {
-    margin: 20px 0;
-}
-.pptsl-game-container > .header i,
-.suma-probar-container > .header i {
-    margin-right: 5px;
 }
 .pptsl-game-container > .game-window {
     position: relative;
@@ -1128,6 +1145,28 @@ article {
 .suma-probar-container > .panel .panel-footer .resultado .numero h2 {
     font-size: 40px;
 }
+/*--------- Northwind - Clientes ---------*/
+.clientes-container > .search {
+    position: relative;
+}
+.clientes-container > .search i {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: var(--gris);
+}
+.actions > a i,
+.actions > i {
+    cursor: pointer;
+}
+.actions > a i {
+    color: var(--verde);
+}
+.actions > i {
+    color: var(--rojo);
+}
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/
 /*----------------------------------------*/
@@ -1270,6 +1309,9 @@ section.copyright p {
     /*-------------------------------------*/
     /*---------------- Main ---------------*/
     /*-------------------------------------*/
+    .articles-container {
+        display: block;
+    }
     /*---------------- Login --------------*/
     .panel-login {
         padding: 60px 0;

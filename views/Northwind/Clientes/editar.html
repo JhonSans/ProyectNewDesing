@@ -1,0 +1,87 @@
+<div>
+    <div class="header cut">
+        <button class="btn btn-default" ng-click="actualizarContenido('/Northwind/Clientes')">
+            <i class="fa fa-chevron-left"></i>
+            <span>Regresar</span>
+        </button>
+    </div>
+    <div>
+        <form>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="page-header">{{ clientesN.cliente.customerId }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.contactName" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Empresa:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.companyName" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Título:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.contactTitle" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Dirección:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.address" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Ciudad:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.city" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Región:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.region" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Código Postal:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.postalCode" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>País:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.country" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Teléfono:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.phone" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>FAX:</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.fax" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
