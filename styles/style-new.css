@@ -40,6 +40,16 @@ body {
     margin-top: 20px;
     position: relative;
 }
+.page-header > .icons {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.page-header > .icons i:hover {
+    color: var(--verde);
+}
 .panel-default .panel-heading {
     background-color: var(--azul);
     color: var(--blanco);
@@ -1167,6 +1177,47 @@ article {
 .actions > i {
     color: var(--rojo);
 }
+.list-order > div .panel-title a {
+    text-decoration: none;
+}
+.list-order > div .panel-title a i {
+    float: right;
+}
+.list-order > div .list-group {
+    margin: 0;
+}
+.list-order > div .list-group .list-group-item {
+    padding-left: 0;
+    padding-right: 0;
+}
+.list-order > div .list-group .list-group-item:hover,
+.list-order > div .list-group .list-group-item.active {
+    background-color: var(--verde-claro);
+    cursor: pointer;
+    border: 1px solid var(--verde-claro);
+}
+.list-order > div .list-group .list-group-item.active {
+    font-weight: bold;
+    color: var(--blanco);
+    background-color: var(--verde);
+}
+td {
+    position: relative;
+}
+td > .list-product {
+    border-bottom: 0;
+    margin: 0;
+    background: transparent;
+    width: auto;
+    padding: 0;
+    font-size: 15px;
+    top: 0;
+    position: absolute;
+    width: calc(100% - 16px);
+}
+td > .list-product.active {
+    border-bottom:  1px solid var(--gris-oscuro);
+}
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/
 /*----------------------------------------*/
@@ -1193,6 +1244,10 @@ footer > .row i {
 footer > .row ul li,
 footer > .row ul li a {
     color: var(--gris-oscuro);
+}
+footer > .row ul.siguenos li {
+    display: flex;
+    justify-content: space-around;
 }
 footer > .row ul.siguenos a i {
     font-size: 25px;

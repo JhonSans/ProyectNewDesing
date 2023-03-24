@@ -7,7 +7,7 @@ var app = angular
     "ui.bootstrap",
     "ngSanitize",
     "ngResource",
-    "toastr",
+    "toastr"
   ])
   .config(function ($routeProvider) {
     $routeProvider

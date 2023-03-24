@@ -51,7 +51,7 @@ app.controller("mainController", function ($scope, $location) {
             articulos: [
                 {
                     url: "/Northwind/Clientes",
-                    icon: "",
+                    icon: "fa-users",
                     titulo: "Clientes",
                     detalle: "Northwind - Clientes",
                     img: "/content/pictures/Northwind/Clientes/banner.jpg",
@@ -61,7 +61,7 @@ app.controller("mainController", function ($scope, $location) {
                 },
                 {
                     url: "/Northwind/Productos",
-                    icon: "",
+                    icon: "fa-cutlery",
                     titulo: "Productos",
                     detalle: "Northwind - Productos",
                     img: "/content/pictures/Northwind/Productos/banner.jpg",
@@ -71,7 +71,7 @@ app.controller("mainController", function ($scope, $location) {
                 },
                 {
                     url: "/Northwind/Ordenes",
-                    icon: "",
+                    icon: "fa-truck",
                     titulo: "Ordenes",
                     detalle: "Northwind - Ordenes",
                     img: "/content/pictures/Northwind/Ordenes/banner.jpeg",

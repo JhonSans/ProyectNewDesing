@@ -82,6 +82,185 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="page-header">
+                        Ordenes
+                        <span>{{ clientesN.cargando }}</span>
+                        <!--
+                        <div class="icons">
+                            <i class="fa fa-window-minimize" style="cursor: pointer;" ng-click="status.open = false" uib-tooltip="Minimizar"></i>
+                            <i class="fa fa-window-maximize" style="cursor: pointer;" ng-click="status.open = true" uib-tooltip="Maximizar"></i>
+                        </div>
+                        -->
+                    </h2>
+                </div>
+            </div>
+            <div class="row">                
+                <div class="col-sm-2">
+                    <uib-accordion close-others="false" class="list-order">
+                        <div uib-accordion-group class="panel-default" ng-repeat="(date, items) in clientesN.cliente.orders" is-open="status.open" is-disabled="false">
+                            <uib-accordion-heading>
+                                {{ date }}
+                                <i class="fa" ng-class="{ 'fa-angle-right' : !status.open, 'fa-angle-down' : status.open }" aria-hidden="true"></i>
+                            </uib-accordion-heading>
+                            <ul class="list-group">
+                                <li class="list-group-item text-center" ng-repeat="item in items" ng-class="{ 'active' : item.orderId == clientesN.orden.orderId }" ng-click="clientesN.seleccionarOrden(item)">{{ item.orderId }}</li>                                
+                            </ul>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <div class="col-sm-10" ng-show="clientesN.orden.orderId">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="font-weight: bold;">
+                            {{ clientesN.orden.orderId }}
+                        </div>
+                        <div class="panel-body">
+                            <uib-tabset justified="true">
+                                <uib-tab index="0" heading="Detalles">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Empleado:</label>
+                                                    <select class="form-control" ng-model="clientesN.orden.employeeId">
+                                                        <option ng-repeat="empleado in clientesN.empleados" ng-value="{{ empleado.employeeId }}">{{ empleado.lastName + ' ' + empleado.firstName }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Expedidor:</label>                                        
+                                                    <select class="form-control" ng-model="clientesN.orden.shipVia">
+                                                        <option ng-repeat="expedidor in clientesN.expedidores" ng-value="{{ expedidor.shipperId }}">{{ expedidor.companyName }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Flete:</label>
+                                                    <input type="text" class="form-control" ng-model="clientesN.orden.freight" value="{{ clientesN.orden.freight }}"/>
+                                                </div>
+                                            </div>                                
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Fecha:</label>
+                                                    <wj-input-date style="width: 100%;" ng-model="clientesN.orden.orderDate" value="clientesN.orden.orderDate" format="dd/MM/yyyy"></wj-input-date>                                       
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Fecha de Envío:</label>
+                                                    <wj-input-date style="width: 100%;" ng-model="clientesN.orden.shippedDate" value="clientesN.orden.shippedDate" format="dd/MM/yyyy"></wj-input-date>
+                                                </div>
+                                            </div>                                
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Fecha de Entrega:</label>
+                                                    <wj-input-date style="width: 100%;" ng-model="clientesN.orden.requiredDate" value="clientesN.orden.requiredDate" format="dd/MM/yyyy"></wj-input-date>
+                                                </div>
+                                            </div>                         
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Envíar A:</label>
+                                                    <input type="text" class="form-control" ng-model="clientesN.orden.shipName" value="{{ clientesN.orden.shipName }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Dirección:</label>
+                                                    <input type="text" class="form-control" ng-model="clientesN.orden.shipAddress" value="{{ clientesN.orden.shipAddress }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Ciudad:</label>
+                                                    <input type="text" class="form-control" ng-model="clientesN.orden.shipCity" value="{{ clientesN.orden.shipCity }}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Región:</label>
+                                                    <input type="text" class="form-control" ng-model="clientesN.orden.shipRegion" value="{{ clientesN.orden.shipRegion }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Código Postal:</label>
+                                                    <input type="text" class="form-control" ng-model="clientesN.orden.shipPostalCode" value="{{ clientesN.orden.shipPostalCode }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>País:</label>
+                                                    <input type="text" class="form-control" ng-model="clientesN.orden.shipCountry" value="{{ clientesN.orden.shipCountry }}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab index="1" heading="Productos">
+                                    <div class="text-right actions">
+                                        <i ng-if="clientesN.eliminado.length > 0" style="margin-right: 20px; color: var(--gris-oscuro);" ng-click="clientesN.desahacer()" class="fa fa-undo" uib-tooltip="Deshacer"></i>
+                                        <button style="margin-top: 10px; margin-bottom: 10px;" ng-click="clientesN.agregarProducto()" class="btn btn-primary">Agregar</button>
+                                    </div>
+                                    <div class="container-fluid table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Precio Unitario</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Descuento</th>
+                                                    <th>Total</th>
+                                                    <th class="text-center">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in clientesN.orden.orderDetails">
+                                                    <td>
+                                                        {{ item.productId }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.productName }}
+                                                        <select ng-if="!item.productId" class="form-control" ng-model="item.productId" ng-change="clientesN.seleccionarProducto(item)">
+                                                            <option value="0" selected="selected">Seleccionar...</option>
+                                                            <option ng-repeat="producto in clientesN.productos" ng-value="{{ producto.productId }}">{{ producto.productName }}</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>{{ item.unitPrice | currency }}</td>
+                                                    <td>
+                                                        <input type="text" class="list-product form-control" ng-class="{ 'active' : item.productId && item.new }" ng-model="item.quantity" ng-change="clientesN.seleccionarProducto(item.productId)" ng-value="{{ item.quantity }}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="list-product form-control" ng-class="{ 'active' : item.productId && item.new }" ng-model="item.discount" ng-change="clientesN.seleccionarProducto(item.productId)" ng-value="{{ item.discount }}">
+                                                    </td>
+                                                    <td>{{ item.total | currency }}</td>
+                                                    <td class="text-center actions">                                                        
+                                                        <i class="fa fa-times" ng-click="clientesN.eliminarProducto($index, item)" uib-tooltip="Eliminar"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </uib-tab>
+                            </uib-tabset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center header">
+                    <button class="btn btn-primary" ng-click="clientesN.guardar()">Guardar</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>

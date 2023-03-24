@@ -90,7 +90,7 @@
         </nav>
         <footer class="container-fluid">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h4>Contacto</h4>
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -110,8 +110,30 @@
                             311 451 9129 - 317 656 4490
                         </li>
                     </ul>
+                </div>                
+                <div class="col-sm-3">
+                    <h4>Juegos</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="cont in contenidos[1].articulos">
+                            <i class="fa {{ cont.icon }}"></i>
+                            <a href="#!{{ cont.url }}" ng-click="actualizarContenido(cont.url)">
+                                {{ cont.titulo }}
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
+                    <h4>Northwind</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="cont in contenidos[2].articulos">
+                            <i class="fa {{ cont.icon }}"></i>
+                            <a href="#!{{ cont.url }}" ng-click="actualizarContenido(cont.url)">
+                                {{ cont.titulo }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
                     <h4>Siguenos</h4>
                     <ul class="list-group siguenos">
                         <li class="list-group-item">
@@ -120,17 +142,6 @@
                             </a>
                             <a href="https://twitter.com/vpsnotas">
                                 <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-sm-6">
-                    <h4>Artículos</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="cont in contenidos[1].articulos">
-                            <i class="fa {{ cont.icon }}"></i>
-                            <a href="#!{{ cont.url }}" ng-click="actualizarContenido(cont.url)">
-                                {{ cont.titulo }}
                             </a>
                         </li>
                     </ul>
@@ -160,6 +171,9 @@
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.tpls.js"></script>
+    <script src="scripts/js/Moment/moment.js"></script>
+    <script src="scripts/js/Moment/moment-with-locales.js"></script>
+
     <!-- Scripts -->
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/settings.js"></script>
