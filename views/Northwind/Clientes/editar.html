@@ -146,20 +146,41 @@
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Fecha:</label>
-                                                    <wj-input-date style="width: 100%;" ng-model="clientesN.orden.orderDate" value="clientesN.orden.orderDate" format="dd/MM/yyyy"></wj-input-date>                                       
+                                                    <label>Fecha:</label>                                                    
+                                                    <p class="input-group">
+                                                    <input type="text" uib-datepicker-popup ng-model="clientesN.orden.orderDate" show-button-bar="false" is-open="isOpen1" class="form-control" />
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-primary" ng-click="isOpen1 = !isOpen1">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Fecha de Envío:</label>
-                                                    <wj-input-date style="width: 100%;" ng-model="clientesN.orden.shippedDate" value="clientesN.orden.shippedDate" format="dd/MM/yyyy"></wj-input-date>
+                                                    <label>Fecha de Envío:</label>                                                    
+                                                    <p class="input-group">
+                                                    <input type="text" uib-datepicker-popup ng-model="clientesN.orden.shippedDate" show-button-bar="false" is-open="isOpen2" class="form-control"/>
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-primary" ng-click="isOpen2 = !isOpen2">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </p>
                                                 </div>
                                             </div>                                
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Fecha de Entrega:</label>
-                                                    <wj-input-date style="width: 100%;" ng-model="clientesN.orden.requiredDate" value="clientesN.orden.requiredDate" format="dd/MM/yyyy"></wj-input-date>
+                                                    <label>Fecha de Entrega:</label>                                                    
+                                                    <p class="input-group">
+                                                    <input type="text" uib-datepicker-popup ng-model="clientesN.orden.requiredDate" show-button-bar="false" is-open="isOpen3" class="form-control" />
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-primary" ng-click="isOpen3 = !isOpen3">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </span>
+                                                    </p>
                                                 </div>
                                             </div>                         
                                         </div>
@@ -230,17 +251,16 @@
                                                     </td>
                                                     <td>
                                                         {{ item.productName }}
-                                                        <select ng-if="!item.productId" class="form-control" ng-model="item.productId" ng-change="clientesN.seleccionarProducto(item)">
-                                                            <option value="0" selected="selected">Seleccionar...</option>
+                                                        <select ng-if="!item.productId" class="form-control" ng-model="item.productId" ng-change="clientesN.seleccionarProducto($index, item, 0)">
                                                             <option ng-repeat="producto in clientesN.productos" ng-value="{{ producto.productId }}">{{ producto.productName }}</option>
                                                         </select>
                                                     </td>
                                                     <td>{{ item.unitPrice | currency }}</td>
                                                     <td>
-                                                        <input type="text" class="list-product form-control" ng-class="{ 'active' : item.productId && item.new }" ng-model="item.quantity" ng-change="clientesN.seleccionarProducto(item.productId)" ng-value="{{ item.quantity }}">
+                                                        <input type="text" class="list-product form-control" ng-class="{ 'active' : item.productId && item.new }" ng-model="item.quantity" ng-change="clientesN.seleccionarProducto($index, item.productId, 1)" ng-value="{{ item.quantity }}">
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="list-product form-control" ng-class="{ 'active' : item.productId && item.new }" ng-model="item.discount" ng-change="clientesN.seleccionarProducto(item.productId)" ng-value="{{ item.discount }}">
+                                                        <input type="text" class="list-product form-control" ng-class="{ 'active' : item.productId && item.new }" ng-model="item.discount" ng-change="clientesN.seleccionarProducto($index, item.productId, 1)" ng-value="{{ item.discount }}">
                                                     </td>
                                                     <td>{{ item.total | currency }}</td>
                                                     <td class="text-center actions">                                                        

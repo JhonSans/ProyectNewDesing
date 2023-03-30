@@ -19,6 +19,8 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
     // Var cargando
     vm.cargando = null;
 
+    vm.format = "dd/MM/yyyy";
+
     // Contructor
     vm.init = function () {
         // Obtiene al cliente obtenido por su ID, Nombre o Empresa
@@ -54,6 +56,10 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
     vm.seleccionarOrden = function (dato) {
         // Agrega los datos al objeto
         vm.orden = dato;
+        // Formatea las fechas
+        vm.orden.orderDate = moment(vm.orden.orderDate).format("DD/MM/yyyy");
+        vm.orden.shippedDate = moment(vm.orden.shippedDate).format("DD/MM/yyyy");
+        vm.orden.requiredDate = moment(vm.orden.requiredDate).format("DD/MM/yyyy");
         // Limpia el array
         vm.productosOrden = [];
         // Agrega los datos a la copia
@@ -82,40 +88,48 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
         });
     }
     // Funcion seleccionar nuevo producto
-    vm.seleccionarProducto = function (item) {
-        // Valida si el producto existe en el listado copiado
-        var existe = _.find(vm.copy, function (c) { return c.productId == item.productId });        
+    vm.seleccionarProducto = function (indice, item, tipo) {
+
+        console.log("Lista original: ", vm.copy);
+        console.log("Lista nueva: ", vm.orden.orderDetails);
+
         // Busca el producto en la lista de productos y lo agrega a la variable
         var producto = _.find(vm.productos, function (p) { return p.productId == item.productId });
-        if (existe) {
-            toastr.warning("El producto " + producto.productName + " ya se encuentra en la lista", "Producto");
-            item.productId = null;
-            return;
-        }
-        // Recorre el detalle de la orden
-        _.each(vm.orden.orderDetails, function (o) { 
-            // Valida que el producto sea el mismo que el id recibido y agrega la informacion
-            if (o.productId == item.productId) {                
-                // Valida que la cantidad sea mayor a 0
-                if (o.quantity && o.quantity < 1) {
-                    toastr.warning("La cantidad no puede ser inferior a 1", "Cantidad");
-                    o.total = null;
-                    return;
-                }
-                // Valida que el descuento sea mayor a 0 e infernior a 1 y
-                if (o.discount < 0 || o.discount > 1) {
-                    toastr.warning("El descuento debe estar entre 0 y 1", "Descuento");
-                    o.total = null;
-                    return;
-                }
-                // Agrega los datos
-                o.productName = producto.productName;
-                o.unitPrice = producto.unitPrice;
-                o.total = (o.unitPrice * o.quantity) - ((o.unitPrice * o.quantity) * o.discount);
-                // Si todo sale bien actualiza la copia
-                vm.copy = vm.orden.orderDetails;
+
+        if (tipo == 0) {
+            // Busca el producto en el listado original
+            var existe = _.find(vm.copy, function (c) { return c.productId == item.productId });            
+            // Valida si el producto existe en el listado original
+            if (existe) {
+                item.productId = null;
+                toastr.warning("El producto " + producto.productName + " ya se encuentra en la lista", "Producto");
+                return;
             }
-        });
+            // Agrega el nombre y el precio del producto
+            item.productName = producto.productName;
+            item.unitPrice = producto.unitPrice;
+            item.quantity = 1;
+            item.discount = 0;
+            // Si todo sale bien actualiza la copia
+            vm.copy.splice(indice, 1, item);
+        } else {
+            // Valida que la cantidad sea mayor a 0
+            if (item.quantity && item.quantity < 1) {
+                item.total = null;
+                toastr.warning("La cantidad no puede ser inferior a 1", "Cantidad");
+                return;
+            }
+            // Valida que el descuento sea mayor a 0 e infernior a 1 y
+            if (item.discount < 0 || item.discount > 1) {
+                item.total = null;
+                toastr.warning("El descuento debe estar entre 0 y 1", "Descuento");
+                return;
+            }
+            // Calcula el total
+            item.total = (item.unitPrice * item.quantity) - ((item.unitPrice * item.quantity) * item.discount);
+            // Si todo sale bien actualiza la copia
+            vm.copy.splice(indice, 1, item);
+        }
     }
     // Funcion eliminar producto del detalle de orden
     vm.eliminarProducto = function (indice, item) {
