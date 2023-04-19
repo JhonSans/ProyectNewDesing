@@ -55,6 +55,11 @@ var app = angular
         controller: "productosController",
         controllerAs: "productosN",
       })
+      .when("/Northwind/Productos/:id", {
+        templateUrl: "views/Northwind/Productos/editar.html",
+        controller: "editarProductosController",
+        controllerAs: "productosN",
+      })
       .when("/Northwind/Ordenes", {
         templateUrl: "views/Northwind/Ordenes/index.html",
         controller: "ordenesController",

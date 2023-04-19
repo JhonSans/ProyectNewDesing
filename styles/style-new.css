@@ -1155,11 +1155,13 @@ article {
 .suma-probar-container > .panel .panel-footer .resultado .numero h2 {
     font-size: 40px;
 }
-/*--------- Northwind - Clientes ---------*/
-.clientes-container > .search {
+/*--------- Northwind ---------*/
+.clientes-container > .search,
+.productos-container > .search {
     position: relative;
 }
-.clientes-container > .search i {
+.clientes-container > .search i,
+.productos-container > .search i {
     position: absolute;
     top: 0;
     right: 0;

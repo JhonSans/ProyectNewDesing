@@ -1,4 +1,4 @@
-app.controller("clientesController", function ($http, NorthClientes, toastr, $location, settings) {
+app.controller("clientesController", function (NorthClientes, toastr) {
     var vm = this;
 
     // Var id cliente
@@ -14,11 +14,11 @@ app.controller("clientesController", function ($http, NorthClientes, toastr, $lo
         paginaActual: 0,
         itemsPagina: 10,
         tamanoMax: 5
-    }
+    };
     // Funcion inicial
     vm.init = function () {
         // Obtiene todos los clientes
-        NorthClientes.get({ pg : vm.paginador.paginaActual }, function (respuesta) {
+        NorthClientes.get({ pg: vm.paginador.paginaActual }, function (respuesta) {
             // Agrega la informacion de los clientes al objeto
             vm.clientes = respuesta.data;
             // Realiza la copia de la lista de clientes
@@ -32,7 +32,7 @@ app.controller("clientesController", function ($http, NorthClientes, toastr, $lo
     // Funcion cambiar de pagina
     vm.cambiarPagina = function () {
         // Obtiene todos los clientes de la siguiente pagina
-        NorthClientes.get({ pg : vm.paginador.paginaActual - 1 }, function (respuesta) {
+        NorthClientes.get({ pg: vm.paginador.paginaActual - 1 }, function (respuesta) {
             // Agrega la informacion de los clientes al objeto
             vm.clientes = respuesta.data;
         });
@@ -56,10 +56,6 @@ app.controller("clientesController", function ($http, NorthClientes, toastr, $lo
                 // Actualiza el total de clientes en el nuevo listado
                 vm.paginador.totalItems = vm.clientes.lenght;
             }
-            else {
-                // Mensaje de error si no encuentra ningun dato
-                toastr.error("El dato ingresado es incorrecto", "Cliente");
-            }
         });
     }
     // Funcion eliminar
@@ -71,11 +67,30 @@ app.controller("clientesController", function ($http, NorthClientes, toastr, $lo
                 cancel: { label: '<i class="fa fa-times"></i> Cancelar' },
                 confirm: { label: '<i class="fa fa-check"></i> Confirmar'}
             },
-            callback: function (result) {
-                console.log(result);
+            callback: function (resultado) {
+                if (resultado) {
+                    // Ejecuta la funcion
+                    NorthClientes.remove({ customerId: id }, function (respuesta) {
+                        // Valida el resultado
+                        if (respuesta.success) {
+                            // Muestra la alerta
+                            toastr.success(respuesta.message, "Cliente");
+                            // Limpia la variable
+                            vm.idCliente = "";
+                            //Regresa a la primera pagina
+                            vm.paginador.paginaActual = 0;
+                            // Ejecuta la funcion inicial
+                            vm.init();
+                        }
+                        else {
+                            // Muestra la alerta
+                            toastr.error(respuesta.message, "Cliente");
+                        }
+                    });
+                }
             }
         });
     }
-    // Ejecuta la funcion inicial
+    // Funcion contructor
     vm.init();
 });

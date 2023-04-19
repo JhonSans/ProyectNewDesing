@@ -1,5 +1,5 @@
 <div>
-    <div class="header cut">
+    <div class="header" ng-class="{ 'cut' : clientesN.esEdicion }">
         <button class="btn btn-default" ng-click="actualizarContenido('/Northwind/Clientes')">
             <i class="fa fa-chevron-left"></i>
             <span>Regresar</span>
@@ -9,7 +9,11 @@
         <form>
             <div class="row">
                 <div class="col-sm-12">
-                    <h1 class="page-header">{{ clientesN.cliente.customerId }}</h1>
+                    <h1 ng-if="clientesN.esEdicion" class="page-header">{{ clientesN.cliente.customerId }}</h1>
+                    <div class="form-group" ng-if="!clientesN.esEdicion">
+                        <label>ID</label>
+                        <input type="text" class="form-control" ng-model="clientesN.cliente.customerId" />
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -85,21 +89,29 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h2 class="page-header">
-                        Ordenes
-                        <span>{{ clientesN.cargando }}</span>
-                        <!--
-                        <div class="icons">
-                            <i class="fa fa-window-minimize" style="cursor: pointer;" ng-click="status.open = false" uib-tooltip="Minimizar"></i>
-                            <i class="fa fa-window-maximize" style="cursor: pointer;" ng-click="status.open = true" uib-tooltip="Maximizar"></i>
-                        </div>
-                        -->
+                        ORDENES
+                        <span>{{ clientesN.cargando }}</span>                        
+                        <div class="icons">                            
+                            <i class="fa fa-plus" style="cursor: pointer;" uib-tooltip="Agregar Orden"></i>                            
+                        </div>                        
                     </h2>
                 </div>
             </div>
+            {{ clientesN.copy.orders }}
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" ng-repeat="orden in clientesN.copy.orders" ng-click="clientesN.seleccionarOrden(orden)">{{ orden.orderId }}</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--
             <div class="row">                
                 <div class="col-sm-2">
                     <uib-accordion close-others="false" class="list-order">
-                        <div uib-accordion-group class="panel-default" ng-repeat="(date, items) in clientesN.cliente.orders" is-open="status.open" is-disabled="false">
+                        <div uib-accordion-group class="panel-default" ng-repeat="(date, items) in clientesN.copy.orders" is-open="status.open">
                             <uib-accordion-heading>
                                 {{ date }}
                                 <i class="fa" ng-class="{ 'fa-angle-right' : !status.open, 'fa-angle-down' : status.open }" aria-hidden="true"></i>
@@ -110,6 +122,7 @@
                         </div>
                     </uib-accordion>
                 </div>
+
                 <div class="col-sm-10" ng-show="clientesN.orden.orderId">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="font-weight: bold;">
@@ -276,6 +289,7 @@
                     </div>
                 </div>
             </div>
+            -->
             <div class="row">
                 <div class="col-sm-12 text-center header">
                     <button class="btn btn-primary" ng-click="clientesN.guardar()">Guardar</button>

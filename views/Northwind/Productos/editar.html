@@ -1,0 +1,17 @@
+<div>
+    <div class="header" ng-class="{ 'cut' : productosN.esEdicion }">
+        <button class="btn btn-default" ng-click="actualizarContenido('/Northwind/Productos')">
+            <i class="fa fa-chevron-left"></i>
+            <span>Regresar</span>
+        </button>
+    </div>
+    <div>
+        <form>
+            <div class="row">
+                <div class="col-sm-12">
+                    <img ng-if="productosN.esEdicion" ng-src="data:productosN.producto.category.picture/JPEG;base64,{{ productosN.producto.category.picture }}" alt="{{ productosN.producto.productName }}">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

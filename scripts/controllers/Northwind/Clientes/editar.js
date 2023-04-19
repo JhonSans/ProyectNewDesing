@@ -1,12 +1,14 @@
-app.controller("editarClienteController", function ($routeParams, NorthClientes, toastr) {
+app.controller("editarClienteController", function ($scope, $routeParams, NorthClientes, toastr, $location) {
     var vm = this;
+    // Modo edicion
+    vm.esEdicion = false;
     // Var acordion    
     vm.toggle = false;
     // Objeto cliente
     vm.cliente = null;
     // Objeto orden
     vm.orden = null;
-    // Objeto opia
+    // Objeto copia
     vm.copy = null;
     // Objeto empleados
     vm.empleados = null;
@@ -19,19 +21,24 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
     // Var cargando
     vm.cargando = null;
 
-    vm.format = "dd/MM/yyyy";
-
     // Contructor
     vm.init = function () {
-        // Obtiene al cliente obtenido por su ID, Nombre o Empresa
-        NorthClientes.get({ customerId : $routeParams.id }, function (respuesta) {
-            // Agrega los datos al objeto
-            vm.cliente = respuesta;
-            // Agrupa las ordenes por año
-            vm.cliente.orders = _.groupBy(vm.cliente.orders, function (o) { return moment(o.orderDate).format('yyyy'); } );          
-        });
+        // Valida si esta en modo edicion
+        vm.esEdicion = $routeParams.id == "Nuevo" ? false : true;
+        // Valida si es edición
+        if (vm.esEdicion) {
+            // Obtiene al cliente obtenido por su ID, Nombre o Empresa
+            NorthClientes.get({ customerId : $routeParams.id }, function (respuesta) {
+                // Agrega los datos al objeto
+                vm.cliente = respuesta;
+                // Crea una copia del cliente
+                vm.copy = angular.copy(vm.cliente);
+                // Agrupa las ordenes por año
+                //vm.copy.orders = _.groupBy(vm.copy.orders, function (o) { return moment(o.orderDate).format('yyyy'); } );                
+            });
+        }
         // Obtiene los empleados
-        NorthClientes.getEmpleados(function (respuesta) {
+        /*NorthClientes.getEmpleados(function (respuesta) {
             // Agrega los datos a la respuesta
             vm.empleados = respuesta;
             // Ordena la lista
@@ -50,13 +57,14 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
             vm.productos = respuesta;
             // Ordena la lista
             vm.productos = _.sortBy(vm.productos, function (e) { return e.productName })
-        });
+        });*/
     }
     // Funcion seleccionar orden
-    vm.seleccionarOrden = function (dato) {
+    vm.seleccionarOrden = function (orden) {
         // Agrega los datos al objeto
-        vm.orden = dato;
-        // Formatea las fechas
+        vm.orden = orden;
+        console.log(vm.orden);
+        /*// Formatea las fechas
         vm.orden.orderDate = moment(vm.orden.orderDate).format("DD/MM/yyyy");
         vm.orden.shippedDate = moment(vm.orden.shippedDate).format("DD/MM/yyyy");
         vm.orden.requiredDate = moment(vm.orden.requiredDate).format("DD/MM/yyyy");
@@ -73,7 +81,7 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
                 if (o.productId == p.productId)
                     o.productName = p.productName;
             });
-        });
+        });*/
     }
     // Funcion agregar producto
     vm.agregarProducto = function () {
@@ -88,7 +96,7 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
         });
     }
     // Funcion seleccionar nuevo producto
-    vm.seleccionarProducto = function (indice, item, tipo) {
+    /*vm.seleccionarProducto = function (indice, item, tipo) {
 
         console.log("Lista original: ", vm.copy);
         console.log("Lista nueva: ", vm.orden.orderDetails);
@@ -130,7 +138,7 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
             // Si todo sale bien actualiza la copia
             vm.copy.splice(indice, 1, item);
         }
-    }
+    }*/
     // Funcion eliminar producto del detalle de orden
     vm.eliminarProducto = function (indice, item) {
         // Valida que el producto no este vacio
@@ -169,7 +177,39 @@ app.controller("editarClienteController", function ($routeParams, NorthClientes,
     }
     // Funcion guardar
     vm.guardar = function () {
-        console.log(vm.cliente);
+        // Valida si esta en modo edicion
+        if (!vm.esEdicion) {
+            // Ejecuta la funcion
+            NorthClientes.crearCliente(vm.cliente, function (respuesta) {
+                // Valida el resultado
+                if (respuesta.success) {
+                    // Muestra la alerta
+                    toastr.success(respuesta.message, "Cliente");
+                    // Redirigue a la lista de clientes
+                    $scope.actualizarContenido('/Northwind/Clientes');
+                }
+                else {
+                    // Muestra la alerta
+                    toastr.error(respuesta.message, "Cliente");
+                }
+            });
+        }
+        else {           
+            // Ejecuta la funcion
+            NorthClientes.modificarCliente(vm.cliente, function (respuesta) {
+                // Valida el resultado
+                if (respuesta.success) {
+                    // Muestra la alerta
+                    toastr.success(respuesta.message, "Cliente");
+                    // Redirigue a la lista de clientes
+                    $location.path('/Northwind/Clientes/' + $routeParams.id);
+                }
+                else {
+                    // Muestra la alerta
+                    toastr.error(respuesta.message, "Cliente");
+                }
+            });
+        }    
     }
     // Funcion contructor
     vm.init();
