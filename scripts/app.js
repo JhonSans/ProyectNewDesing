@@ -70,6 +70,11 @@ var app = angular
         controller: "ordenesController",
         controllerAs: "ordenesN"
       })
+      .when("/Northwind/Ordenes/:id", {
+        templateUrl: "views/Northwind/Ordenes/editar.html",
+        controller: "editarOrdenesController",
+        controllerAs: "ordenesN"
+      })
       .otherwise({
         redirectTo: "/IniciarSesion",
       });

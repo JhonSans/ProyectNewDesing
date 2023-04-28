@@ -1156,14 +1156,10 @@ article {
     font-size: 40px;
 }
 /*--------- Northwind ---------*/
-.clientes-container > .search,
-.productos-container > .search,
-.proveedores-container > .search {
+.search {
     position: relative;
 }
-.clientes-container > .search i,
-.productos-container > .search i,
-.proveedores-container > .search i {
+.search > i {
     position: absolute;
     top: 0;
     right: 0;
@@ -1171,6 +1167,14 @@ article {
     margin-top: 10px;
     color: var(--gris);
 }
+.search > span {
+    font-size: 12px;
+    font-style: italic;
+    position: absolute;
+    top: 40px;
+    color: var(--gris);
+}
+.clientes-container > .search i
 .actions > a i,
 .actions > i {
     cursor: pointer;
@@ -1224,6 +1228,8 @@ td > .list-product.active {
 }
 .thumbnail-product {
     border-radius: 0 !important;
+    min-height: 181px;
+    background-color: var(--gris-oscuro);
 }
 .discontinued {
     color: var(--gris);

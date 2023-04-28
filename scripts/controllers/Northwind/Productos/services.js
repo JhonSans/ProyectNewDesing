@@ -3,7 +3,6 @@ app.factory("NorthProductos", function (settings, $resource) {
 
     return $resource(urlServicio + "api/Products/:productId", { productId: "@productId" }, {
         getCategorias: { method: "GET", url: urlServicio + "api/Categories", isArray: true },
-        //getProveedores: { method: "GET", url: urlServicio + "api/Suppliers", isArray: true },
         crearProducto: { method: "POST", url: urlServicio + "api/Products" },
         modificarProducto: { method: "PUT", url: urlServicio + "api/Products/:productId", params: { productId : "@productId" } }
     });

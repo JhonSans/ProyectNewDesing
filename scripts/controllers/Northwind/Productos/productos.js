@@ -1,9 +1,11 @@
 app.controller("productosController", function (NorthProductos, toastr) {
     var vm = this;
 
-    // Objeto productos
+    // Objetos
+    vm.producto = null;
     vm.productos = null;
-    // Objeto paginador
+    vm.productosCopia = null;
+    // Paginador
     vm.paginador = {
         totalItems: 0,
         totalItemsCopia: 0,
@@ -17,6 +19,8 @@ app.controller("productosController", function (NorthProductos, toastr) {
         NorthProductos.get({ pg: vm.paginador.paginaActual }, function (respuesta) {
             // Agrega la informacion de los productos
             vm.productos = respuesta.data;
+            // Realiza una copia del listado
+            vm.productosCopia = angular.copy(vm.productos);
             // Obtiene el total de los productos
             vm.paginador.totalItems = respuesta.count;
             // Realiza una copia del total de productos
@@ -24,18 +28,37 @@ app.controller("productosController", function (NorthProductos, toastr) {
         });
     }
     // Funcion cambiar de pagina
-    vm.cambiarPagina = function () {
+    vm.cambiarPagina = function () {        
         // Obtiene todos los productos de la siguiente pagina
         NorthProductos.get({ pg: vm.paginador.paginaActual - 1 }, function (respuesta) {
             // Agrega la informacion de los productos al objeto
             vm.productos = respuesta.data;
         });
     }
+    // Funcion buscar un producto
+    vm.buscarProducto = function () {
+        // Si el campo no tiene elementos regresa al listado completo
+        if (!vm.producto) {
+            vm.productos = vm.productosCopia;
+            // Actualiza el contador de paginas
+            vm.paginador.totalItems = vm.paginador.totalItemsCopia;
+            return;
+        }
+        // Obtiene un producto por id
+        NorthProductos.get({ productId: vm.producto }, function (respuesta) {
+            // Agrega la respuesta
+            vm.productos = [respuesta];
+            // Actualiza el contador de paginas
+            vm.paginador.totalItems = vm.productos.lengt;
+        }, function (error) {
+            toastr.error("El producto con ID #" + vm.producto + " no existe", "Error " + error.status)
+        });
+    }
     // Funcion eliminar
-    vm.eliminar = function (id) {
+    vm.eliminar = function (producto) {
         bootbox.confirm({
             title: "Eliminar",
-            message: "Desea eliminar el producto " + id + "?",
+            message: "Desea eliminar el producto " + producto.productName + "?",
             buttons: {
                 cancel: { label: '<i class="fa fa-times"></i> Cancelar' },
                 confirm: { label: '<i class="fa fa-check"></i> Confirmar' }
@@ -43,20 +66,14 @@ app.controller("productosController", function (NorthProductos, toastr) {
             callback: function (resultado) {
                 if (resultado) {
                     // Ejecuta la funcion
-                    NorthProductos.remove({ productId: id }, function (respuesta) {
-                        // Valida el resultado
-                        if (respuesta.success) {
-                            // Muestra la alerta
-                            toastr.success(respuesta.message, "Producto");
-                            // Regresa a la primera pagina
-                            vm.paginador.paginaActual = 0;
-                            // Ejecuta la funcion inicial
-                            vm.init();
-                        }
-                        else {
-                            // Muestra la alerta
-                            toastr.error(respuesta.message, "Producto");
-                        }
+                    NorthProductos.delete({ productId: producto.productId }, function (respuesta) {
+                        toastr.success("El producto " + producto.productName + " ha sido eliminado satisfactoriamente", "Producto #" + producto.productId);
+                        // Regresa a la primera pagina
+                        vm.paginador.paginaActual = 0;
+                        // Ejecuta la funcion inicial
+                        vm.init();
+                    }, function (error) {
+                        toastr.error("Ocurrió un error al eliminar el producto " + producto.productName, "Error " + error.status);
                     });
                 }
             }

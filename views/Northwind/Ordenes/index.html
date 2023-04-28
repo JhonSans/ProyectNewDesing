@@ -1,13 +1,44 @@
+<div ng-include="'/views/main.html'"></div>
+<div class="search">
+    <input type="text" class="form-control" ng-model="ordenesN.orden" buscar-elemento="ordenesN.buscarOrden()" placeholder="ID" />
+    <i class="fa fa-shopping-cart"></i>
+    <span>Presione enter para iniciar la busqueda</span>
+</div>
+<div class="text-right header">
+    <a href="#!/Northwind/Ordenes/Nuevo">
+        <button class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            <span>Agregar</span>
+        </button>
+    </a>
+</div>
 <div>
-    <div ng-include="'/views/main.html'"></div>
-    <div>
-        <table class="table">
-            <thead>
-                <th>Hola</th>
-            </thead>
-            <tbody>
-                <td>Hola</td>
-            </tbody>
-        </table>
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Empleado</th>
+                <th>Fecha</th>
+                <th>País</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="orden in ordenesN.ordenes">
+                <td>{{ orden.orderId }}</td>
+                <td>{{ orden.customer.contactName }}</td>
+                <td>{{ orden.employee.firstName }} {{ orden.employee.lastName }}</td>
+                <td>{{ orden.orderDate }}</td>
+                <td>{{ orden.shipCountry }}</td>
+                <td class="text-center actions">
+                    <a href="#!/Northwind/Ordenes/{{ orden.orderId }}"><i class="fa fa-search" uib-tooltip="Ver"></i></a>
+                    <i class="fa fa-times" ng-click="ordenesN.eliminar(orden)" uib-tooltip="Eliminar"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="text-center">
+    <ul uib-pagination class="pagination-sm" ng-model="ordenesN.paginador.paginaActual" ng-change="ordenesN.cambiarPagina()" boundary-links="true" boundary-link-numbers="true" total-items="ordenesN.paginador.totalItems" items-per-page="ordenesN.paginador.itemsPagina" max-size="ordenesN.paginador.tamanoMax" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 </div>

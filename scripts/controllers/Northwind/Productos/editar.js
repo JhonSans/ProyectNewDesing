@@ -2,8 +2,8 @@ app.controller("editarProductosController", function ($scope, $routeParams, Nort
     var vm = this;
     // Variables
     vm.esEdicion = false;
-    vm.producto = null;
     // Objeto img productos
+    vm.producto = null;
     vm.productosImg = [
         { id: 1, img: "/content/pictures/Northwind/Productos/p-beverages.jpg" },
         { id: 2, img: "/content/pictures/Northwind/Productos/p-condiments.jpg" },
@@ -25,7 +25,7 @@ app.controller("editarProductosController", function ($scope, $routeParams, Nort
 
     // Constructor
     vm.init = function () {
-        // Valida si esta en modo edición
+        // Valida si esta en modo edicion
         vm.esEdicion = $routeParams.id == "Nuevo" ? false : true;        
         // Valida si es edicion
         if (vm.esEdicion) {
@@ -53,6 +53,13 @@ app.controller("editarProductosController", function ($scope, $routeParams, Nort
             vm.proveedores = respuesta;
             // Ordena la lista
             vm.proveedores = _.sortBy(vm.proveedores, function (p) { return p.companyName });
+        });
+    }
+    // Si es creacion actualiza la img del banner al seleccionar una categoria
+    vm.seleccionCategoria = function (categoryId) {
+        _.filter(vm.productosImg, function (p) {
+            if (p.id == categoryId)
+                vm.producto.Image = p.img;
         });
     }
     // Funcion guardar
