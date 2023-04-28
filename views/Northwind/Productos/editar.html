@@ -1,15 +1,83 @@
 <div>
-    <div class="header" ng-class="{ 'cut' : productosN.esEdicion }">
+    <div class="header">
         <button class="btn btn-default" ng-click="actualizarContenido('/Northwind/Productos')">
             <i class="fa fa-chevron-left"></i>
             <span>Regresar</span>
         </button>
     </div>
     <div>
+        <div ng-if="productosN.esEdicion" class="jumbotron thumbnail-product">
+            <div style="background-image: url('{{ productosN.producto.category.Image }}')" alt="{{ productosN.producto.productName }}"></div>
+            <h1>{{ productosN.producto.productName }}</h1>
+        </div>
         <form>
             <div class="row">
                 <div class="col-sm-12">
-                    <img ng-if="productosN.esEdicion" ng-src="data:productosN.producto.category.picture/JPEG;base64,{{ productosN.producto.category.picture }}" alt="{{ productosN.producto.productName }}">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" ng-model="productosN.producto.productName">
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select type="text" class="form-control" ng-model="productosN.producto.categoryId" ng-options="categoria.categoryId as categoria.categoryName for categoria in productosN.categorias"></select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Empresa</label>
+                        <select type="text" class="form-control" ng-model="productosN.producto.supplierId" ng-options="proveedor.supplierId as proveedor.companyName for proveedor in productosN.proveedores"></select>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Cantidad por Unidad</label>
+                        <input type="text" class="form-control" ng-model="productosN.producto.quantityPerUnit">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Precio Unitario</label>
+                        <input type="text" class="form-control" ng-model="productosN.producto.unitPrice">
+                    </div>
+                </div>                         
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Unidades en Stock</label>
+                        <input type="text" class="form-control" ng-model="productosN.producto.unitsInStock">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Unidades por Pedido</label>
+                        <input type="text" class="form-control" ng-model="productosN.producto.unitsOnOrder">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Nivel de Reorden</label>
+                        <input type="text" class="form-control" ng-model="productosN.producto.reorderLevel">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Descontinuado</label>
+                        <select type="text" class="form-control" ng-model="productosN.producto.discontinued" ng-options="descontinuado.id as descontinuado.estado for descontinuado in productosN.descontinuado"></select>
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center header">
+                    <button class="btn btn-primary" ng-click="productosN.guardar()"><i class="fa fa-save"></i> Guardar</button>
                 </div>
             </div>
         </form>

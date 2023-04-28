@@ -11,7 +11,7 @@ app.controller("productosController", function (NorthProductos, toastr) {
         itemsPagina: 10,
         tamanoMax: 5
     };
-    // Funcion inicial
+    // Constructor
     vm.init = function () {
         // Obtiene todos los productos
         NorthProductos.get({ pg: vm.paginador.paginaActual }, function (respuesta) {
@@ -62,6 +62,6 @@ app.controller("productosController", function (NorthProductos, toastr) {
             }
         });
     }
-    // Funcion contructor
+    // Constructor
     vm.init();
 });

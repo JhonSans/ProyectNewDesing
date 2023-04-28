@@ -1,0 +1,40 @@
+<div class="proveedores-container">
+    <div ng-include="'/views/main.html'"></div>
+    <div class="search">
+        <input type="text" class="form-control" placeholder="Nombre" />
+        <i class="fa fa-truck"></i>
+    </div>
+    <div class="text-right header">
+        <a href="#!/Northwind/Proveedores/Nuevo">
+            <button class="btn btn-primary">Agregar</button>
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Empresa</th>
+                    <th>Título</th>
+                    <th>Teléfono</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="proveedor in proveedoresN.proveedores">
+                    <td>{{ proveedor.contactName }}</td>
+                    <td>{{ proveedor.companyName }}</td>
+                    <td>{{ proveedor.contactTitle }}</td>
+                    <td>{{ proveedor.phone }}</td>
+                    <td class="text-center actions">
+                        <a><i class="fa fa-search" uib-tooltip="Ver"></i></a>
+                        <i class="fa fa-times" uib-tooltip="Eliminar"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <ul uib-pagination class="pagination-sm" ng-model="proveedoresN.paginador.paginaActual" ng-change="proveedoresN.cambiarPagina()" boundary-links="true" boundary-link-numbers="true" total-items="proveedoresN.paginador.totalItems" items-per-page="proveedoresN.paginador.itemsPagina" max-size="proveedoresN.paginador.tamanoMax" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+    </div>
+</div>

@@ -14,7 +14,7 @@ var app = angular
       .when("/Inicio", {
         templateUrl: "views/articulos.html",
         controller: "articulosController",
-        controllerAs: "ar",
+        controllerAs: "ar"
       })
       .when("/IniciarSesion", {
         templateUrl: "views/login.html",
@@ -23,47 +23,52 @@ var app = angular
       .when("/Juegos/PPTLS", {
         templateUrl: "views/Juegos/PPTLS/pptls.html",
         controller: "pptslController",
-        controllerAs: "pptsl",
+        controllerAs: "pptsl"
       })
       .when("/Juegos/PPTLS/Jugar", {
         templateUrl: "views/Juegos/PPTLS/jugar.html",
         controller: "pptslController",
-        controllerAs: "pptsl",
+        controllerAs: "pptsl"
       })
       .when("/Juegos/Suma", {
         templateUrl: "views/Juegos/Suma/suma.html",
         controller: "sumaController",
-        controllerAs: "sumaMM",
+        controllerAs: "sumaMM"
       })
       .when("/Juegos/Suma/Probar", {
         templateUrl: "views/Juegos/Suma/probar.html",
         controller: "sumaController",
-        controllerAs: "sumaMM",
+        controllerAs: "sumaMM"
       })
       .when("/Northwind/Clientes", {
         templateUrl: "views/Northwind/Clientes/index.html",
         controller: "clientesController",
-        controllerAs: "clientesN",
+        controllerAs: "clientesN"
       })
       .when("/Northwind/Clientes/:id", {
         templateUrl: "views/Northwind/Clientes/editar.html",
         controller: "editarClienteController",
         controllerAs: "clientesN"
       })
+      .when("/Northwind/Proveedores", {
+        templateUrl: "views/Northwind/Proveedores/index.html",
+        controller: "proveedoresController",
+        controllerAs: "proveedoresN"
+      })
       .when("/Northwind/Productos", {
         templateUrl: "views/Northwind/Productos/index.html",
         controller: "productosController",
-        controllerAs: "productosN",
+        controllerAs: "productosN"
       })
       .when("/Northwind/Productos/:id", {
         templateUrl: "views/Northwind/Productos/editar.html",
         controller: "editarProductosController",
-        controllerAs: "productosN",
+        controllerAs: "productosN"
       })
       .when("/Northwind/Ordenes", {
         templateUrl: "views/Northwind/Ordenes/index.html",
         controller: "ordenesController",
-        controllerAs: "ordenesN",
+        controllerAs: "ordenesN"
       })
       .otherwise({
         redirectTo: "/IniciarSesion",

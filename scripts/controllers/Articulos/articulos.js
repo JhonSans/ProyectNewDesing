@@ -21,6 +21,12 @@ app.controller("articulosController", function () {
       url: "/Northwind/Clientes",
     },
     {
+      img: "/content/pictures/Northwind/Proveedores/proveedores.jpg",
+      titulo: "Proveedores - Northwind",
+      cont: "Listado de proveedores registrados en la base de datos de Northwind",
+      url: "/Northwind/Proveedores",
+    },
+    {
       img: "/content/pictures/Northwind/Productos/productos.jpg",
       titulo: "Productos - Northwind",
       cont: "Listado de productos registrados en la base de datos de Northwind",

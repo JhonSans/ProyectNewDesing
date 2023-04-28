@@ -52,18 +52,25 @@ app.controller("mainController", function ($scope, $location) {
                 {
                     url: "/Northwind/Clientes",
                     icon: "fa-users",
-                    titulo: "Clientes",
-                    detalle: "Northwind - Clientes",
+                    titulo: "Clientes",                    
                     img: "/content/pictures/Northwind/Clientes/banner.jpg",
                     lead: "",
                     contenidoImg: "",
-                    contenido: "",
+                    contenido: ""
+                },
+                {
+                    url: "/Northwind/Proveedores",
+                    icon: "fa-truck",
+                    titulo: "Proveedores",                    
+                    img: "/content/pictures/Northwind/Proveedores/banner.jpg",
+                    lead: "",
+                    contenidoImg: "",
+                    contenido: ""
                 },
                 {
                     url: "/Northwind/Productos",
                     icon: "fa-cutlery",
-                    titulo: "Productos",
-                    detalle: "Northwind - Productos",
+                    titulo: "Productos",                    
                     img: "/content/pictures/Northwind/Productos/banner.jpg",
                     lead: "",
                     contenidoImg: "",
@@ -71,14 +78,13 @@ app.controller("mainController", function ($scope, $location) {
                 },
                 {
                     url: "/Northwind/Ordenes",
-                    icon: "fa-truck",
-                    titulo: "Ordenes",
-                    detalle: "Northwind - Ordenes",
+                    icon: "fa-shopping-cart",
+                    titulo: "Ordenes",                    
                     img: "/content/pictures/Northwind/Ordenes/banner.jpeg",
                     lead: "",
                     contenidoImg: "",
-                    contenido: "",
-                }
+                    contenido: ""
+                }                
             ]
         }
     ];
@@ -146,7 +152,7 @@ app.controller("mainController", function ($scope, $location) {
                     // Asigna los parametros del articulo a el contenido de la pagina
                     $scope.contenidoPagina = {
                         url: i.url,
-                        titulo: i.detalle,
+                        titulo: i.titulo,
                         img: i.img,
                         lead: i.lead,
                         contenidoImg: i.contenidoImg,

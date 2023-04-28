@@ -298,7 +298,7 @@ header > div ul li a:focus {
     height: calc(34px * 2);
 }
 .navbar > .navbar-collapse .navbar-btn-drop.open ul.northwind {
-    height: calc(34px * 3);
+    height: calc(34px * 4);
 }
 .navbar > .navbar-collapse .navbar-btn-drop ul li a {
     padding: 6px 20px;
@@ -1157,11 +1157,13 @@ article {
 }
 /*--------- Northwind ---------*/
 .clientes-container > .search,
-.productos-container > .search {
+.productos-container > .search,
+.proveedores-container > .search {
     position: relative;
 }
 .clientes-container > .search i,
-.productos-container > .search i {
+.productos-container > .search i,
+.proveedores-container > .search i {
     position: absolute;
     top: 0;
     right: 0;
@@ -1219,6 +1221,12 @@ td > .list-product {
 }
 td > .list-product.active {
     border-bottom:  1px solid var(--gris-oscuro);
+}
+.thumbnail-product {
+    border-radius: 0 !important;
+}
+.discontinued {
+    color: var(--gris);
 }
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/

@@ -23,11 +23,11 @@
             </thead>
             <tbody>
                 <tr ng-repeat="producto in productosN.productos">
-                    <td>{{ producto.productId }}</td>
-                    <td>{{ producto.productName }}</td>
-                    <td>{{ producto.category.categoryName }}</td>
-                    <td>{{ producto.unitPrice | currency }}</td>
-                    <td>{{ producto.unitsInStock }}</td>
+                    <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.productId }}</td>
+                    <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.productName }}</td>
+                    <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.category.categoryName }}</td>
+                    <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.unitPrice | currency }}</td>
+                    <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.unitsInStock }}</td>
                     <td class="text-center actions">
                         <a href="#!/Northwind/Productos/{{producto.productId}}"><i class="fa fa-search" uib-tooltip="Ver"></i></a>
                         <i class="fa fa-times" ng-click="productosN.eliminar(producto.productId)" uib-tooltip="Eliminar"></i>
