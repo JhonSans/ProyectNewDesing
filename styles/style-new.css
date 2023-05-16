@@ -81,6 +81,16 @@ body {
     border: none;
     outline: none !important;
 }
+.btn-sm {
+    font-size: 15px;
+    border-radius: 0;
+}
+.btn-info.active {
+    background-color: var(--verde);
+}
+.btn-info.active:hover {
+    background-color: var(--verde-claro) !important;
+}
 input[type="text"],
 input[type="password"] {
     border: none;
@@ -1233,6 +1243,10 @@ td > .list-product.active {
 }
 .discontinued {
     color: var(--gris);
+}
+.text {
+    margin: 0;
+    font-weight: normal;
 }
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/

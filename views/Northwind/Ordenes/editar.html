@@ -4,13 +4,115 @@
         <span>Regresar</span>
     </button>
 </div>
-<div>
-    {{ ordenesN.orden }}
+<div class="jumbotron thumbnail-product">
+    <div ng-style="ordenesN.esEdicion && { 'background-image' : 'url(' + ordenesN.imgInicio.editar + ')' } || { 'background-image' : 'url(' + ordenesN.imgInicio.crear + ')' }" alt="Orden #{{ ordenesN.orden.orderId }}"></div>
+    <h1 ng-if="ordenesN.esEdicion">Orden # {{ ordenesN.orden.orderId }}</h1>
+    <h1 ng-if="!ordenesN.esEdicion">Nueva Orden</h1>
 </div>
 <form>
     <div class="row">
-        <div class="col-sm-12">
-            <label></label>
+        <div class="col-sm-5">
+            <div class="form-group">
+                <label>Cliente</label>
+                <select class="form-control" ng-model="ordenesN.orden.customer.customerId" ng-change="ordenesN.actualizarCliente(ordenesN.orden.customer.customerId)" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
+            </div>
         </div>
+        <div class="col-sm-7">
+            <div class="form-group">
+                <label>Empresa</label>
+                <h2 class="text">{{ ordenesN.orden.shipName }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.orden.orderDate" is-open="ordenesN.fechaConfiguracion.f1" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(1)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha de Envío</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.orden.shippedDate" is-open="ordenesN.fechaConfiguracion.f2" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(2)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Fecha de Entrega</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.orden.requiredDate" is-open="ordenesN.fechaConfiguracion.f3" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(3)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Empleado</label>
+                <select class="form-control" ng-model="ordenesN.orden.employee.employeeId" ng-options="empleado.employeeId as empleado.firstName + ' ' + empleado.lastName for empleado in ordenesN.empleados"></select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Expedidor</label>
+                <select class="form-control" ng-model="ordenesN.orden.shipVia" ng-options="expedidor.shipperId as expedidor.companyName for expedidor in ordenesN.expedidores"></select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Flete</label>
+                <input type="text" class="form-control" ng-model="ordenesN.orden.freight" value="{{ ordenesN.orden.freight }}" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Dirección</label>
+                <input type="text" class="form-control" ng-model="ordenesN.orden.shipAddress" value="{{ ordenesN.orden.shipAddress }}" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Ciudad</label>
+                <input type="text" class="form-control" ng-model="ordenesN.orden.shipCity" value="{{ ordenesN.orden.shipCity }}" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Región</label>
+                <input type="text" class="form-control" ng-model="ordenesN.orden.shipRegion" value="{{ ordenesN.orden.shipRegion }}" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Código Postal</label>
+                <input type="text" class="form-control" ng-model="ordenesN.orden.shipPostalCode" value="{{ ordenesN.orden.shipPostalCode }}" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>País</label>
+                <input type="text" class="form-control" ng-model="ordenesN.orden.shipCountry" value="{{ ordenesN.orden.shipCountry }}" />
+            </div>
+        </div>        
     </div>
 </form>
