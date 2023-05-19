@@ -4,32 +4,32 @@
         <span>Regresar</span>
     </button>
 </div>
-<div class="jumbotron thumbnail-product">
-    <div ng-style="ordenesN.esEdicion && { 'background-image' : 'url(' + ordenesN.imgInicio.editar + ')' } || { 'background-image' : 'url(' + ordenesN.imgInicio.crear + ')' }" alt="Orden #{{ ordenesN.orden.orderId }}"></div>
-    <h1 ng-if="ordenesN.esEdicion">Orden # {{ ordenesN.orden.orderId }}</h1>
-    <h1 ng-if="!ordenesN.esEdicion">Nueva Orden</h1>
-</div>
 <form>
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
+            <div class="jumbotron thumbnail-product">
+                <div ng-style="ordenesN.esEdicion && { 'background-image' : 'url(' + ordenesN.imgInicio.editar + ')' } || { 'background-image' : 'url(' + ordenesN.imgInicio.crear + ')' }" alt="Orden #{{ ordenesN.orden.orderId }}"></div>
+                <h1 class="text-center" ng-if="ordenesN.esEdicion">
+                    Orden
+                    <br />
+                    # {{ ordenesN.orden.orderId }}
+                </h1>
+                <h1 class="text-center" ng-if="!ordenesN.esEdicion">Nueva Orden</h1>
+            </div>
+        </div>
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>Cliente</label>
                 <select class="form-control" ng-model="ordenesN.orden.customer.customerId" ng-change="ordenesN.actualizarCliente(ordenesN.orden.customer.customerId)" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
             </div>
-        </div>
-        <div class="col-sm-7">
             <div class="form-group">
                 <label>Empresa</label>
                 <h2 class="text">{{ ordenesN.orden.shipName }}</h2>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
             <div class="form-group">
                 <label>Fecha</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.orden.orderDate" is-open="ordenesN.fechaConfiguracion.f1" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.orderDate" is-open="ordenesN.fechaConfiguracion.f1" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(1)">
                             <i class="fa fa-calendar"></i>
@@ -38,7 +38,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>Fecha de Envío</label>
                 <div class="input-group">
@@ -51,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>Fecha de Entrega</label>
                 <div class="input-group">
@@ -63,7 +65,7 @@
                     </span>
                 </div>
             </div>
-        </div>        
+        </div>     
     </div>
     <div class="row">
         <div class="col-sm-6">
@@ -72,12 +74,14 @@
                 <select class="form-control" ng-model="ordenesN.orden.employee.employeeId" ng-options="empleado.employeeId as empleado.firstName + ' ' + empleado.lastName for empleado in ordenesN.empleados"></select>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>Expedidor</label>
                 <select class="form-control" ng-model="ordenesN.orden.shipVia" ng-options="expedidor.shipperId as expedidor.companyName for expedidor in ordenesN.expedidores"></select>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Flete</label>
@@ -96,6 +100,8 @@
                 <input type="text" class="form-control" ng-model="ordenesN.orden.shipCity" value="{{ ordenesN.orden.shipCity }}" />
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Región</label>
@@ -113,6 +119,38 @@
                 <label>País</label>
                 <input type="text" class="form-control" ng-model="ordenesN.orden.shipCountry" value="{{ ordenesN.orden.shipCountry }}" />
             </div>
-        </div>        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <label>Productos</label>
+            <ul class="list-group list-group-products">
+                <li class="list-group-item" ng-repeat="producto in ordenesN.orden.orderDetails" ng-click="ordenesN.agregarProducto(producto)">
+                    {{ producto.productName }}
+                    <span class="badge">{{ producto.quantity }}</span>
+                </li>
+            </ul>
+            <div class="text-center header">
+                <button class="btn btn-primary" uib-tooltip="Agregar un nuevo producto a la orden" ng-click="ordenesN.agregarProducto()">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Agregar</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label>Total</label>
+            <div class="well">
+                Valor Inicial:
+                <label class="pull-right">{{ ordenesN.costo.inicial }}</label>
+            </div>
+            <div class="well">
+                Descuento Realizado:
+                <label class="pull-right">{{ ordenesN.costo.descuento }}</label>
+            </div>
+            <div class="well">
+                Valor Final:
+                <label class="pull-right">{{ ordenesN.costo.total }}</label>
+            </div>
+        </div>
     </div>
 </form>

@@ -1,4 +1,4 @@
-/// <binding Clean='serve, server' />
+/// <binding />
 // Generated on 2015-10-22 using generator-angular 0.12.1
 'use strict';
 

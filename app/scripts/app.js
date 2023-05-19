@@ -56,7 +56,7 @@ var app = angular
         controllerAs: "proveedoresN"
       })
       .when("/Northwind/Productos", {
-        templateUrl: "views/Northwind/Productos/index.html",
+        templateUrl: "views/Northwind/index.html",
         controller: "productosController",
         controllerAs: "productosN"
       })
@@ -66,7 +66,7 @@ var app = angular
         controllerAs: "productosN"
       })
       .when("/Northwind/Ordenes", {
-        templateUrl: "views/Northwind/Ordenes/index.html",
+        templateUrl: "views/Northwind/index.html",
         controller: "ordenesController",
         controllerAs: "ordenesN"
       })

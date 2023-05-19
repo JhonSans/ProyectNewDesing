@@ -1238,7 +1238,7 @@ td > .list-product.active {
 }
 .thumbnail-product {
     border-radius: 0 !important;
-    min-height: 181px;
+    /*min-height: 181px;*/
     background-color: var(--gris-oscuro);
 }
 .discontinued {
@@ -1247,6 +1247,22 @@ td > .list-product.active {
 .text {
     margin: 0;
     font-weight: normal;
+}
+.list-group-products > .list-group-item:hover {
+    background-color: var(--verde-claro);
+    cursor: pointer;
+}
+.list-group-products > .list-group-item.active {
+    background-color: var(--verde);
+    font-weight: bold;
+    border-color: var(--verde-claro);
+}
+.list-group-products > .list-group-item > .badge {
+    background-color: var(--gris-oscuro);
+}
+.list-group-products > .list-group-item.active > .badge {
+    color: var(--gris-oscuro);
+    background-color: var(--blanco);
 }
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/

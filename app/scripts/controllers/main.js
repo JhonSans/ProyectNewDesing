@@ -1,5 +1,5 @@
 // Main controller
-app.controller("mainController", function ($scope, $location) {
+app.controller("mainController", function ($scope, $location, $location) {
     // Var menu movil
     $scope.toggle = false;
 
@@ -157,6 +157,7 @@ app.controller("mainController", function ($scope, $location) {
                         lead: i.lead,
                         contenidoImg: i.contenidoImg,
                         contenido: i.contenido,
+                        icon: i.icon
                     };
                 }
             });
