@@ -1,7 +1,12 @@
 app.controller("editarProductosController", function ($scope, $routeParams, NorthProductos, NorthProveedores, toastr, $location, $timeout) {
     var vm = this;
+
+    $scope.backRute = "/Northwind/Productos";
+    $scope.mainRute = "/views/Northwind/Productos/editar.html";
+
     // Variables
     vm.esEdicion = false;
+
     // Objeto img productos
     vm.producto = null;
     vm.productosImg = [

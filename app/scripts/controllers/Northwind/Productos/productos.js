@@ -1,10 +1,14 @@
-app.controller("productosController", function (NorthProductos, toastr) {
+app.controller("productosController", function (NorthProductos, toastr, $scope) {
     var vm = this;
 
+    $scope.mainRute = "/views/Northwind/Productos/index.html";
+    $scope.addRute = "/Northwind/Productos/Nuevo";    
+
     // Objetos
-    vm.producto = null;
+    $scope.busqueda = null;
     vm.productos = null;
     vm.productosCopia = null;
+
     // Paginador
     vm.paginador = {
         totalItems: 0,
@@ -36,22 +40,22 @@ app.controller("productosController", function (NorthProductos, toastr) {
         });
     }
     // Funcion buscar un producto
-    vm.buscarProducto = function () {
+    $scope.buscarElemento = function () {
         // Si el campo no tiene elementos regresa al listado completo
-        if (!vm.producto) {
+        if (!$scope.busqueda) {
             vm.productos = vm.productosCopia;
             // Actualiza el contador de paginas
             vm.paginador.totalItems = vm.paginador.totalItemsCopia;
             return;
         }
         // Obtiene un producto por id
-        NorthProductos.get({ productId: vm.producto }, function (respuesta) {
+        NorthProductos.get({ productId: $scope.busqueda }, function (respuesta) {
             // Agrega la respuesta
             vm.productos = [respuesta];
             // Actualiza el contador de paginas
             vm.paginador.totalItems = vm.productos.lengt;
         }, function (error) {
-            toastr.error("El producto con ID #" + vm.producto + " no existe", "Error " + error.status)
+            toastr.error("El producto con ID #" + $scope.busqueda + " no existe", "Error " + error.status)
         });
     }
     // Funcion eliminar

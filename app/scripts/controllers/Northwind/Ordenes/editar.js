@@ -1,7 +1,12 @@
-app.controller("editarOrdenesController", function ($routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal) {
+app.controller("editarOrdenesController", function ($scope, $routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal) {
     var vm = this;
+    
+    $scope.backRute = "/Northwind/Ordenes";
+    $scope.mainRute = "/views/Northwind/Ordenes/editar.html";
+
     // Variables
     vm.esEdicion = false;
+
     // Objetos
     vm.orden = null;
     vm.date = { orderDate: moment().toDate() };
@@ -114,8 +119,9 @@ app.controller("editarOrdenesController", function ($routeParams, NorthOrdenes, 
         var modalInstance = $uibModal.open({
             templateUrl: 'views/Northwind/Ordenes/modal-producto.html',
             controller: 'modalProducto',
-            controllerAs: 'modalOrdenes',
+            controllerAs: 'productosN',
             size: 'md',
+            backdrop: "static",
             keyboard: false,
             resolve: {
                 producto: function () {

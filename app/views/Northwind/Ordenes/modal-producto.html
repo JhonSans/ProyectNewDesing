@@ -1,13 +1,13 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h3 class="modal-title" ng-if="modalOrdenes.esEdicion">Editar Producto</h3>
-        <h3 class="modal-title" ng-if="!modalOrdenes.esEdicion">Agregar Producto</h3>
+        <h3 class="modal-title" ng-if="productosN.esEdicion">Editar Producto</h3>
+        <h3 class="modal-title" ng-if="!productosN.esEdicion">Agregar Producto</h3>
     </div>
     <div class="modal-body">
         <div ng-include="'/views/Northwind/Productos/editar.html'"></div>
     </div>
     <div class="modal-footer">
-        <button class="btn" ng-click="modalOrdenes.guardar()">Guardar</button>
-        <button class="btn" ng-click="modalOrdenes.cancelar()">Cancelar</button>
+        <button class="btn" ng-click="productosN.guardar()">Guardar</button>
+        <button class="btn" ng-click="productosN.cancelar()">Cancelar</button>
     </div>
 </div>

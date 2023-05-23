@@ -1,8 +1,11 @@
-app.controller("ordenesController", function (NorthOrdenes, toastr) {
+app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
     var vm = this;
 
+    $scope.mainRute = "/views/Northwind/Ordenes/index.html";
+    $scope.addRute = "/Northwind/Ordenes/Nuevo";    
+
     // Objetos
-    vm.orden = null;
+    $scope.busqueda = null;
     vm.ordenes = null;
     vm.ordenesCopia = null;
 
@@ -50,9 +53,9 @@ app.controller("ordenesController", function (NorthOrdenes, toastr) {
         });
     }
     // Funcion buscar una orden
-    vm.buscarOrden = function () {
+    $scope.buscarElemento = function () {
         // Si el campo no tiene elementos regresa al listado completo
-        if (!vm.orden) {
+        if (!$scope.busqueda) {
             vm.ordenes = vm.ordenesCopia;
             
             // Actualiza el contador de paginas
@@ -60,7 +63,7 @@ app.controller("ordenesController", function (NorthOrdenes, toastr) {
             return;
         }
         // Obtiene la orden por id
-        NorthOrdenes.get({ orderId: vm.orden }, function (respuesta) {
+        NorthOrdenes.get({ orderId: $scope.busqueda }, function (respuesta) {
 
             // Agrega la respuesta
             vm.ordenes = [respuesta];
@@ -72,7 +75,7 @@ app.controller("ordenesController", function (NorthOrdenes, toastr) {
             vm.paginador.totalItems = vm.ordenes.lengt;
 
         }, function (error) {
-            toastr.error("La orden #" + vm.orden + " no existe", "Error " + error.status);
+            toastr.error("La orden #" + $scope.busqueda + " no existe", "Error " + error.status);
         });
     }
     // Funcion eliminar
