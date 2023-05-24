@@ -1,13 +1,68 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h3 class="modal-title" ng-if="productosN.esEdicion">Editar Producto</h3>
-        <h3 class="modal-title" ng-if="!productosN.esEdicion">Agregar Producto</h3>
+        <h3 class="modal-title" ng-if="modalProducto.esEdicion">Editar Producto</h3>
+        <h3 class="modal-title" ng-if="!modalProducto.esEdicion">Agregar Producto</h3>        
     </div>
     <div class="modal-body">
-        <div ng-include="'/views/Northwind/Productos/editar.html'"></div>
+        <div class="jumbotron thumbnail-product">
+            <div ng-style="modalProducto.esEdicion && { 'background-image' : 'url(' + modalProducto.producto.Image + ')' } || { 'background-image' : 'url(' + modalProducto.producto.Image + ')' }" alt="{{ modalProducto.producto.productName }}"></div>
+            <h1>{{ modalProducto.producto.productName }}</h1>
+        </div>
+        <form>
+            <div class="row" ng-if="!modalProducto.esEdicion">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Producto</label>
+                        <select type="text" class="form-control" ng-model="modalProducto.producto.productId" ng-options="producto.productId as producto.productName for producto in modalProducto.productos" ng-change="modalProducto.seleccionarProducto()"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Precio</label>
+                        <input type="text" class="form-control" ng-model="modalProducto.producto.unitPrice" ng-change="modalProducto.actualizarCostos()" />
+                        <i class="fa fa-usd" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="text" class="form-control" ng-model="modalProducto.producto.quantity" ng-change="modalProducto.actualizarCostos()" />
+                        <i class="fa fa-hashtag" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Descuento</label>
+                        <input type="text" class="form-control" ng-model="modalProducto.producto.discountAbsolute" ng-change="modalProducto.actualizarCostos()" />
+                        <i class="fa fa-percent" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>Total</label>
+                </div>
+            </div>
+            <div class="row">                
+                <div class="col-sm-6">
+                    <div class="well">
+                        Valor Inicial:
+                        <label class="pull-right">{{ modalProducto.costo.inicial | currency }}</label>
+                    </div>                    
+                </div>
+                <div class="col-sm-6">
+                    <div class="well">
+                        Valor Final:
+                        <label class="pull-right">{{ modalProducto.costo.total | currency }}</label>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="modal-footer">
-        <button class="btn" ng-click="productosN.guardar()">Guardar</button>
-        <button class="btn" ng-click="productosN.cancelar()">Cancelar</button>
+        <button class="btn btn-primary" ng-click="modalProducto.guardar()">Guardar</button>
+        <button class="btn btn-default" ng-click="modalProducto.cancelar()">Cancelar</button>
     </div>
 </div>

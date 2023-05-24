@@ -68,7 +68,7 @@ app.controller("editarProductosController", function ($scope, $routeParams, Nort
         });
     }
     // Funcion guardar
-    vm.guardar = function () {        
+    $scope.guardar = function () {
         // Valida si esta en modo edicion
         if (vm.esEdicion) {
             NorthProductos.modificarProducto(vm.producto, function (respuesta) { 

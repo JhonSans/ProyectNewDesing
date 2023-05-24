@@ -12,6 +12,7 @@
     --verde: #04aa6d;
     --verde-claro: #3fbd8f;
     --rojo: #a00000;
+    --rojo-claro: #ca0000;
 
     --pptsl-window: #030321;
     --pptsl-progress: #840037;
@@ -91,12 +92,24 @@ body {
 .btn-info.active:hover {
     background-color: var(--verde-claro) !important;
 }
-input[type="text"],
-input[type="password"] {
+.btn-danger {
+    background-color: var(--rojo-claro);
     border: none;
-    border-bottom: solid 1px var(--gris);
-    border-radius: 0;
-    box-shadow: none;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+    background-color: var(--rojo);
+    border: none;
+    outline: none !important;
+}
+input[type="text"],
+input[type="password"],
+select {
+    border: none !important;
+    border-bottom: solid 1px var(--gris) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     margin-bottom: 30px;
 }
 input[type="text"]:focus,
@@ -169,6 +182,18 @@ header > div ul li a:hover,
 header > div ul li a:focus {
     background-color: var(--verde);
     color: var(--gris-oscuro);
+}
+.error-message {
+    position: absolute;
+    top: 65px;
+    font-size: x-small;
+    color: var(--rojo-claro);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--rojo);
+    padding: 4px 10px;
+    width: 100%;
+    text-align: center;
 }
 /*------------------------------------*/
 /*-------------- Navbar --------------*/
@@ -1238,8 +1263,9 @@ td > .list-product.active {
 }
 .thumbnail-product {
     border-radius: 0 !important;
-    /*min-height: 181px;*/
     background-color: var(--gris-oscuro);
+    padding-left: 60px;
+    padding-right: 60px;
 }
 .discontinued {
     color: var(--gris);

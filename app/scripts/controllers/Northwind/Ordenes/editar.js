@@ -1,4 +1,4 @@
-app.controller("editarOrdenesController", function ($scope, $routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal) {
+app.controller("editarOrdenesController", function ($scope, toastr, $location, $routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal) {
     var vm = this;
     
     $scope.backRute = "/Northwind/Ordenes";
@@ -6,22 +6,26 @@ app.controller("editarOrdenesController", function ($scope, $routeParams, NorthO
 
     // Variables
     vm.esEdicion = false;
+    vm.requerido = false;
 
     // Objetos
     vm.orden = null;
-    vm.date = { orderDate: moment().toDate() };
+    vm.date = { orderDate: null, shippedDate: null, requiredDate: null };
     vm.costo = { inicial: 0, descuento: 0, total: 0 };
     vm.clientes = [];
     vm.empleados = [];
     vm.expedidores = [];
-    vm.imgInicio = { editar: "/content/pictures/Northwind/Ordenes/editar.jpg", crear: "/content/pictures/Northwind/Ordenes/crear.jpg" }
+    vm.imgInicio = { 
+        editar: "/content/pictures/Northwind/Ordenes/editar.jpg", 
+        crear: "/content/pictures/Northwind/Ordenes/crear.jpg" 
+    };
     vm.fechaConfiguracion = {
         formatYear: 'yyyy',
         startingDay: 1,
         f1: false,
         f2: false,
         f3: false
-    }
+    };
 
     // Contructor
     vm.init = function () {
@@ -39,38 +43,20 @@ app.controller("editarOrdenesController", function ($scope, $routeParams, NorthO
 
                 // Formatea las fechas
                 vm.date.orderDate = moment(vm.orden.orderDate).toDate();
-                vm.orden.shippedDate = moment(vm.orden.shippedDate).toDate();
-                vm.orden.requiredDate = moment(vm.orden.requiredDate).toDate();
+                vm.date.shippedDate = moment(vm.orden.shippedDate).toDate();
+                vm.date.requiredDate = moment(vm.orden.requiredDate).toDate();
 
-                // Arrays que almacenan los numeros a calcular
-                var inicial = [];
-                var descuento = [];
-                var total = [];
-
-                // Recorre el detalle de la orden
-                _.each(vm.orden.orderDetails, function (d) {
-
-                    // Agrega el costo de los productos al array
-                    inicial.push(d.productPrice);
-
-                    // Si tiene descuento, lo calcula y lo agrega al array
-                    if (d.discount) {
-                        descuento.push(parseFloat(Math.abs(d.productPrice * d.discount)));
-                        total.push(d.productPrice - parseFloat(Math.abs(d.productPrice * d.discount)));
-                    }
-                    else {
-                        total.push(d.productPrice);
-                    }
-                });
-
-                // Calcula los costos de la orden
-                vm.costo.inicial = _.reduce(inicial, function (memo, numero) { return memo + numero }, 0).toFixed(2);
-                vm.costo.descuento = _.reduce(descuento, function (memo, numero) { return memo + numero }, 0).toFixed(2);
-                vm.costo.total = _.reduce(total, function (memo, numero) { return memo + numero }, 0).toFixed(2);
+                // Obtiene los costos
+                vm.calcularCostos();
             });
         }
-        else
-            vm.date.orderDate = moment().toDate();
+        else {
+            var s = _.random(5, 15);
+            var r = _.random(10, 15);
+            vm.date.orderDate = moment().toDate();        
+            vm.date.shippedDate = moment(vm.date.orderDate).add(s, "days").toDate();
+            vm.date.requiredDate = moment(vm.date.shippedDate).add(r, "days").toDate();
+        }
 
         // Obtiene los clientes
         NorthClientes.query(function (respuesta) {
@@ -112,14 +98,43 @@ app.controller("editarOrdenesController", function ($scope, $routeParams, NorthO
             vm.fechaConfiguracion.f3 = true;
     }
 
+    vm.calcularCostos = function () {
+        // Arrays que almacenan los numeros a calcular
+        var inicial = [];
+        var descuento = [];
+        var total = [];
+
+        // Recorre el detalle de la orden
+        _.each(vm.orden.orderDetails, function (d) {
+            
+            // Agrega el costo de los productos al array
+            var price = d.unitPrice * d.quantity;
+            inicial.push(price);
+
+            // Si tiene descuento, lo calcula y lo agrega al array
+            if (d.discount) {
+                descuento.push(parseFloat(Math.abs(price * d.discount)));
+                total.push(price - parseFloat(Math.abs(price * d.discount)));
+            }
+            else {
+                total.push(price);
+            }
+        });
+
+        // Calcula los costos de la orden
+        vm.costo.inicial = _.reduce(inicial, function (memo, numero) { return memo + numero }, 0).toFixed(2);
+        vm.costo.descuento = _.reduce(descuento, function (memo, numero) { return memo + numero }, 0).toFixed(2);
+        vm.costo.total = _.reduce(total, function (memo, numero) { return memo + numero }, 0).toFixed(2);
+    }
+
     // Funcion agregar o editar producto en modal
     vm.agregarProducto = function (producto) {
 
         // Configuracion del modal
         var modalInstance = $uibModal.open({
             templateUrl: 'views/Northwind/Ordenes/modal-producto.html',
-            controller: 'modalProducto',
-            controllerAs: 'productosN',
+            controller: 'modalProductoController',
+            controllerAs: 'modalProducto',
             size: 'md',
             backdrop: "static",
             keyboard: false,
@@ -132,10 +147,93 @@ app.controller("editarOrdenesController", function ($scope, $routeParams, NorthO
 
         // Resultado del modal
         modalInstance.result.then(function (producto) {
-            console.log(producto);
+            // Valida si existe el producto dentro de la orden y lo edita
+            var validar = _.find(vm.orden.orderDetails, function (o) { return o.productId == producto.productId });
+
+            // Si no existe lo agrega
+            if (!validar) {
+                // Si esta vacio lo inicializa
+                if (!vm.orden.orderDetails)
+                    vm.orden.orderDetails = [];
+
+                vm.orden.orderDetails.push(producto);
+            }
+
+            // Actualiza los costos
+            vm.calcularCostos();
+
         }, function (error) {
             console.log(error);
         });
+    }
+
+    // Funcion eliminar producto de la lista
+    vm.eliminarProducto = function (productId) {
+
+        // Filtra los productos y retorna los diferentes al seleccionado
+        vm.orden.orderDetails = _.filter(vm.orden.orderDetails, function (o) {
+            return o.productId != productId ? o : "";
+        });
+
+        // Actualiza los costos
+        vm.calcularCostos();
+    }
+
+    // Funcion guardar
+    $scope.guardar = function () {
+
+        // Valida los campos
+        if (!vm.orden || !vm.orden.customerId || !vm.orden.employeeId) {
+            vm.requerido = true;
+            toastr.warning("Valide que todos los campos requeridos estén llenos", "Atención");
+            return;
+        }
+
+        // Agrega las fechas al objeto
+        vm.orden.orderDate = vm.date.orderDate;
+        vm.orden.requiredDate = vm.date.requiredDate;
+        vm.orden.shippedDate = vm.date.shippedDate;
+
+        // Valida si esta en modo edicion
+        if (vm.esEdicion) {
+
+            // Ajustes objeto
+            var orden = {
+                orderId: vm.orden.orderId,
+                customerId: vm.orden.customerId,
+                employeeId: vm.orden.employeeId,
+                orderDate: vm.orden.orderDate,
+                requiredDate: vm.orden.requiredDate,
+                shippedDate: vm.orden.shippedDate,
+                shipVia: vm.orden.shipVia,
+                freight: vm.orden.freight,
+                shipName: vm.orden.shipName,
+                shipAddress: vm.orden.shipAddress,
+                shipCity: vm.orden.shipCity,
+                shipRegion: vm.orden.shipRegion,
+                shipPostalCode: vm.orden.shipPostalCode,
+                shipCountry: vm.orden.shipCountry,
+                orderDetails: vm.orden.orderDetails
+            };
+
+            NorthOrdenes.modificarOrden(orden, function (respuesta) {
+                // Redirige a la orden actual
+                toastr.success("La orden ha sido modificada satisfactoriamente", "Orden #" + respuesta.orderId);
+                $location.path('/Northwind/Ordenes/' + respuesta.orderId);
+            }, function (error) {
+                toastr.error("Error al modificar la orden", "ERROR " + error.status);
+            });
+        }
+        else {
+            // Crea la orden
+            NorthOrdenes.crearOrden(vm.orden, function (respuesta) {
+                // Redirigue a la lista de ordenes
+                toastr.success("La orden a sido creada satisfactoriamente", "Orden #" + respuesta.orderId);
+                $scope.actualizarContenido('/Northwind/Ordenes');
+            }, function (error) {
+                toastr.error("Error al crear la orden", "ERROR " + error.status)
+            });
+        }
     }
 
     // Constructor

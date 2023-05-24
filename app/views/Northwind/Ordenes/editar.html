@@ -1,3 +1,10 @@
+<div class="alert alert-info" ng-if="!ordenesN.esEdicion">
+    <i class="fa fa-info-circle" style="margin-right: 10px;"></i>
+    <span>
+        La orden será enviada y entregada en un plazo de
+        <strong>20 a 30 días hábiles</strong>
+    </span>
+</div>
 <form>
     <div class="row">
         <div class="col-sm-6">
@@ -14,7 +21,11 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label>Cliente</label>
-                <select class="form-control" ng-model="ordenesN.orden.customer.customerId" ng-change="ordenesN.actualizarCliente(ordenesN.orden.customer.customerId)" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
+                <select class="form-control" ng-model="ordenesN.orden.customerId" ng-change="ordenesN.actualizarCliente(ordenesN.orden.customerId)" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
+                <span class="error-message" ng-show="!ordenesN.orden.customerId && ordenesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
             <div class="form-group">
                 <label>Empresa</label>
@@ -23,7 +34,7 @@
             <div class="form-group">
                 <label>Fecha</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.orderDate" is-open="ordenesN.fechaConfiguracion.f1" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.orderDate" is-open="ordenesN.fechaConfiguracion.f1" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-disabled="true" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(1)">
                             <i class="fa fa-calendar"></i>
@@ -38,7 +49,7 @@
             <div class="form-group">
                 <label>Fecha de Envío</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.orden.shippedDate" is-open="ordenesN.fechaConfiguracion.f2" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.shippedDate" is-open="ordenesN.fechaConfiguracion.f2" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-disabled="true" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(2)">
                             <i class="fa fa-calendar"></i>
@@ -51,7 +62,7 @@
             <div class="form-group">
                 <label>Fecha de Entrega</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.orden.requiredDate" is-open="ordenesN.fechaConfiguracion.f3" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.requiredDate" is-open="ordenesN.fechaConfiguracion.f3" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-disabled="true" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(3)">
                             <i class="fa fa-calendar"></i>
@@ -65,13 +76,21 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label>Empleado</label>
-                <select class="form-control" ng-model="ordenesN.orden.employee.employeeId" ng-options="empleado.employeeId as empleado.firstName + ' ' + empleado.lastName for empleado in ordenesN.empleados"></select>
+                <select class="form-control" ng-model="ordenesN.orden.employeeId" ng-options="empleado.employeeId as empleado.firstName + ' ' + empleado.lastName for empleado in ordenesN.empleados"></select>
+                <span class="error-message" ng-show="!ordenesN.orden.employeeId && ordenesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
                 <label>Expedidor</label>
                 <select class="form-control" ng-model="ordenesN.orden.shipVia" ng-options="expedidor.shipperId as expedidor.companyName for expedidor in ordenesN.expedidores"></select>
+                <span class="error-message" ng-show="!ordenesN.orden.shipVia && ordenesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
     </div>
@@ -86,12 +105,20 @@
             <div class="form-group">
                 <label>Dirección</label>
                 <input type="text" class="form-control" ng-model="ordenesN.orden.shipAddress" value="{{ ordenesN.orden.shipAddress }}" />
+                <span class="error-message" ng-show="!ordenesN.orden.shipAddress && ordenesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label>Ciudad</label>
                 <input type="text" class="form-control" ng-model="ordenesN.orden.shipCity" value="{{ ordenesN.orden.shipCity }}" />
+                <span class="error-message" ng-show="!ordenesN.orden.shipCity && ordenesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
     </div>
@@ -112,18 +139,27 @@
             <div class="form-group">
                 <label>País</label>
                 <input type="text" class="form-control" ng-model="ordenesN.orden.shipCountry" value="{{ ordenesN.orden.shipCountry }}" />
+                <span class="error-message" ng-show="!ordenesN.orden.shipCountry && ordenesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <label>Productos</label>
-            <ul class="list-group list-group-products">
-                <li class="list-group-item" ng-repeat="producto in ordenesN.orden.orderDetails" ng-click="ordenesN.agregarProducto(producto)">
+            <div class="input-group list-group-products" ng-repeat="producto in ordenesN.orden.orderDetails">
+                <button class="list-group-item" ng-click="ordenesN.agregarProducto(producto)">
                     {{ producto.productName }}
                     <span class="badge">{{ producto.quantity }}</span>
-                </li>
-            </ul>
+                </button>
+                <div class="input-group-btn">
+                    <button class="btn btn-danger" uib-tooltip="Eliminar" ng-click="ordenesN.eliminarProducto(producto.productId)">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
             <div class="text-center header">
                 <button class="btn btn-primary" uib-tooltip="Agregar un nuevo producto a la orden" ng-click="ordenesN.agregarProducto()">
                     <i class="fa fa-shopping-cart"></i>
@@ -131,19 +167,19 @@
                 </button>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <label>Total</label>
             <div class="well">
                 Valor Inicial:
-                <label class="pull-right">{{ ordenesN.costo.inicial }}</label>
+                <label class="pull-right">{{ ordenesN.costo.inicial | currency }}</label>
             </div>
             <div class="well">
                 Descuento Realizado:
-                <label class="pull-right">{{ ordenesN.costo.descuento }}</label>
+                <label class="pull-right">{{ ordenesN.costo.descuento | currency }}</label>
             </div>
             <div class="well">
                 Valor Final:
-                <label class="pull-right">{{ ordenesN.costo.total }}</label>
+                <label class="pull-right">{{ ordenesN.costo.total | currency }}</label>
             </div>
         </div>
     </div>
