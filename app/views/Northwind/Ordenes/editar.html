@@ -21,7 +21,8 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label>Cliente</label>
-                <select class="form-control" ng-model="ordenesN.orden.customerId" ng-change="ordenesN.actualizarCliente(ordenesN.orden.customerId)" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
+                <select ng-if="!ordenesN.esEdicion" class="form-control" ng-model="ordenesN.orden.customerId" ng-change="ordenesN.actualizarCliente(ordenesN.orden.customerId)" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
+                <h2 ng-if="ordenesN.esEdicion" class="text">{{ ordenesN.orden.customer.contactName }}</h2>
                 <span class="error-message" ng-show="!ordenesN.orden.customerId && ordenesN.requerido">
                     <i class="fa fa-warning"></i>
                     Este campo es requerido
@@ -36,7 +37,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.orderDate" is-open="ordenesN.fechaConfiguracion.f1" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-disabled="true" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(1)">
+                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(1)" ng-disabled="true">
                             <i class="fa fa-calendar"></i>
                         </button>
                     </span>
@@ -51,7 +52,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.shippedDate" is-open="ordenesN.fechaConfiguracion.f2" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-disabled="true" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(2)">
+                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(2)" ng-disabled="true">
                             <i class="fa fa-calendar"></i>
                         </button>
                     </span>
@@ -64,7 +65,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.date.requiredDate" is-open="ordenesN.fechaConfiguracion.f3" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-disabled="true" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(3)">
+                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(3)" ng-disabled="true">
                             <i class="fa fa-calendar"></i>
                         </button>
                     </span>
@@ -155,7 +156,7 @@
                     <span class="badge">{{ producto.quantity }}</span>
                 </button>
                 <div class="input-group-btn">
-                    <button class="btn btn-danger" uib-tooltip="Eliminar" ng-click="ordenesN.eliminarProducto(producto.productId)">
+                    <button class="btn btn-danger" ng-click="ordenesN.eliminarProducto(producto.productId)">
                         <i class="fa fa-times"></i>
                     </button>
                 </div>

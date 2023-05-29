@@ -1,8 +1,9 @@
-app.controller("modalProductoController", function (producto, toastr, $uibModalInstance, NorthProductos) {
+app.controller("modalProductoController", function ($timeout, producto, toastr, $uibModalInstance, NorthProductos) {
     var vm = this;
 
     // Vairables
     vm.esEdicion = false;
+    vm.loading = false;
 
     // Objetos
     vm.producto = null;
@@ -23,6 +24,7 @@ app.controller("modalProductoController", function (producto, toastr, $uibModalI
     vm.init = function () {
         // Si viene un dato es edicion
         if (producto) {
+            vm.loading = true;
             vm.esEdicion = true;
 
             vm.producto = producto;
@@ -44,6 +46,11 @@ app.controller("modalProductoController", function (producto, toastr, $uibModalI
         // Obtiene el producto por Id
         NorthProductos.get({ productId: productId }, function (respuesta) {
             
+            // Oculta cargando
+            $timeout(function () {
+                vm.loading = false;
+            }, 800);
+
             // Valida si es edicion y ajusta los datos
             if (!vm.esEdicion) {
                 vm.producto.unitPrice = respuesta.unitPrice;

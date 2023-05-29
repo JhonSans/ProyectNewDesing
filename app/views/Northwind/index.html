@@ -1,8 +1,8 @@
 <div ng-include="'/views/main.html'"></div>
 <div class="search">
-    <input type="text" class="form-control" ng-model="busqueda" buscar-elemento="buscarElemento()" placeholder="ID" />
+    <input type="text" class="form-control" ng-model="busqueda" ng-model-options="{ debounce: 1000 }" ng-change="buscarElemento()" placeholder="ID" />
     <i class="fa {{ contenidoPagina.icon }}"></i>
-    <span>Presione enter para iniciar la busqueda</span>
+    <span>Digite el ID para iniciar la busqueda</span>
 </div>
 <div class="text-right header">
     <a href="#!{{ addRute }}">
@@ -12,4 +12,7 @@
         </button>
     </a>
 </div>
-<div ng-include="mainRute"></div>
+<div ng-if="loading" class="loading">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+</div>
+<div ng-if="!loading" ng-include="mainRute"></div>

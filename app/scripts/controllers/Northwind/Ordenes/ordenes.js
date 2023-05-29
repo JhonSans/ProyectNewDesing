@@ -1,6 +1,7 @@
-app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
+app.controller("ordenesController", function (NorthOrdenes, NorthClientes, NorthEmpleados, toastr, $scope, $timeout) {
     var vm = this;
 
+    $scope.loading = false;
     $scope.mainRute = "/views/Northwind/Ordenes/index.html";
     $scope.addRute = "/Northwind/Ordenes/Nuevo";    
 
@@ -8,6 +9,10 @@ app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
     $scope.busqueda = null;
     vm.ordenes = null;
     vm.ordenesCopia = null;
+    vm.clientes = [];
+    vm.empleados = [];
+    vm.paises = [];
+    vm.filtro = { customer: null, employee: null, desde: moment().startOf('month').toDate(), hasta: moment().toDate() }
 
     // Paginador
     vm.paginador = {
@@ -18,16 +23,63 @@ app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
         tamanoMax: 5
     }
 
+    // fechas
+    vm.fechaConfiguracion = {
+        formatYear: 'yyyy',
+        startingDay: 1,
+        f1: false,
+        f2: false
+    };
+
     // Constructor
     vm.init = function () {
+        $scope.loading = true;
+
+        // Obtiene los clientes
+        NorthClientes.query(function (respuesta) {
+            // Filtra el resultado y agrega los usuarios al objeto
+            _.filter(respuesta, function (r) { 
+                vm.clientes.push({ customerId: r.customerId, contactName: r.contactName});
+                vm.paises.push(r.country);
+            });
+
+            // Obtiene los unicos
+            vm.paises = _.uniq(vm.paises, function (p) { return p });
+
+            // Ordena la lista de usuarios
+            vm.clientes = _.sortBy(vm.clientes, function (c) { return c.contactName });
+            vm.paises = _.sortBy(vm.paises, function (p) { return p });
+
+            // Agrega la primera opcion
+            vm.clientes.unshift({ customerId: null, contactName: "Todos" });
+            //vm.paises.unshift("Todos");
+        });
+
+        // Obtiene los empleados
+        NorthEmpleados.query(function (respuesta) {
+            // Filtra el resultado y agrega los usuarios al objeto
+            _.filter(respuesta, function (r) { vm.empleados.push({ employeeId: r.employeeId, contactName: r.firstName + " " + r.lastName }); });
+
+            // Ordena la lista de usuarios
+            vm.empleados = _.sortBy(vm.empleados, function (e) { return e.contactName });
+
+            // Agrega la primera opcion
+            vm.empleados.unshift({ employeeId: null, contactName: "Todos" });
+        });
+
         // Obtiene todas las ordenes
         NorthOrdenes.get({ pg: vm.paginador.paginaActual }, function (respuesta) {
             
+            // Oculta cargando
+            $timeout(function () {
+                $scope.loading = false;
+            }, 1000);
+
             // Agrega la informacion al objeto
             vm.ordenes = respuesta.data;
 
             // Formatea las fechas de cada orden
-            vm.ordenes = _.each(vm.ordenes, function (o) { o.orderDate = moment(o.orderDate).format("DD-MM-YYYY"); });
+            vm.ajustesBasicos();
             
             // Realiza una copia del listado
             vm.ordenesCopia = angular.copy(vm.ordenes);
@@ -40,6 +92,36 @@ app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
         });
     }
 
+    // Funcion que despliega la fecha
+    vm.abrirFecha = function (id) {
+        // Despliega la fecha seleccionada
+        if (id == 1)
+            vm.fechaConfiguracion.f1 = true;
+        else
+            vm.fechaConfiguracion.f2 = true;
+    }
+
+    // Funcio formatear fechas
+    vm.ajustesBasicos = function () {
+        vm.ordenes = _.each(vm.ordenes, function (o) {
+            // Obtiene la fecha actual
+            var fechaActual = moment().toDate();
+
+            // Valida la fecha actual con las fechas de la orden para determinar su estado
+            if (fechaActual < moment(o.orderDate))
+                o.status = "Pendiente";
+            else if (fechaActual > moment(o.shippedDate) && fechaActual < moment(o.requiredDate))
+                o.status = "Enviado";
+            else if (fechaActual > moment(o.requiredDate))
+                o.status = "Entregado";
+
+            // Formatea las fechas para la vista
+            o.orderDate = moment(o.orderDate).format("DD-MM-YYYY");
+            o.shippedDate = moment(o.shippedDate).format("DD-MM-YYYY");
+            o.requiredDate = moment(o.requiredDate).format("DD-MM-YYYY");
+        });
+    }
+
     // Funcion cambiar de pagina
     vm.cambiarPagina = function () {
         // Obtiene todas las ordenes de la siguiente pagina
@@ -49,7 +131,7 @@ app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
             vm.ordenes = respuesta.data;
             
             // Formatea las fechas de cada orden
-            vm.ordenes = _.each(vm.ordenes, function (o) { o.orderDate = moment(o.orderDate).format("DD-MM-YYYY"); });
+            vm.ajustesBasicos();
         });
     }
     // Funcion buscar una orden
@@ -69,18 +151,19 @@ app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
             vm.ordenes = [respuesta];
             
             // Formatea las fechas
-            vm.ordenes = _.each(vm.ordenes, function (o) { o.orderDate = moment(o.orderDate).format("DD-MM-YYYY"); });
+            vm.ajustesBasicos();
             
             // Actualiza el contador de paginas
             vm.paginador.totalItems = vm.ordenes.lengt;
 
         }, function (error) {
-            toastr.error("La orden #" + $scope.busqueda + " no existe", "Error " + error.status);
+            // Obtiene el mensaje de error
+            var message = error.data.replace("System.Exception: ", "").split("\r\n");
+            toastr.error(message[0], "ERROR " + error.status);
         });
     }
     // Funcion eliminar
     vm.eliminar = function (orden) {
-
         bootbox.confirm({
             title: "Eliminar",
             message: "Desea eliminar la orden #" + orden.orderId + "?",
@@ -101,7 +184,9 @@ app.controller("ordenesController", function (NorthOrdenes, toastr, $scope) {
                         vm.init();
                         
                     }, function (error) {
-                        toastr.error("Ocurrió un error al eliminar la orden #" + orden.orderId, "Error " + error.status);
+                        // Obtiene el mensaje de error
+                        var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                        toastr.error(message[0], "ERROR " + error.status);
                     });
                 }
             }

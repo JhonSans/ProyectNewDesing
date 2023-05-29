@@ -1,6 +1,7 @@
-app.controller("editarOrdenesController", function ($scope, toastr, $location, $routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal) {
+app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $location, $routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal) {
     var vm = this;
     
+    $scope.loading = false;
     $scope.backRute = "/Northwind/Ordenes";
     $scope.mainRute = "/views/Northwind/Ordenes/editar.html";
 
@@ -31,12 +32,21 @@ app.controller("editarOrdenesController", function ($scope, toastr, $location, $
     vm.init = function () {
         // Valida si esta en modo edicion
         vm.esEdicion = $routeParams.id == "Nuevo" ? false : true;
-
+        
         // Valida si es edicion
         if (vm.esEdicion) {
 
+            $scope.loading = true;
+
+            var orderId = $routeParams.id;
+
             // Obtiene la orden obtenida por su id
-            NorthOrdenes.get({ orderId: $routeParams.id }, function (respuesta) {
+            NorthOrdenes.get({ orderId: orderId }, function (respuesta) {
+
+                // Oculta cargando
+                $timeout(function () {
+                    $scope.loading = false;
+                }, 1000);
 
                 // Agrega los datos al objeto
                 vm.orden = respuesta;
@@ -47,7 +57,7 @@ app.controller("editarOrdenesController", function ($scope, toastr, $location, $
                 vm.date.requiredDate = moment(vm.orden.requiredDate).toDate();
 
                 // Obtiene los costos
-                vm.calcularCostos();
+                vm.calcularCostos();                
             });
         }
         else {
@@ -171,9 +181,7 @@ app.controller("editarOrdenesController", function ($scope, toastr, $location, $
     vm.eliminarProducto = function (productId) {
 
         // Filtra los productos y retorna los diferentes al seleccionado
-        vm.orden.orderDetails = _.filter(vm.orden.orderDetails, function (o) {
-            return o.productId != productId ? o : "";
-        });
+        vm.orden.orderDetails = _.filter(vm.orden.orderDetails, function (o) { return o.productId != productId ? o : ""; });
 
         // Actualiza los costos
         vm.calcularCostos();
@@ -183,7 +191,7 @@ app.controller("editarOrdenesController", function ($scope, toastr, $location, $
     $scope.guardar = function () {
 
         // Valida los campos
-        if (!vm.orden || !vm.orden.customerId || !vm.orden.employeeId) {
+        if (!vm.orden || !vm.orden.customerId || !vm.orden.employeeId || !vm.orden.shipVia || !vm.orden.shipAddress || !vm.orden.shipCity || !vm.orden.shipCountry) {
             vm.requerido = true;
             toastr.warning("Valide que todos los campos requeridos estén llenos", "Atención");
             return;
@@ -193,6 +201,8 @@ app.controller("editarOrdenesController", function ($scope, toastr, $location, $
         vm.orden.orderDate = vm.date.orderDate;
         vm.orden.requiredDate = vm.date.requiredDate;
         vm.orden.shippedDate = vm.date.shippedDate;
+        
+        $scope.loading = true;
 
         // Valida si esta en modo edicion
         if (vm.esEdicion) {
@@ -217,21 +227,39 @@ app.controller("editarOrdenesController", function ($scope, toastr, $location, $
             };
 
             NorthOrdenes.modificarOrden(orden, function (respuesta) {
-                // Redirige a la orden actual
-                toastr.success("La orden ha sido modificada satisfactoriamente", "Orden #" + respuesta.orderId);
-                $location.path('/Northwind/Ordenes/' + respuesta.orderId);
+
+                // Oculta cargando
+                $timeout(function () {
+                    $scope.loading = false;
+                    // Redirige a la orden actual
+                    toastr.success("La orden ha sido modificada satisfactoriamente", "Orden #" + respuesta.orderId);
+                    $location.path('/Northwind/Ordenes/' + respuesta.orderId);
+                }, 500);
+
             }, function (error) {
-                toastr.error("Error al modificar la orden", "ERROR " + error.status);
+                // Obtiene el mensaje de error
+                var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                toastr.error(message[0], "ERROR " + error.status);
+                $scope.loading = false;
             });
         }
         else {
             // Crea la orden
             NorthOrdenes.crearOrden(vm.orden, function (respuesta) {
-                // Redirigue a la lista de ordenes
-                toastr.success("La orden a sido creada satisfactoriamente", "Orden #" + respuesta.orderId);
-                $scope.actualizarContenido('/Northwind/Ordenes');
+
+                // Oculta cargando
+                $timeout(function () {
+                    $scope.loading = false;
+                    // Redirigue a la lista de ordenes
+                    toastr.success("La orden a sido creada satisfactoriamente", "Orden #" + respuesta.orderId);
+                    $scope.actualizarContenido('/Northwind/Ordenes');                    
+                }, 500);
+
             }, function (error) {
-                toastr.error("Error al crear la orden", "ERROR " + error.status)
+                // Obtiene el mensaje de error
+                var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                toastr.error(message[0], "ERROR " + error.status);
+                $scope.loading = false;
             });
         }
     }

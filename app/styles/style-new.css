@@ -36,6 +36,18 @@ body {
     background-color: var(--gris-claro);
     position: relative;
 }
+.main-container {
+    min-height: calc(100vh - 165px);
+}
+.loading {
+    width: 100%;
+    background-color: var(--blanco);
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--gris);
+}
 .page-header {
     border-color: var(--gris);
     margin-top: 20px;
@@ -1283,12 +1295,46 @@ td > .list-product.active {
     font-weight: bold;
     border-color: var(--verde-claro);
 }
+.list-group-products > .list-group-item {
+    border-radius: 0;
+}
 .list-group-products > .list-group-item > .badge {
     background-color: var(--gris-oscuro);
 }
 .list-group-products > .list-group-item.active > .badge {
     color: var(--gris-oscuro);
     background-color: var(--blanco);
+}
+.list-group-products > .input-group-btn .btn {
+    padding: 10px;
+}
+.list-info > .row .col-sm-4 {
+    display: flex;
+    align-items: center;
+}
+.list-info > .row .col-sm-4 div, 
+.info-status-item {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background-color: var(--gris-oscuro);
+    margin-right: 15px;
+}
+.list-info > .row .col-sm-4:nth-child(1) div,
+.info-status-item.warning {
+    background-color: var(--pptsl-btn);
+}
+.list-info > .row .col-sm-4:nth-child(2) div,
+.info-status-item.info {
+    background-color: var(--azul-claro);
+}
+.list-info > .row .col-sm-4:nth-child(3) div,
+.info-status-item.success {
+    background-color: var(--verde-claro);
+}
+.info-status-item {
+    margin-right: 0;
+    border-radius: 100%;
 }
 /*----------------------------------------*/
 /*-------------- Breadcrumb --------------*/
