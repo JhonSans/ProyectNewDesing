@@ -1,3 +1,25 @@
+<div class="well list-info">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label>Categorias</label>
+                <select class="form-control" style="margin-bottom: 0;" ng-model="productosN.filtro.category" ng-options="categoria.categoryId as categoria.categoryName for categoria in productosN.categorias"></select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label>Proveedor</label>
+                <select class="form-control" style="margin-bottom: 0;" ng-model="productosN.filtro.supplier" ng-options="proveedor.supplierId as proveedor.companyName for proveedor in productosN.proveedores"></select>
+            </div>
+        </div>
+        <div class="col-md-2 text-center">
+            <button class="btn btn-primary" style="margin-top: 15px;" ng-click="productosN.actualizarFiltro(productosN.paginador.paginaActual = 0, true)">
+                <i class="fa fa-filter"></i>
+                Filtrar
+            </button>
+        </div>
+    </div>
+</div>
 <div class="table-responsive">
     <table class="table table-striped table-hover">
         <thead>
@@ -26,6 +48,12 @@
             </tr>
         </tbody>
     </table>
+    <div ng-if="!productosN.productos.length">
+        <div class="alert alert-warning">
+            <i class="fa fa-question-circle"></i>
+            <span>No se han encontrado datos registrados.</span>
+        </div>          
+    </div>
 </div>
 <div class="text-center">
     <ul uib-pagination class="pagination-sm" ng-model="productosN.paginador.paginaActual" ng-change="productosN.cambiarPagina()" boundary-links="true" boundary-link-numbers="true" total-items="productosN.paginador.totalItems" items-per-page="productosN.paginador.itemsPagina" max-size="productosN.paginador.tamanoMax" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>

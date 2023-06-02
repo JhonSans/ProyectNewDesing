@@ -11,8 +11,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
     vm.ordenesCopia = null;
     vm.clientes = [];
     vm.empleados = [];
-    vm.paises = [];
-    vm.filtro = { customer: null, employee: null, desde: moment().startOf('month').toDate(), hasta: moment().toDate() }
+    vm.filtro = { customerId: null, employeeId: null }
 
     // Paginador
     vm.paginador = {
@@ -23,14 +22,6 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
         tamanoMax: 5
     }
 
-    // fechas
-    vm.fechaConfiguracion = {
-        formatYear: 'yyyy',
-        startingDay: 1,
-        f1: false,
-        f2: false
-    };
-
     // Constructor
     vm.init = function () {
         $scope.loading = true;
@@ -40,7 +31,6 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
             // Filtra el resultado y agrega los usuarios al objeto
             _.filter(respuesta, function (r) { 
                 vm.clientes.push({ customerId: r.customerId, contactName: r.contactName});
-                vm.paises.push(r.country);
             });
 
             // Obtiene los unicos
@@ -48,11 +38,9 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
 
             // Ordena la lista de usuarios
             vm.clientes = _.sortBy(vm.clientes, function (c) { return c.contactName });
-            vm.paises = _.sortBy(vm.paises, function (p) { return p });
 
             // Agrega la primera opcion
             vm.clientes.unshift({ customerId: null, contactName: "Todos" });
-            //vm.paises.unshift("Todos");
         });
 
         // Obtiene los empleados
@@ -66,9 +54,20 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
             // Agrega la primera opcion
             vm.empleados.unshift({ employeeId: null, contactName: "Todos" });
         });
+        
+        // Obtiene todas las ordenes filtradas
+        vm.actualizarFiltro(vm.paginador.paginaActual);
+    }
 
+    // Funcion aplicar filtro
+    vm.actualizarFiltro = function (paginaActual, actualizar) {
+
+        // Valida que la pagina actual sea la incial para mostrar el loading
+        if (actualizar)
+            $scope.loading = true;
+       
         // Obtiene todas las ordenes
-        NorthOrdenes.get({ pg: vm.paginador.paginaActual }, function (respuesta) {
+        NorthOrdenes.get({ pg: paginaActual, customerId: vm.filtro.customerId, employeeId: vm.filtro.employeeId }, function (respuesta) {
             
             // Oculta cargando
             $timeout(function () {
@@ -92,15 +91,6 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
         });
     }
 
-    // Funcion que despliega la fecha
-    vm.abrirFecha = function (id) {
-        // Despliega la fecha seleccionada
-        if (id == 1)
-            vm.fechaConfiguracion.f1 = true;
-        else
-            vm.fechaConfiguracion.f2 = true;
-    }
-
     // Funcio formatear fechas
     vm.ajustesBasicos = function () {
         vm.ordenes = _.each(vm.ordenes, function (o) {
@@ -108,7 +98,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
             var fechaActual = moment().toDate();
 
             // Valida la fecha actual con las fechas de la orden para determinar su estado
-            if (fechaActual < moment(o.orderDate))
+            if (fechaActual < moment(o.orderDate) || fechaActual > moment(o.orderDate) && fechaActual < moment(o.shippedDate))
                 o.status = "Pendiente";
             else if (fechaActual > moment(o.shippedDate) && fechaActual < moment(o.requiredDate))
                 o.status = "Enviado";
@@ -124,15 +114,8 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
 
     // Funcion cambiar de pagina
     vm.cambiarPagina = function () {
-        // Obtiene todas las ordenes de la siguiente pagina
-        NorthOrdenes.get({ pg: vm.paginador.paginaActual - 1 }, function (respuesta) {
-            
-            // Agrega la informacion de las ordenes
-            vm.ordenes = respuesta.data;
-            
-            // Formatea las fechas de cada orden
-            vm.ajustesBasicos();
-        });
+        // Ajusta la pagina
+        vm.actualizarFiltro(vm.paginador.paginaActual - 1);
     }
     // Funcion buscar una orden
     $scope.buscarElemento = function () {

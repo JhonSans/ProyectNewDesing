@@ -1,54 +1,18 @@
 <div class="well list-info">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-md-2">
             <div class="form-group">
                 <label>Cliente</label>
-                <select class="form-control" ng-model="ordenesN.filtro.customer" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
+                <select class="form-control" style="margin-bottom: 0;" ng-model="ordenesN.filtro.customerId" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-md-2">
             <div class="form-group">
                 <label>Empleado</label>
-                <select class="form-control" ng-model="ordenesN.filtro.employee" ng-options="empleado.employeeId as empleado.contactName for empleado in ordenesN.empleados"></select>
+                <select class="form-control" style="margin-bottom: 0;" ng-model="ordenesN.filtro.employeeId" ng-options="empleado.employeeId as empleado.contactName for empleado in ordenesN.empleados"></select>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label>Fecha Desde</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.filtro.desde" is-open="ordenesN.fechaConfiguracion.f1" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(1)">
-                            <i class="fa fa-calendar"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label>Fecha Hasta</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="ordenesN.filtro.hasta" is-open="ordenesN.fechaConfiguracion.f2" show-button-bar="false" datepicker-options="ordenesN.fechaConfiguracion" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="ordenesN.abrirFecha(2)">
-                            <i class="fa fa-calendar"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label>País</label>
-                <select class="form-control" ng-model="ordenesN.filtro.country" ng-options="pais as pais for pais in ordenesN.paises" style="margin-bottom: 0;">
-                    <option value="">Todos</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-8">
+        <div class="col-md-6">
             <label>Estado</label>
             <div class="row">
                 <div class="col-sm-4">
@@ -64,6 +28,12 @@
                     <span>Entregado</span>
                 </div>
             </div>
+        </div>
+        <div class="col-md-2 text-center">
+            <button class="btn btn-primary" style="margin-top: 15px;" ng-click="ordenesN.actualizarFiltro(ordenesN.paginador.paginaActual = 0, true)">
+                <i class="fa fa-filter"></i>
+                Filtrar
+            </button>
         </div>
     </div>
 </div>
@@ -97,6 +67,12 @@
             </tr>
         </tbody>
     </table>
+    <div ng-if="!ordenesN.ordenes.length">
+        <div class="alert alert-warning">
+            <i class="fa fa-question-circle"></i>
+            <span>No se han encontrado datos registrados.</span>
+        </div>          
+    </div>
 </div>
 <div class="text-center">
     <ul uib-pagination class="pagination-sm" ng-model="ordenesN.paginador.paginaActual" ng-change="ordenesN.cambiarPagina()" boundary-links="true" boundary-link-numbers="true" total-items="ordenesN.paginador.totalItems" items-per-page="ordenesN.paginador.itemsPagina" max-size="ordenesN.paginador.tamanoMax" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>

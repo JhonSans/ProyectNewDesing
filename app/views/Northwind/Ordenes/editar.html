@@ -1,5 +1,5 @@
 <div class="alert alert-info" ng-if="!ordenesN.esEdicion">
-    <i class="fa fa-info-circle" style="margin-right: 10px;"></i>
+    <i class="fa fa-info-circle"></i>
     <span>
         La orden será enviada y entregada en un plazo de
         <strong>20 a 30 días hábiles</strong>
@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label>Cliente</label>
                 <select ng-if="!ordenesN.esEdicion" class="form-control" ng-model="ordenesN.orden.customerId" ng-change="ordenesN.actualizarCliente(ordenesN.orden.customerId)" ng-options="cliente.customerId as cliente.contactName for cliente in ordenesN.clientes"></select>
-                <h2 ng-if="ordenesN.esEdicion" class="text">{{ ordenesN.orden.customer.contactName }}</h2>
+                <h2 ng-if="ordenesN.esEdicion" class="text">{{ ordenesN.orden.customerName }}</h2>
                 <span class="error-message" ng-show="!ordenesN.orden.customerId && ordenesN.requerido">
                     <i class="fa fa-warning"></i>
                     Este campo es requerido

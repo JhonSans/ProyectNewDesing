@@ -123,6 +123,7 @@ select {
     border-radius: 0 !important;
     box-shadow: none !important;
     margin-bottom: 30px;
+    background-color: transparent !important;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -155,7 +156,8 @@ input[type="password"]:focus {
     margin-top: 20px;
     margin-bottom: 0;
 }
-.header i {
+.header i,
+.alert > i {
     margin-right: 5px;
 }
 /*------------------------------------*/

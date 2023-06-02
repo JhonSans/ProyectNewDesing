@@ -206,27 +206,8 @@ app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $l
 
         // Valida si esta en modo edicion
         if (vm.esEdicion) {
-
-            // Ajustes objeto
-            var orden = {
-                orderId: vm.orden.orderId,
-                customerId: vm.orden.customerId,
-                employeeId: vm.orden.employeeId,
-                orderDate: vm.orden.orderDate,
-                requiredDate: vm.orden.requiredDate,
-                shippedDate: vm.orden.shippedDate,
-                shipVia: vm.orden.shipVia,
-                freight: vm.orden.freight,
-                shipName: vm.orden.shipName,
-                shipAddress: vm.orden.shipAddress,
-                shipCity: vm.orden.shipCity,
-                shipRegion: vm.orden.shipRegion,
-                shipPostalCode: vm.orden.shipPostalCode,
-                shipCountry: vm.orden.shipCountry,
-                orderDetails: vm.orden.orderDetails
-            };
-
-            NorthOrdenes.modificarOrden(orden, function (respuesta) {
+            // Modifica la orden
+            NorthOrdenes.modificarOrden(vm.orden, function (respuesta) {
 
                 // Oculta cargando
                 $timeout(function () {
