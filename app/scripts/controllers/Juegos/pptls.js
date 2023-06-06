@@ -1,4 +1,4 @@
-app.controller("pptslController", function ($location, $interval, $timeout) {
+app.controller("pptslController", function ($interval, $timeout) {
     var vm = this;
 
     // Cargando

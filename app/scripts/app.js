@@ -1,13 +1,13 @@
 //Main App Module + Dependencias
 var app = angular
   .module("MainApp", [
-    "ngRoute",
     "ngAnimate",
-    "ngTouch",
-    "ui.bootstrap",
-    "ngSanitize",
     "ngResource",
-    "toastr"
+    "ngRoute",
+    "ngSanitize",
+    "ngTouch",
+    "toastr",
+    "ui.bootstrap"
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -41,12 +41,17 @@ var app = angular
         controllerAs: "sumaMM"
       })
       .when("/Northwind/Clientes", {
-        templateUrl: "views/Northwind/Clientes/index.html",
-        controller: "clientesController",
+        templateUrl: "views/Northwind/index.html",
+        controller: "clienteController",
         controllerAs: "clientesN"
       })
       .when("/Northwind/Clientes/:id", {
-        templateUrl: "views/Northwind/Clientes/editar.html",
+        templateUrl: "views/Northwind/detalle.html",
+        controller: "detalleClienteController",
+        controllerAs: "clientesN"
+      })
+      .when("/Northwind/Clientes/:tipo/:id", {
+        templateUrl: "views/Northwind/detalle.html",
         controller: "editarClienteController",
         controllerAs: "clientesN"
       })
@@ -61,7 +66,7 @@ var app = angular
         controllerAs: "productosN"
       })
       .when("/Northwind/Productos/:id", {
-        templateUrl: "views/Northwind/editar.html",
+        templateUrl: "views/Northwind/detalle.html",
         controller: "editarProductosController",
         controllerAs: "productosN"
       })
@@ -71,9 +76,10 @@ var app = angular
         controllerAs: "ordenesN"
       })
       .when("/Northwind/Ordenes/:id", {
-        templateUrl: "views/Northwind/editar.html",
+        templateUrl: "views/Northwind/detalle.html",
         controller: "editarOrdenesController",
-        controllerAs: "ordenesN"
+        controllerAs: "ordenesN",
+        resolve: { modalOrderId: function () { return null }, $uibModalInstance: function () { return null } }
       })
       .otherwise({
         redirectTo: "/IniciarSesion",

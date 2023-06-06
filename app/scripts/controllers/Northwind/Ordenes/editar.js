@@ -1,4 +1,4 @@
-app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $location, $routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal) {
+app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $location, $routeParams, NorthOrdenes, NorthClientes, NorthEmpleados, NorthExpedidores, $uibModal, $uibModalInstance, modalOrderId) {
     var vm = this;
     
     $scope.loading = false;
@@ -7,6 +7,7 @@ app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $l
 
     // Variables
     vm.esEdicion = false;
+    vm.esEdicionModal = false;
     vm.requerido = false;
 
     // Objetos
@@ -30,9 +31,23 @@ app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $l
 
     // Contructor
     vm.init = function () {
+
+        // Valida si viene desde modal
+        if (modalOrderId) {
+            $routeParams.id = modalOrderId.orderId != 0 ? modalOrderId.orderId : "Nuevo";
+            vm.orden = {
+                customerId: modalOrderId.customerId,
+                shipAddress: modalOrderId.shipAddress,
+                shipCity: modalOrderId.shipCity,
+                shipCountry: modalOrderId.shipCountry
+            }
+            vm.esEdicionModal = true;
+            vm.actualizarCliente(vm.orden.customerId);
+        }
+
         // Valida si esta en modo edicion
         vm.esEdicion = $routeParams.id == "Nuevo" ? false : true;
-        
+
         // Valida si es edicion
         if (vm.esEdicion) {
 
@@ -57,7 +72,7 @@ app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $l
                 vm.date.requiredDate = moment(vm.orden.requiredDate).toDate();
 
                 // Obtiene los costos
-                vm.calcularCostos();                
+                vm.calcularCostos();
             });
         }
         else {
@@ -243,6 +258,29 @@ app.controller("editarOrdenesController", function ($scope, $timeout, toastr, $l
                 $scope.loading = false;
             });
         }
+    }
+
+    // Funcion guardar
+    vm.guardar = function () {
+
+        // Valida los campos
+        if (!vm.orden || !vm.orden.customerId || !vm.orden.employeeId || !vm.orden.shipVia || !vm.orden.shipAddress || !vm.orden.shipCity || !vm.orden.shipCountry) {
+            vm.requerido = true;
+            toastr.warning("Valide que todos los campos requeridos estén llenos", "Atención");
+            return;
+        }
+
+        // Agrega las fechas al objeto
+        vm.orden.orderDate = vm.date.orderDate;
+        vm.orden.requiredDate = vm.date.requiredDate;
+        vm.orden.shippedDate = vm.date.shippedDate;
+
+        $uibModalInstance.close(vm.orden);
+    }
+
+    // Funcion cancelar
+    vm.cancelar = function () {
+        $uibModalInstance.dismiss('cancelar');
     }
 
     // Constructor

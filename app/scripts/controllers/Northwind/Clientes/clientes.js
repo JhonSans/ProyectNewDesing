@@ -1,61 +1,87 @@
-app.controller("clientesController", function (NorthClientes, toastr) {
+app.controller("clienteController", function (NorthClientes, toastr, $scope, $timeout) {
     var vm = this;
+
+    $scope.loading = false;
+    $scope.mainRute = "/views/Northwind/Clientes/index.html";
+    $scope.addRute = "/Northwind/Clientes/Nuevo/Cliente";
+    $scope.busqueda = null;
 
     // Var id cliente
     vm.idCliente = "";
+
     // Objeto clientes
     vm.clientes = null;
+
     //Objeto clientes copia
     vm.clientesCopia = null;
+
     // Objeto paginador
-    vm.paginador = {
+    $scope.paginador = {
         totalItems: 0,
         totalItemsCopia: 0,
         paginaActual: 0,
         itemsPagina: 10,
         tamanoMax: 5
     };
+
     // Funcion inicial
     vm.init = function () {
+        $scope.loading = true;
+
         // Obtiene todos los clientes
-        NorthClientes.get({ pg: vm.paginador.paginaActual }, function (respuesta) {
+        NorthClientes.get({ pg: $scope.paginador.paginaActual }, function (respuesta) {
+
+            // Oculta cargando
+            $timeout(function () {
+                $scope.loading = false;
+            }, 1000);
+
             // Agrega la informacion de los clientes al objeto
             vm.clientes = respuesta.data;
+
             // Realiza la copia de la lista de clientes
             vm.clientesCopia = vm.clientes;
+
             // Obtiene el total de los clientes
-            vm.paginador.totalItems = respuesta.count;
+            $scope.paginador.totalItems = respuesta.count;
+
             // Realiza una copia del total de clientes
-            vm.paginador.totalItemsCopia = vm.paginador.totalItems;
+            $scope.paginador.totalItemsCopia = $scope.paginador.totalItems;
         });
     }
+    
     // Funcion cambiar de pagina
-    vm.cambiarPagina = function () {
+    $scope.cambiarPagina = function () {
         // Obtiene todos los clientes de la siguiente pagina
-        NorthClientes.get({ pg: vm.paginador.paginaActual - 1 }, function (respuesta) {
+        NorthClientes.get({ pg: $scope.paginador.paginaActual - 1 }, function (respuesta) {
             // Agrega la informacion de los clientes al objeto
             vm.clientes = respuesta.data;
         });
     }
-    // Funcion buscar cliente por ID, Nombre o Empresa
-    vm.buscarCliente = function (key) {
-        // Valida si el campo esta vacío o se borra contenido
-        if (!vm.idCliente || key.keyCode == "8" || key.keyCode == "46") {
-            // Actualiza el listado de clientes
-            vm.clientes = vm.clientesCopia
-            // Actualiza el total de clientes
-            vm.paginador.totalItems = vm.paginador.totalItemsCopia;
+
+    // Funcion buscar una orden
+    $scope.buscarElemento = function () {
+        // Si el campo no tiene elementos regresa al listado completo
+        if (!$scope.busqueda) {
+            vm.clientes = vm.clientesCopia;
+            
+            // Actualiza el contador de paginas
+            $scope.paginador.totalItems = $scope.paginador.totalItemsCopia;
             return;
         }
-        // Obtiene al cliente obtenido por su ID, Nombre o Empresa
-        NorthClientes.get({ customerId : vm.idCliente }, function (respuesta) {
-            // Valida si la respuesta fue correcta
-            if (respuesta.customerId) {
-                // Actualiza el listado
-                vm.clientes = [respuesta];
-                // Actualiza el total de clientes en el nuevo listado
-                vm.paginador.totalItems = vm.clientes.lenght;
-            }
+        // Obtiene la orden por id
+        NorthClientes.get({ customerId: $scope.busqueda }, function (respuesta) {
+
+            // Agrega la respuesta
+            vm.clientes = [respuesta];
+            
+            // Actualiza el contador de paginas
+            $scope.paginador.totalItems = vm.clientes.lengt;
+
+        }, function (error) {
+            // Obtiene el mensaje de error
+            var message = error.data.replace("System.Exception: ", "").split("\r\n");
+            toastr.error(message[0], "ERROR " + error.status);
         });
     }
     // Funcion eliminar
@@ -78,7 +104,7 @@ app.controller("clientesController", function (NorthClientes, toastr) {
                             // Limpia la variable
                             vm.idCliente = "";
                             //Regresa a la primera pagina
-                            vm.paginador.paginaActual = 0;
+                            $scope.paginador.paginaActual = 0;
                             // Ejecuta la funcion inicial
                             vm.init();
                         }

@@ -14,7 +14,7 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
     vm.filtro = { category: null, supplier: null };
 
     // Paginador
-    vm.paginador = {
+    $scope.paginador = {
         totalItems: 0,
         totalItemsCopia: 0,
         paginaActual: 0,
@@ -47,7 +47,7 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
         });
 
         // Obtiene todos los productos filtrados
-        vm.actualizarFiltro(vm.paginador.paginaActual);
+        vm.actualizarFiltro($scope.paginador.paginaActual);
     }
 
     // Funcion actualizar filtro
@@ -72,17 +72,17 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
             vm.productosCopia = angular.copy(vm.productos);
 
             // Obtiene el total de los productos
-            vm.paginador.totalItems = respuesta.count;
+            $scope.paginador.totalItems = respuesta.count;
 
             // Realiza una copia del total de productos
-            vm.paginador.totalItemsCopia = vm.paginador.totalItems;
+            $scope.paginador.totalItemsCopia = $scope.paginador.totalItems;
         });
     }
 
     // Funcion cambiar de pagina
-    vm.cambiarPagina = function () {        
+    $scope.cambiarPagina = function () {        
         // Ajusta la pagina
-        vm.actualizarFiltro(vm.paginador.paginaActual - 1);
+        vm.actualizarFiltro($scope.paginador.paginaActual - 1);
     }
 
     // Funcion buscar un producto
@@ -93,7 +93,7 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
             vm.productos = vm.productosCopia;
 
             // Actualiza el contador de paginas
-            vm.paginador.totalItems = vm.paginador.totalItemsCopia;
+            $scope.paginador.totalItems = $scope.paginador.totalItemsCopia;
             return;
         }
         // Obtiene un producto por id
@@ -103,7 +103,7 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
             vm.productos = [respuesta];
 
             // Actualiza el contador de paginas
-            vm.paginador.totalItems = vm.productos.lengt;
+            $scope.paginador.totalItems = vm.productos.lengt;
 
         }, function (error) {
             toastr.error("El producto con ID #" + $scope.busqueda + " no existe", "Error " + error.status)
@@ -125,7 +125,7 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
                         toastr.success("El producto " + producto.productName + " ha sido eliminado satisfactoriamente", "Producto #" + producto.productId);
 
                         // Regresa a la primera pagina
-                        vm.paginador.paginaActual = 0;
+                        $scope.paginador.paginaActual = 0;
 
                         // Ejecuta la funcion inicial
                         vm.init();

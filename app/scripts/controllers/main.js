@@ -1,5 +1,5 @@
 // Main controller
-app.controller("mainController", function ($scope, $location, $location) {
+app.controller("mainController", function ($scope, $location) {
     // Var menu movil
     $scope.toggle = false;
 
@@ -105,7 +105,7 @@ app.controller("mainController", function ($scope, $location, $location) {
     ];
 
     // Funcion inicial
-    this.init = function () {
+    $scope.init = function () {
         // Actualiza el contenido de la pagina
         $scope.actualizarContenido($location.path());
     };
@@ -165,5 +165,5 @@ app.controller("mainController", function ($scope, $location, $location) {
     };
 
     // Carga la funcion inicial
-    this.init();
+    $scope.init();
 });

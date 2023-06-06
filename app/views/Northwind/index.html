@@ -16,3 +16,6 @@
     <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
 </div>
 <div ng-if="!loading" ng-include="mainRute"></div>
+<div class="text-center" ng-if="!loading">
+    <ul uib-pagination class="pagination-sm" ng-model="paginador.paginaActual" ng-change="cambiarPagina()" boundary-links="true" boundary-link-numbers="true" total-items="paginador.totalItems" items-per-page="paginador.itemsPagina" max-size="paginador.tamanoMax" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+</div>

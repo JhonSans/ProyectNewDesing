@@ -26,6 +26,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Detalles</th>
                 <th>Categoría</th>
                 <th>Proveedor</th>
                 <th>Precio Unitario</th>
@@ -37,6 +38,7 @@
             <tr ng-repeat="producto in productosN.productos">
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.productId }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.productName }}</td>
+                <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.quantityPerUnit }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.category.categoryName }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.supplier.companyName }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.unitPrice | currency }}</td>
@@ -54,7 +56,4 @@
             <span>No se han encontrado datos registrados.</span>
         </div>          
     </div>
-</div>
-<div class="text-center">
-    <ul uib-pagination class="pagination-sm" ng-model="productosN.paginador.paginaActual" ng-change="productosN.cambiarPagina()" boundary-links="true" boundary-link-numbers="true" total-items="productosN.paginador.totalItems" items-per-page="productosN.paginador.itemsPagina" max-size="productosN.paginador.tamanoMax" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 </div>

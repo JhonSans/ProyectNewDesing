@@ -3,7 +3,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
 
     $scope.loading = false;
     $scope.mainRute = "/views/Northwind/Ordenes/index.html";
-    $scope.addRute = "/Northwind/Ordenes/Nuevo";    
+    $scope.addRute = "/Northwind/Ordenes/Nuevo";
 
     // Objetos
     $scope.busqueda = null;
@@ -14,7 +14,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
     vm.filtro = { customerId: null, employeeId: null }
 
     // Paginador
-    vm.paginador = {
+    $scope.paginador = {
         totalItems: 0,
         totalItemsCopia: 0,
         paginaActual: 0,
@@ -56,7 +56,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
         });
         
         // Obtiene todas las ordenes filtradas
-        vm.actualizarFiltro(vm.paginador.paginaActual);
+        vm.actualizarFiltro($scope.paginador.paginaActual);
     }
 
     // Funcion aplicar filtro
@@ -84,10 +84,10 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
             vm.ordenesCopia = angular.copy(vm.ordenes);
             
             // Obtiene el total de las ordenes
-            vm.paginador.totalItems = respuesta.count;
+            $scope.paginador.totalItems = respuesta.count;
             
             // Realiza una copia del total de las ordenes
-            vm.paginador.totalItemsCopia = vm.paginador.totalItems;
+            $scope.paginador.totalItemsCopia = $scope.paginador.totalItems;
         });
     }
 
@@ -113,9 +113,9 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
     }
 
     // Funcion cambiar de pagina
-    vm.cambiarPagina = function () {
+    $scope.cambiarPagina = function () {
         // Ajusta la pagina
-        vm.actualizarFiltro(vm.paginador.paginaActual - 1);
+        vm.actualizarFiltro($scope.paginador.paginaActual - 1);
     }
     // Funcion buscar una orden
     $scope.buscarElemento = function () {
@@ -124,7 +124,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
             vm.ordenes = vm.ordenesCopia;
             
             // Actualiza el contador de paginas
-            vm.paginador.totalItems = vm.paginador.totalItemsCopia;
+            $scope.paginador.totalItems = $scope.paginador.totalItemsCopia;
             return;
         }
         // Obtiene la orden por id
@@ -137,7 +137,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
             vm.ajustesBasicos();
             
             // Actualiza el contador de paginas
-            vm.paginador.totalItems = vm.ordenes.lengt;
+            $scope.paginador.totalItems = vm.ordenes.lengt;
 
         }, function (error) {
             // Obtiene el mensaje de error
@@ -162,7 +162,7 @@ app.controller("ordenesController", function (NorthOrdenes, NorthClientes, North
                         toastr.success("La orden #" + orden.orderId + " ha sido eliminada satisfactoriamente", "Orden #" + orden.orderId);
                         // Regresa a la primera pagina
                         
-                        vm.paginador.paginaActual = 0;
+                        $scope.paginador.paginaActual = 0;
                         // Ejecuta la funcion inicial
                         vm.init();
                         

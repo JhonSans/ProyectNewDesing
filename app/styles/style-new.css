@@ -1223,13 +1223,17 @@ article {
     top: 40px;
     color: var(--gris);
 }
-.clientes-container > .search i
 .actions > a i,
 .actions > i {
     cursor: pointer;
 }
-.actions > a i {
+.actions > a:nth-child(1) i {
     color: var(--verde);
+    margin-right: 5px;
+}
+.actions > a:nth-child(2) i {
+    color: var(--pptsl-btn);
+    margin-right: 5px;
 }
 .actions > i {
     color: var(--rojo);
@@ -1391,6 +1395,42 @@ section.copyright {
 }
 section.copyright p {
     margin: 0;
+}
+.info-cliente img {
+    width: 100%;
+    filter: brightness(1.14);
+    mix-blend-mode: multiply;
+}
+.thumbnail.orders {
+    border: none;
+    background-color: transparent;
+    border-radius: 6px;
+}
+.thumbnail.orders:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 1px var(--gris-oscuro);
+}
+.thumbnail.orders img {
+    filter: brightness(30%);
+}
+.thumbnail.orders label {
+    position: absolute;
+    color: var(--blanco);
+    font-size: xx-large;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.thumbnail.orders i {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 8px;
+    margin-right: 8px;
+    z-index: 1000;
 }
 /*----------------------------------------*/
 /*-------------- Responsive --------------*/

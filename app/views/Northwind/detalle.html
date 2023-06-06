@@ -8,7 +8,7 @@
     <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
 </div>
 <div ng-show="!loading" ng-include="mainRute"></div>
-<div class="row">
+<div class="row" ng-if="esEdicion">
     <div class="col-sm-12 text-center header">
         <button class="btn btn-primary" ng-click="guardar()">
             <i class="fa fa-save"></i>
