@@ -8,18 +8,30 @@
             <div class="form-group" ng-if="!clientesN.esEdicion">
                 <label>ID</label>
                 <input type="text" class="form-control" ng-model="clientesN.cliente.customerId" />
+                <span class="error-message" ng-show="!clientesN.cliente.customerId && clientesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
         <div class="col-sm-7">
             <div class="form-group">
                 <label>Nombre:</label>
                 <input type="text" class="form-control" ng-model="clientesN.cliente.contactName" />
+                <span class="error-message" ng-show="!clientesN.cliente.contactName && clientesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
         <div class="col-sm-7">
             <div class="form-group">
                 <label>Empresa:</label>
                 <input type="text" class="form-control" ng-model="clientesN.cliente.companyName" />
+                <span class="error-message" ng-show="!clientesN.cliente.companyName && clientesN.requerido">
+                    <i class="fa fa-warning"></i>
+                    Este campo es requerido
+                </span>
             </div>
         </div>
         <div class="col-sm-7">

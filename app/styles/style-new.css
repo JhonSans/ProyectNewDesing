@@ -1,4 +1,3 @@
-/* CSS EXAMPLES https://freefrontend.com/css-gallery/ */
 /*---------------------------------------*/
 /*-------------- Variables --------------*/
 /*---------------------------------------*/
@@ -1431,6 +1430,39 @@ section.copyright p {
     margin-top: 8px;
     margin-right: 8px;
     z-index: 1000;
+}
+.info-producto {
+    overflow: hidden;
+}
+.info-producto .col-sm-5,
+.info-producto .col-sm-7 {
+    z-index: 1;
+}
+.info-producto section {
+    background-color: var(--blanco);
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px;
+}
+.info-producto h1 {
+    color: var(--blanco);
+    font-size: 55px;
+    margin: 15px;
+}
+.info-producto img {
+    position: absolute;
+    width: calc(100% - 30px);
+    height: 100%;
+    top: 0;
+    border-radius: 6px;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+.info-producto label,
+.info-producto span {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 4px;
 }
 /*----------------------------------------*/
 /*-------------- Responsive --------------*/

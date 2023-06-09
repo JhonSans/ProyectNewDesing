@@ -3,7 +3,8 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
     
     $scope.loading = false;
     $scope.mainRute = "/views/Northwind/Productos/index.html";
-    $scope.addRute = "/Northwind/Productos/Nuevo";    
+    $scope.addRute = "/Northwind/Productos/Nuevo";
+    $scope.include = false;
 
     // Objetos
     $scope.busqueda = null;
@@ -109,6 +110,7 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
             toastr.error("El producto con ID #" + $scope.busqueda + " no existe", "Error " + error.status)
         });
     }
+    
     // Funcion eliminar
     vm.eliminar = function (producto) {
         bootbox.confirm({
@@ -131,7 +133,9 @@ app.controller("productosController", function (NorthProductos, NorthProveedores
                         vm.init();
 
                     }, function (error) {
-                        toastr.error("Ocurrió un error al eliminar el producto " + producto.productName, "Error " + error.status);
+                        // Obtiene el mensaje de error
+                        var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                        toastr.error(message[0], "ERROR " + error.status);
                     });
                 }
             }

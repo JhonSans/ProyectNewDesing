@@ -1,22 +1,16 @@
-<div class="well list-info">
+<div class="well list-info" ng-if="!include">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="form-group">
                 <label>Categorias</label>
-                <select class="form-control" style="margin-bottom: 0;" ng-model="productosN.filtro.category" ng-options="categoria.categoryId as categoria.categoryName for categoria in productosN.categorias"></select>
+                <select class="form-control" style="margin-bottom: 0;" ng-model="productosN.filtro.category" ng-options="categoria.categoryId as categoria.categoryName for categoria in productosN.categorias" ng-change="productosN.actualizarFiltro(productosN.paginador.paginaActual = 0, true)"></select>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="form-group">
                 <label>Proveedor</label>
-                <select class="form-control" style="margin-bottom: 0;" ng-model="productosN.filtro.supplier" ng-options="proveedor.supplierId as proveedor.companyName for proveedor in productosN.proveedores"></select>
+                <select class="form-control" style="margin-bottom: 0;" ng-model="productosN.filtro.supplier" ng-options="proveedor.supplierId as proveedor.companyName for proveedor in productosN.proveedores" ng-change="productosN.actualizarFiltro(productosN.paginador.paginaActual = 0, true)"></select>
             </div>
-        </div>
-        <div class="col-md-2 text-center">
-            <button class="btn btn-primary" style="margin-top: 15px;" ng-click="productosN.actualizarFiltro(productosN.paginador.paginaActual = 0, true)">
-                <i class="fa fa-filter"></i>
-                Filtrar
-            </button>
         </div>
     </div>
 </div>
@@ -28,29 +22,30 @@
                 <th>Nombre</th>
                 <th>Detalles</th>
                 <th>Categoría</th>
-                <th>Proveedor</th>
+                <th ng-if="!include">Proveedor</th>
                 <th>Precio Unitario</th>
                 <th>Stock</th>
                 <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="producto in productosN.productos">
+            <tr ng-repeat="producto in !productos ? productosN.productos : productos">
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.productId }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.productName }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.quantityPerUnit }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.category.categoryName }}</td>
-                <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.supplier.companyName }}</td>
+                <td ng-if="!include" ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.supplier.companyName }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.unitPrice | currency }}</td>
                 <td ng-class="{ 'discontinued' : producto.unitsInStock <= 0 }">{{ producto.unitsInStock }}</td>
                 <td class="text-center actions">
-                    <a href="#!/Northwind/Productos/{{ producto.productId }}"><i class="fa fa-search" uib-tooltip="Ver"></i></a>
-                    <i class="fa fa-times" ng-click="productosN.eliminar(producto)" uib-tooltip="Eliminar"></i>
+                    <a ng-if="!include" href="#!/Northwind/Productos/{{ producto.productId }}"><i class="fa fa-search" uib-tooltip="Ver"></i></a>
+                    <a ng-if="include"><i class="fa fa-search" ng-click="detallesProducto(producto)" uib-tooltip="Ver"></i></a>
+                    <i ng-if="!include" class="fa fa-times" ng-click="productosN.eliminar(producto)" uib-tooltip="Eliminar"></i>
                 </td>
             </tr>
         </tbody>
     </table>
-    <div ng-if="!productosN.productos.length">
+    <div ng-if="!productosN.productos.length && !productos">
         <div class="alert alert-warning">
             <i class="fa fa-question-circle"></i>
             <span>No se han encontrado datos registrados.</span>

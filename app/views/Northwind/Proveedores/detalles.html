@@ -1,0 +1,25 @@
+<div class="row info-cliente">
+    <div class="col-sm-4">
+        <img ng-src="{{ proveedoresN.proveedor.photo }}" alt="{{ proveedoresN.proveedor.supplierId }}">
+    </div>
+    <div class="col-sm-8">
+        <h1>{{ proveedoresN.proveedor.companyName }}</h1>
+        <span>{{ proveedoresN.proveedor.contactName }}</span>
+        <br />
+        <span>{{ proveedoresN.proveedor.contactTitle }}</span>
+        <br />
+        <span>{{ proveedoresN.proveedor.address }}</span>
+        <br />
+        <span>{{ proveedoresN.proveedor.city }} ({{ proveedoresN.proveedor.country }})</span>
+        <br />
+        <span>{{ proveedoresN.proveedor.phone }}</span>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Productos</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div ng-include="include"></div>
+    </div>
+</div>

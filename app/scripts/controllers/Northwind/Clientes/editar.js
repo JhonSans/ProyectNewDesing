@@ -9,6 +9,7 @@ app.controller("editarClienteController", function ($scope, $routeParams, NorthC
 
     // Variables
     vm.esEdicion = false;
+    vm.requerido = false;
     
     // Objetos
     vm.cliente = { photo: "/content/pictures/Northwind/Clientes/user.png" };
@@ -41,39 +42,60 @@ app.controller("editarClienteController", function ($scope, $routeParams, NorthC
 
     // Funcion guardar
     $scope.guardar = function () {
+
+        // Valida los campos
+        if (!vm.cliente || !vm.cliente.customerId || !vm.cliente.companyName || !vm.cliente.contactName) {
+            vm.requerido = true;
+            toastr.warning("Valide que todos los campos requeridos estén llenos", "Atención");
+            return;
+        }
+
+        $scope.loading = true;
+
         // Valida si esta en modo edicion
         if (!vm.esEdicion) {
             // Ejecuta la funcion
             NorthClientes.crearCliente(vm.cliente, function (respuesta) {
-                // Valida el resultado
-                if (respuesta.success) {
-                    // Muestra la alerta
-                    toastr.success(respuesta.message, "Cliente");
+
+                // Oculta cargando
+                $timeout(function () {
+                    $scope.loading = false;
+
+                    toastr.success("El cliente ha sido creado satísfactoriamente", "Cliente " + respuesta.customerId);
+
                     // Redirigue a la lista de clientes
-                    $scope.actualizarContenido('/Northwind/Clientes');
-                }
-                else {
-                    // Muestra la alerta
-                    toastr.error(respuesta.message, "Cliente");
-                }
+                    $location.path('/Northwind/Clientes/' + respuesta.customerId);
+                }, 500);
+                
+            }, function (error) {
+                // Obtiene el mensaje de error
+                var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                toastr.error(message[0], "ERROR " + error.status);
+                $scope.loading = false;
             });
         }
         else {           
             // Ejecuta la funcion
             NorthClientes.modificarCliente(vm.cliente, function (respuesta) {
-                // Valida el resultado
-                if (respuesta.success) {
-                    // Muestra la alerta
-                    toastr.success(respuesta.message, "Cliente");
+
+                // Oculta cargando
+                $timeout(function () {
+                    $scope.loading = false;
+
+                    toastr.success("El cliente ha sido modificado satísfactoriamente", "Cliente " + respuesta.customerId);
+
                     // Redirigue a la lista de clientes
-                    $location.path('/Northwind/Clientes/' + $routeParams.id);
-                }
-                else {
-                    // Muestra la alerta
-                    toastr.error(respuesta.message, "Cliente");
-                }
+                    $location.path('/Northwind/Clientes/' + respuesta.customerId);
+                }, 500);
+
+            }, function (error) {
+                // Obtiene el mensaje de error
+                var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                toastr.error(message[0], "ERROR " + error.status);
+                $scope.loading = false;
             });
-        }    
+
+        }
     }
     // Funcion contructor
     vm.init();

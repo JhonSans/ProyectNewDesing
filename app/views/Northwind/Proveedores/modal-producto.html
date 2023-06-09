@@ -1,0 +1,38 @@
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12 info-producto">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h1>{{ modalProducto.producto.productName }}</h1>
+                    </div>
+                    <div class="col-sm-7">
+                        <section>
+                            <label>Nombre</label>
+                            <span>{{ modalProducto.producto.productName }}</span>
+                            <label>Categoría</label>
+                            <span>{{ modalProducto.producto.category.categoryName }}</span>
+                            <label>Descripción</label>
+                            <span>{{ modalProducto.producto.category.description }}</span>
+                            <label>Cantidad</label>
+                            <span>{{ modalProducto.producto.quantityPerUnit }}</span>
+                            <label>Precio Unitario</label>
+                            <span>{{ modalProducto.producto.unitPrice }}</span>
+                            <label>Unidades en Stock</label>
+                            <span>{{ modalProducto.producto.unitsInStock }}</span>
+                            <label>Unidades Ordenadas</label>
+                            <span>{{ modalProducto.producto.unitsOnOrder }}</span>
+                            <label>Descontinuado</label>
+                            <span>{{ modalProducto.producto.discontinued ? 'Si' : 'No' }}</span>
+                        </section>
+                    </div>
+                </div>
+                <img ng-src="{{ modalProducto.producto.Image }}" alt="{{ modalProducto.producto.productName }}">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button ng-if="!modalProducto.esDetalle" class="btn btn-primary" ng-click="modalProducto.guardar()">Guardar</button>
+        <button class="btn btn-default" ng-click="modalProducto.cancelar()">Cancelar</button>
+    </div>
+</div>

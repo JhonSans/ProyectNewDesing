@@ -1,11 +1,13 @@
 app.controller("editarProductosController", function ($scope, $routeParams, NorthProductos, NorthProveedores, toastr, $location, $timeout) {
     var vm = this;
 
+    $scope.esEdicion = true;
     $scope.backRute = "/Northwind/Productos";
     $scope.mainRute = "/views/Northwind/Productos/editar.html";
-
+    
     // Variables
     vm.esEdicion = false;
+    $scope.productos = null;
 
     // Objeto img productos
     vm.producto = null;
@@ -69,27 +71,42 @@ app.controller("editarProductosController", function ($scope, $routeParams, Nort
     }
     // Funcion guardar
     $scope.guardar = function () {
+
+        $scope.loading = true;
+
         // Valida si esta en modo edicion
         if (vm.esEdicion) {
             NorthProductos.modificarProducto(vm.producto, function (respuesta) { 
-                // Valida el resultado
-                if (respuesta.success) {
-                    toastr.success(respuesta.message, "Prodúcto");
+                
+                // Oculta cargando
+                $timeout(function () {
+                    $scope.loading = false;
+                    toastr.success("El producto ha sido modificado satisfactoriamente", "Prodúcto " + respuesta.productName);
                     $location.path('/Northwind/Productos/' + $routeParams.id);
-                }
-                else
-                    toastr.error(respuesta.message, "Prodúcto");
+                }, 800);
+                    
+            }, function (error) {
+                // Obtiene el mensaje de error
+                var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                toastr.error(message[0], "ERROR " + error.status);
+                $scope.loading = false;
             });
         }
         else {
             NorthProductos.crearProducto(vm.producto, function (respuesta) { 
-                // Valida el resultado
-                if (respuesta.success) {
-                    toastr.success(respuesta.message, "Prodúcto");
+                
+                // Oculta cargando
+                $timeout(function () {
+                    $scope.loading = false;
+                    toastr.success("El producto ha sido registrado satisfactoriamente", "Prodúcto " + respuesta.productName);
                     $scope.actualizarContenido('/Northwind/Productos');
-                }
-                else
-                    toastr.error(respuesta.message, "Prodúcto");
+                }, 800);
+
+            }, function (error) {
+                // Obtiene el mensaje de error
+                var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                toastr.error(message[0], "ERROR " + error.status);
+                $scope.loading = false;
             });  
         }
     }

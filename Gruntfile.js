@@ -75,7 +75,7 @@ module.exports = function (grunt) {
     open: {
         dev: {
             url: 'http://localhost:3493',
-            app: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+            app: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
         },
         fix: {          
             path: "--fixurl",
@@ -181,7 +181,6 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.tmp/styles/',
           src: '{,*/}*.css',
-          //src: ['{,*/}*.css', 'styles/Modulos/Mensajes/mensajes.css'],
           dest: '.tmp/styles/'
         }]
       },
@@ -190,7 +189,6 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.tmp/styles/',
           src: '{,*/}*.css',
-          //src: ['{,*/}*.css', 'styles/Modulos/Mensajes/mensajes.css'],
           dest: '.tmp/styles/'
         }]
       }

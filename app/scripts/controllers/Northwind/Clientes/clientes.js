@@ -86,6 +86,7 @@ app.controller("clienteController", function (NorthClientes, toastr, $scope, $ti
     }
     // Funcion eliminar
     vm.eliminar = function (id) {
+
         bootbox.confirm({
             title: "Eliminar",
             message: "Desea eliminar a el cliente " + id + "?",
@@ -97,21 +98,22 @@ app.controller("clienteController", function (NorthClientes, toastr, $scope, $ti
                 if (resultado) {
                     // Ejecuta la funcion
                     NorthClientes.remove({ customerId: id }, function (respuesta) {
-                        // Valida el resultado
-                        if (respuesta.success) {
-                            // Muestra la alerta
-                            toastr.success(respuesta.message, "Cliente");
-                            // Limpia la variable
-                            vm.idCliente = "";
-                            //Regresa a la primera pagina
-                            $scope.paginador.paginaActual = 0;
-                            // Ejecuta la funcion inicial
-                            vm.init();
-                        }
-                        else {
-                            // Muestra la alerta
-                            toastr.error(respuesta.message, "Cliente");
-                        }
+
+                        toastr.success("El cliente ha sido eliminado satísfactoriamente", "Cliente " + id);
+
+                        // Limpia la variable
+                        vm.idCliente = "";
+
+                        //Regresa a la primera pagina
+                        $scope.paginador.paginaActual = 0;
+                        
+                        // Ejecuta la funcion inicial
+                        vm.init();
+
+                    }, function (error) {
+                        // Obtiene el mensaje de error
+                        var message = error.data.replace("System.Exception: ", "").split("\r\n");
+                        toastr.error(message[0], "ERROR " + error.status);
                     });
                 }
             }

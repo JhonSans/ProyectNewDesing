@@ -4,6 +4,7 @@ app.controller("modalProductoController", function ($timeout, producto, toastr, 
     // Vairables
     vm.esEdicion = false;
     vm.loading = false;
+    vm.esDetalle = true;
 
     // Objetos
     vm.producto = null;
@@ -22,6 +23,7 @@ app.controller("modalProductoController", function ($timeout, producto, toastr, 
 
     // Constructor
     vm.init = function () {
+        console.log(producto);
         // Si viene un dato es edicion
         if (producto) {
             vm.loading = true;
