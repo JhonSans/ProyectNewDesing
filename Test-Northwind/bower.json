@@ -1,0 +1,17 @@
+{
+    "name": "test-sp",
+    "version": "0.0.0",
+    "dependencies": {
+        "angular": "1.x.x",
+        "angular-resource": "1.x.x",
+        "angular-route": "1.x.x",
+        "angular-sanitize": "1.x.x",
+        "angular-touch": "1.x.x",
+        "angular-animate": "1.x.x",
+        "font-awesome": "4.x",
+        "underscore": "*",
+        "amplify": "*",
+        "moment": "*",
+        "toastr": "*"
+    }
+}

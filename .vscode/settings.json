@@ -1,4 +1,3 @@
 {
-    "git.ignoreLimitWarning": true,
-    "livePreview.defaultPreviewPath": "/app/index.html"
+    "livePreview.defaultPreviewPath": "/Test-Northwind/index.html"
 }
