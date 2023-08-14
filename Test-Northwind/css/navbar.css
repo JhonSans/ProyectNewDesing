@@ -1,0 +1,183 @@
+nav {
+    width: 80%;
+    height: 71px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background: #fff;
+    padding: 10px 0;
+    box-shadow: 0px 5px 0px #dedede;
+    position: relative;
+    overflow: hidden;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+nav ul li {
+    display: none;
+    position: relative;
+}
+nav ul li:nth-child(1),
+nav ul li:nth-child(2) {
+    display: inline-block;
+}
+nav ul li a,
+nav ul li div {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #aaa;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 10px;
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before,
+nav ul li div,
+nav ul li div:after,
+nav ul li div:before {
+    transition: all 0.5s;
+}
+nav ul li a:hover,
+nav ul li div:hover {
+    color: #555;
+}
+
+nav.collapse {
+    animation-name: expandClose;
+    animation-duration: 1s;
+}
+
+nav.collapse-in {
+    width: 100%;
+    height: calc(100vh - 40px);
+    margin: 0;
+    margin-top: 0;
+    animation-name: expandOpen;
+    animation-duration: 1s;
+}
+nav.collapse-in ul {
+    flex-wrap: wrap;
+}
+nav.collapse-in ul li {
+    display: inline-block;
+    width: 100%;
+}
+nav.collapse-in ul li:nth-child(1),
+nav.collapse-in ul li:nth-child(2) {
+    width: initial;
+}
+nav.collapse-in ul li:nth-child(3) {
+    margin-top: 30px;
+}
+nav.collapse-in ul li a {
+    text-align: center;
+}
+nav.collapse-in ul li:nth-child(1) a,
+nav.collapse-in ul li:nth-child(2) a {
+    text-align: initial;
+}
+
+nav.shift ul li a,
+nav.shift ul li div {
+    position: relative;
+    z-index: 1;
+}
+nav.shift ul li a:hover,
+nav.shift ul li div:hover {
+    color: darkslategrey;
+}
+nav.shift ul li a:after,
+nav.shift ul li div:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 1px;
+    content: ".";
+    color: transparent;
+    background: #00b3b3;
+    visibility: none;
+    opacity: 0;
+    z-index: -1;
+}
+nav.shift ul li a:hover:after,
+nav.shift ul li div:hover:after {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+}
+
+.menu {
+    height: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: center;
+}
+.menu i {
+    position: absolute;
+}
+
+.menu i:nth-child(1) {
+    top: calc(35% - 8px);
+}
+.menu i:nth-child(2) {
+    top: calc(50% - 8px);
+}
+.menu i:nth-child(3) {
+    top: calc(65% - 8px);
+}
+nav.collapse.shift ul li div:hover i:nth-child(1) {
+    top: calc(30% - 8px);
+}
+nav.collapse.shift ul li div:hover i:nth-child(3) {
+    top: calc(70% - 8px);
+}
+
+nav.collapse-in ul li div i:nth-child(1),
+nav.collapse-in ul li div i:nth-child(2),
+nav.collapse-in ul li div i:nth-child(3) {
+    top: calc(50% - 8px);
+    transition: linear 0.5s;
+}
+nav.collapse-in ul li div i:nth-child(1),
+nav.collapse-in ul li div i:nth-child(2) {
+    transform: rotate(135deg);
+
+}
+nav.collapse-in ul li div i:nth-child(3) {
+    transform: rotate(45deg);
+}
+
+@keyframes expandOpen {
+    0% { width: 80%; height: 71px; margin: 0 auto; margin-top: 30px; }
+    50% { width: 100%; height: 71px; margin: 0 auto; margin-top: 30px; }
+    100% { height: calc(100vh - 40px); margin: 0; margin-top: 0; }
+}
+@keyframes expandClose {
+    0% { width: 100%; height: calc(100vh - 40px); margin: 0; margin-top: 0; }
+    50% { width: 100%; height: 71px; margin: 0 auto; margin-top:30px; }
+    100% { width: 80%; height: 71px; margin: 0 auto; margin-top: 30px; }
+}
+
+@media (min-width: 768px) {
+
+    nav ul {
+        justify-content: space-evenly;
+    }
+
+    nav ul li {
+        display: inline-block;
+    }
+
+    nav ul li:nth-child(2) {
+        display: none;
+    }
+}

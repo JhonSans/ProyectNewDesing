@@ -1,0 +1,58 @@
+.header {
+    position: relative;
+    background-color: #212529;
+    height: 40px;
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.header i {
+    color: #00b3b3;
+}
+
+.header > .social-media {
+    display: flex;
+    gap: 8px;
+}
+
+.header-expand {
+    background-color: #212529;
+    overflow: hidden;
+    transition: all 0.2s linear;
+    height: 0;
+}
+
+.header-expand.in {
+    height: calc(100vh - 40px);
+}
+
+.img-label {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    color: white;
+}
+
+.swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+}
+
+.swipe-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.swipe-wrap > div {
+    float: left;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}

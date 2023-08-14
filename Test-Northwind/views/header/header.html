@@ -1,0 +1,67 @@
+<div class="container-absolute-size header-expand" ng-class="{ 'in' : !headerExpand }">
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Angular Slick</h2>
+            <slick infinite="true" slides-to-show="1" slides-to-scroll="1" autoplay="true" autoplay-speed="2000" touch-move="true" arrows="false" pause-on-focus="true">
+                <div ng-repeat="new in news">
+                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" height="200px" width="100%" ng-mouseover="seleccionar2(new)" ng-mouseleave="seleccionar2(new)">
+                    <h2 class="img-label">{{ new.Name }}</h2>
+                </div>
+            </slick>
+        </div>
+        <div class="col-md-6">
+            <h2>Image Selected</h2>
+            <div ng-if="imgNext2">
+                <img ng-src="{{ imgNext2.Picture }}" alt="{{ imgNext2.Name }}" height="200px" width="100%" style="object-fit: cover;">
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-md-6">
+            <h2>Swipe 2</h2>
+            <swipe-wrap>
+                <swipe-slider data-options="config">
+                    <swipe-item ng-repeat="new in news">
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" height="200px" width="100%" ng-mouseover="seleccionar3(new)" ng-mouseleave="seleccionar3(new)">
+                        <h2 class="img-label">{{ new.Name }}</h2>
+                    </swipe-item>
+                </swipe-slider>
+            </swipe-wrap>
+        </div>
+        <div class="col-md-6">
+            <h2>Image Selected</h2>
+            <div ng-if="imgNext3">
+                <img ng-src="{{ imgNext3.Picture }}" alt="{{ imgNext3.Name }}" height="200px" width="100%" style="object-fit: cover;">
+            </div>
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Swiper</h2>
+            <swiper-container class="mySwiper" slides-per-view="1" free-mode="true" loop="true" autoplay-delay="2000" autoplay-disable-on-interaction="false">
+                <swiper-slide ng-repeat="new in news">
+                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" height="200px" width="100%" ng-mouseover="seleccionar(new)" ng-mouseleave="seleccionar(new)">
+                    <h2 class="img-label">{{ new.Name }}</h2>
+                </swiper-slide>
+            </swiper-container>
+        </div>
+        <div class="col-md-6">
+            <h2>Image Selected</h2>
+            <div ng-if="imgNext">
+                <img ng-src="{{ imgNext.Picture }}" alt="{{ imgNext.Name }}" height="200px" width="100%" style="object-fit: cover;">
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container-absolute-size header">
+    <div class="social-media">
+        <i class="fa-brands fa-discord cursor-pointer"></i>
+        <i class="fa-brands fa-twitter cursor-pointer"></i>
+    </div>
+    <i class="fa-sharp fa-solid cursor-pointer" ng-class="{ 'fa-chevron-down' : headerExpand, 'fa-chevron-up' : !headerExpand }" ng-click="headerExpand = !headerExpand"></i>
+    <div></div>
+</div>

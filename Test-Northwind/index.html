@@ -4,8 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-</head>
-<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>    
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/container.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/navbar.css">
+
+    <link rel="stylesheet" href="http://vasyabigi.github.io/angular-slick/bower_components/slick-carousel/slick/slick.css" />
     
+</head>
+<body ng-app="MainApp" ng-controller="mainController">
+    <!-- HEADER -->
+    <header ng-include="'views/header/header.html'"></header>
+    
+    <nav class="shift" ng-class="{ 'collapse-in' : toggleMenu == 'In', 'collapse' : toggleMenu == 'Down' }" ng-include="'views/navbar.html'"></nav>
+
+    <!-- SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+    <script src="http://vasyabigi.github.io/angular-slick/bower_components/slick-carousel/slick/slick.js"></script>
+    <script src="scripts/angular-slick.js"></script>
+    <script src="scripts/angular-swipe/swipe.js"></script>
+    <script src="scripts/angular-swipe/angular.swipe.js"></script>
+    <script src="scripts/angular-swipe/swipe.counter.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controller/main.js"></script>
 </body>
 </html>
