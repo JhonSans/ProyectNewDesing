@@ -1,0 +1,15 @@
+.main-background {
+    background-color: darkslategray;
+    height: calc(100vh - 40px);
+}
+.main-background img {
+    height: calc(100vh - 40px);
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+.main-background .img-label {
+    font-size: 50px;
+    line-height: 0.8;
+    margin-bottom: 30px;
+}

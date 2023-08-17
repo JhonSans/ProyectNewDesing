@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/main-background.css">
 
     <link rel="stylesheet" href="http://vasyabigi.github.io/angular-slick/bower_components/slick-carousel/slick/slick.css" />
     
@@ -19,7 +20,9 @@
     <!-- HEADER -->
     <header ng-include="'views/header/header.html'"></header>
     
-    <nav class="shift" ng-class="{ 'collapse-in' : toggleMenu == 'In', 'collapse' : toggleMenu == 'Down' }" ng-include="'views/navbar.html'"></nav>
+    <nav ng-include="'views/navbar.html'"></nav>
+
+    <section class="main-background" ng-include="'views/background.html'"></section>
 
     <!-- SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>

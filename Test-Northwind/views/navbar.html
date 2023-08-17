@@ -1,21 +1,23 @@
-<ul>
-    <li>
-        <a href="#"><i class="fa-solid fa-circle-play"></i> Logo</a>
-    </li>
-    <li>
-        <div class="menu cursor-pointer" ng-click="toggleMenuAction()">
-            <i class="fa-solid fa-minus"></i>
-            <i class="fa-solid fa-minus"></i>
-            <i class="fa-solid fa-minus"></i>
-        </div>
-    </li>
-    <li>
-        <a href="#"><i class="fa-solid fa-house"></i> Inicio</a>
-    </li>
-    <li>
-        <a href="#"><i class="fa-solid fa-bookmark"></i> Mi Lista</a>
-    </li>
-    <li>
-        <a href="#"><i class="fa-solid fa-heart"></i> Favoritos</a>
-    </li>
-</ul>
+<div class="nav shift" ng-class="{ 'collapse-in' : toggleMenu == 'In', 'collapse' : toggleMenu == 'Down' }">
+    <ul>
+        <li>
+            <a href="#"><i class="fa-solid fa-circle-play"></i> Logo</a>
+        </li>
+        <li>
+            <div class="menu cursor-pointer" ng-click="toggleMenuAction()">
+                <i class="fa-solid fa-minus"></i>
+                <i class="fa-solid fa-minus"></i>
+                <i class="fa-solid fa-minus"></i>
+            </div>
+        </li>
+        <li>
+            <a href="#"><i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa-solid fa-bookmark"></i> Mi Lista</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa-solid fa-heart"></i> Favoritos</a>
+        </li>
+    </ul>
+</div>

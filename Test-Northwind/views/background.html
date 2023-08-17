@@ -1,0 +1,8 @@
+<slick infinite="true" slides-to-show="1" slides-to-scroll="1" autoplay="true" autoplay-speed="3000" touch-move="true" fade="true", arrows="false" pause-on-focus="false">
+    <div ng-repeat="new in news">
+        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" ng-mouseover="seleccionar2(new)" ng-mouseleave="seleccionar2(new)">
+        <div>
+            <h1 class="img-label">TITULO</h1>
+        </div>
+    </div>
+</slick>
