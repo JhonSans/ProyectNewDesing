@@ -1,15 +1,41 @@
+:root {
+    --swiper-pagination-bottom: 25px;
+    --swiper-pagination-bullet-inactive-color: #fff;
+    --swiper-pagination-color: #00b3b3;
+    --swiper-pagination-bullet-width: 25px;
+    --swiper-pagination-bullet-height: 5px;
+    --swiper-pagination-bullet-border-radius: 0;
+}
 .main-background {
-    background-color: darkslategray;
-    height: calc(100vh - 40px);
+    padding-top: 40px;
+    background-color: #212529;
+    position: relative;
+    height: 100vh;
 }
-.main-background img {
+.main-background img,
+.main-background span {
     height: calc(100vh - 40px);
-    width: 100%;
+    width: 130%;
     object-fit: cover;
-    filter: brightness(0.5);
 }
-.main-background .img-label {
-    font-size: 50px;
-    line-height: 0.8;
-    margin-bottom: 30px;
+.main-background span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgb(33,37,41);
+    background: linear-gradient(0deg, rgba(33,37,41,1) 10%, rgba(3,3,33,0) 100%);
+}
+.main-background .description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.main-background .description h1,
+.main-background .description p {
+    color: antiquewhite;
+    line-height: 1.5;
+    text-align: justify;
 }

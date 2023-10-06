@@ -1,12 +1,62 @@
-<div class="header">
-    <div class="header-menu">
-        <ul>
-            <li>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            </li>
-            <li>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-            </li>
-        </ul>
+<div class="header-news">
+    <div class="news" ng-class="{ 'active' : toggleHeader }">
+        <!-- <swiper-container init="false" navigation="true" pagination="true" pagination-clickable="true">
+            <swiper-slide ng-repeat="new in news">
+                <img
+                    ng-src="{{ new.Picture }}"
+                    alt="{{ new.Name }}"
+                    height="100"
+                    style="width: 100%; object-fit: cover"
+                />
+            </swiper-slide>
+        </swiper-container> -->
+    </div>
+    <div class="header">
+        <div class="header-menu">
+            <div class="btn-notify" ng-click="toggleHeader = !toggleHeader">
+                <i class="fa-regular fa-newspaper"></i>
+            </div>
+            <ul>
+                <li>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
+<!-- <script>
+    const swiperEl = document.querySelector("swiper-container");
+
+    const swiperParams = {
+        slidesPerView: 1,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        }
+        // navigation: {
+        //     nextEl: ".swiper-button-next",
+        //     prevEl: ".swiper-button-prev",
+        // },
+        // pagination: {
+        //     el: ".swiper-pagination",
+        //     dynamicBullets: true,
+        // },
+        // breakpoints: {
+        //     640: {
+        //         slidesPerView: 2,
+        //     },
+        //     1024: {
+        //         slidesPerView: 3,
+        //     },
+        // }
+    };
+
+    // now we need to assign all parameters to Swiper element
+    Object.assign(swiperEl, swiperParams);
+
+    // and now initialize it
+    swiperEl.initialize();
+</script> -->

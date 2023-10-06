@@ -1,3 +1,17 @@
+.header-news {
+    position: absolute;
+    width: 100%;
+    background-color: blueviolet;
+    z-index: 1001;
+    overflow: hidden;
+}
+.news {
+    height: 0;
+    transition: linear 0.3s all;
+}
+.news.active {
+    height: calc(100vh - 40px);
+}
 .header {
     position: relative;
     background-color: #212529;
@@ -7,9 +21,7 @@
     padding: 0 0.5rem;
     align-items: center;
     justify-content: space-between;
-    /* -webkit-box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.4);
-    box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.4); */
+    box-shadow: 0px -5px 23px 5px rgba(0,0,0,0.3);
 }
 .header-menu ul {
     display: flex;
@@ -18,7 +30,8 @@
     margin-bottom: 0;
     list-style: none;
 }
-.header-menu ul li a {
+.header-menu ul li a,
+.btn-notify i {
     display: block;
     position: relative;
     padding: 0 0.5rem;
@@ -30,10 +43,12 @@
     z-index: 1;
     transition: all 0.5s linear;
 }
-.header-menu ul li a:hover {
+.header-menu ul li a:hover,
+.btn-notify i:hover {
     color: #212529;
 }
-.header-menu ul li a:after {
+.header-menu ul li a:after,
+.btn-notify i:after {
     content: '.';
     display: block;
     position: absolute;
@@ -51,8 +66,28 @@
     z-index: -1;
     transition: all 0.5s;
 }
-.header-menu ul li a:hover:after {
+.header-menu ul li a:hover:after,
+.btn-notify i:hover:after {
     opacity: 1;
     visibility: visible;
     height: 100%;
+}
+.btn-notify {
+    position: absolute;
+    width: 36px;
+    height: 27px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-notify:hover i {
+    width: 36px;
+    height: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

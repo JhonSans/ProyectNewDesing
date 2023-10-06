@@ -2,6 +2,7 @@ nav {
     position: absolute;
     width: 100%;
     z-index: 1000;
+    margin-top: 40px;
 }
 .nav {
     width: 80%;

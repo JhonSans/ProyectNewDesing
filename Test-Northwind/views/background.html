@@ -1,8 +1,33 @@
-<slick infinite="true" slides-to-show="1" slides-to-scroll="1" autoplay="true" autoplay-speed="3000" touch-move="true" fade="true", arrows="false" pause-on-focus="false">
-    <div ng-repeat="new in news">
-        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" ng-mouseover="seleccionar2(new)" ng-mouseleave="seleccionar2(new)">
-        <!-- <div>
-            <h1 class="img-label">TITULO</h1>
-        </div> -->
-    </div>
-</slick>
+<!-- <swiper-container style="padding-top: 40px;" init="false"> -->
+<swiper-container slides-per-view="1" autoplay-delay="3000" autoplay-disable-on-interaction="false" keyboard="true" speed="1000" parallax="true" pagination="true" pagination-clickable="true">
+    <swiper-slide ng-repeat="new in news">
+        <img data-swiper-parallax="-23%" ng-src="{{ new.Picture }}" alt="{{ new.Name }}"/>
+        <span data-swiper-parallax="-23%"></span>
+        <div class="description">
+            <h1 data-swiper-parallax="-300">{{ new.Name }}</h1>
+            <br />
+            <p data-swiper-parallax="-200">{{ new.Description }}</p>
+        </div>
+    </swiper-slide>
+</swiper-container>
+<!-- <script>
+    var element = document.querySelector('swiper-container');
+
+    var parameters = {
+        slidesPerView: 1,
+        parallax: true,
+        speed: 1000,
+        keyboard: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            clickable: true,
+        }
+    };
+
+    Object.assign(element, parameters);
+
+    element.initialize();
+</script> -->
