@@ -11,12 +11,16 @@
     background-color: #212529;
     position: relative;
     height: 100vh;
+    overflow: hidden;
 }
 .main-background img,
 .main-background span {
     height: calc(100vh - 40px);
     width: 130%;
     object-fit: cover;
+}
+.main-background img {
+    box-shadow: -5px 0px 40px 0px rgba(0,0,0,0.5);
 }
 .main-background span {
     position: absolute;

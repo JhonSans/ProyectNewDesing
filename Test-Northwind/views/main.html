@@ -1,0 +1,38 @@
+<!-- <div class="container">
+    <div class="gallery">
+        <div ng-repeat="news in newsGallery" class="gallery__column">
+            <a href="#" ng-repeat="new in news" class="gallery__link">
+                <figure class="gallery__thumb">
+                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="gallery__image">
+                    <figcaption class="gallery__caption">{{ new.Name }}</figcaption>
+                </figure>
+            </a>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="container">
+    <ul class="gallery">
+        <li ng-repeat="new in news">
+            <a href="" class="gallery__link">
+                <figure class="gallery__thumb">
+                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="gallery__image">
+                    <figcaption class="gallery__caption">{{ new.Name }}</figcaption>
+                </figure>
+            </a>
+        </li>
+    </ul>
+</div> -->
+
+<div class="container">
+    <div class="external">
+        <div class="horizontal-scroll-wrapper">
+            <div ng-repeat="new in news" class="img-wrapper" ng-class="new.Style ? new.Style : ''">
+                <a href="#" target="_blank" rel="noopener">
+                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="gallery__image">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
