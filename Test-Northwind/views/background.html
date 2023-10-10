@@ -1,8 +1,7 @@
-<!-- <swiper-container style="padding-top: 40px;" init="false"> -->
-<swiper-container slides-per-view="1" autoplay-delay="3000" autoplay-disable-on-interaction="false" keyboard="true" speed="1000" parallax="true" pagination="true" pagination-clickable="true">
+<swiper-container slides-per-view="1" autoplay-delay="3000" autoplay-disable-on-interaction="false" speed="1000" parallax="true" pagination="true" pagination-clickable="true">
     <swiper-slide ng-repeat="new in news">
-        <img data-swiper-parallax="-23%" ng-src="{{ new.Picture }}" alt="{{ new.Name }}"/>
-        <span data-swiper-parallax="-23%"></span>
+        <img data-swiper-parallax="-23%" ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="main-img"/>
+        <span data-swiper-parallax="-23%" class="main-shadow"></span>
         <div class="description">
             <h1 data-swiper-parallax="-300">{{ new.Name }}</h1>
             <br />
@@ -10,24 +9,3 @@
         </div>
     </swiper-slide>
 </swiper-container>
-<!-- <script>
-    var element = document.querySelector('swiper-container');
-
-    var parameters = {
-        slidesPerView: 1,
-        parallax: true,
-        speed: 1000,
-        keyboard: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            clickable: true,
-        }
-    };
-
-    Object.assign(element, parameters);
-
-    element.initialize();
-</script> -->

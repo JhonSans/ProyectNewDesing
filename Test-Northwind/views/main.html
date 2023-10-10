@@ -1,29 +1,4 @@
-<!-- <div class="container">
-    <div class="gallery">
-        <div ng-repeat="news in newsGallery" class="gallery__column">
-            <a href="#" ng-repeat="new in news" class="gallery__link">
-                <figure class="gallery__thumb">
-                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="gallery__image">
-                    <figcaption class="gallery__caption">{{ new.Name }}</figcaption>
-                </figure>
-            </a>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="container">
-    <ul class="gallery">
-        <li ng-repeat="new in news">
-            <a href="" class="gallery__link">
-                <figure class="gallery__thumb">
-                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="gallery__image">
-                    <figcaption class="gallery__caption">{{ new.Name }}</figcaption>
-                </figure>
-            </a>
-        </li>
-    </ul>
-</div> -->
-
+<!--
 <div class="container">
     <div class="external">
         <div class="horizontal-scroll-wrapper">
@@ -34,5 +9,48 @@
             </div>
         </div>
     </div>
+</div> -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <br />
+            <div>
+                <h1>Seccion 1</h1>
+            </div>
+            <swiper-container slides-per-view="1" space-between="10" free-mode="true" breakpoints='{ "285": {"slidesPerView": 2}, "576": {"slidesPerView": 3}, "768": {"slidesPerView": 4}, "992": {"slidesPerView": 5}, "1200": {"slidesPerView": 6} }'>
+                <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide">
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img"/>
+                        <div class="swiper-gallery-description">
+                            <h1>{{ new.Name }}</h1>
+                            <div class="swiper-gallery-actions">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                </swiper-slide>
+            </swiper-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <br />
+            <div>
+                <h1>Seccion 2</h1>
+            </div>
+            <swiper-container thumbs-swiper=".swiper-gallery-thumbs" space-between="50" speed="1000" keyboard="true" rewind="true">
+                <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide">
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img"/>
+                </swiper-slide>
+            </swiper-container>
+            <swiper-container slides-per-view="2" space-between="10" free-mode="true" breakpoints='{ "280": {"slidesPerView": 3}, "576": {"slidesPerView": 4}, "768": {"slidesPerView": 5}, "992": {"slidesPerView": 6} }' class="swiper-gallery-thumbs">
+                <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide thumb">
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img thumb"/>
+                </swiper-slide>
+            </swiper-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <br />
+        </div>
+    </div>
 </div>
-
