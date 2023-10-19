@@ -10,12 +10,12 @@
     padding-top: 40px;
     background-color: #212529;
     position: relative;
-    height: 100vh;
+    height: calc(100vh - 40px);
     overflow: hidden;
 }
 .main-background .main-img,
 .main-background .main-shadow {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 80px);
     width: 130%;
     object-fit: cover;
 }
@@ -44,4 +44,14 @@
 }
 .main-background .description p {
     text-align: justify;
+}
+
+@media (min-width: 768px) {
+    .main-background {
+        height: 100vh;
+    }
+    .main-background .main-img,
+    .main-background .main-shadow {
+        height: calc(100vh - 40px);
+    }
 }
