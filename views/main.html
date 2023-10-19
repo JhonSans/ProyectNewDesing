@@ -1,0 +1,50 @@
+<!--
+<div class="container">
+    <div class="external">
+        <div class="horizontal-scroll-wrapper">
+            <div ng-repeat="new in news" class="img-wrapper" ng-class="new.Style ? new.Style : ''">
+                <a href="#" target="_blank" rel="noopener">
+                    <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="gallery__image">
+                </a>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <br />
+            <div>
+                <h2>Seccion 1</h2>
+            </div>
+            <swiper-container slides-per-view="1" space-between="10" breakpoints='{ "285": {"slidesPerView": 2}, "576": {"slidesPerView": 3}, "768": {"slidesPerView": 4}, "992": {"slidesPerView": 5}, "1200": {"slidesPerView": 6} }'>
+                <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide">
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img swiper-gallery-img-hover"/>
+                </swiper-slide>
+            </swiper-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <br />
+            <div>
+                <h2>Seccion 2</h2>
+            </div>
+            <swiper-container thumbs-swiper=".swiper-gallery-thumbs" space-between="50" speed="1000" keyboard="true" rewind="true">
+                <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide">
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img swiper-gallery-img-hover"/>
+                </swiper-slide>
+            </swiper-container>
+            <swiper-container slides-per-view="2" space-between="10" free-mode="true" breakpoints='{ "280": {"slidesPerView": 3}, "576": {"slidesPerView": 4}, "768": {"slidesPerView": 5}, "992": {"slidesPerView": 6} }' class="swiper-gallery-thumbs">
+                <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide thumb">
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img thumb"/>
+                </swiper-slide>
+            </swiper-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <br />
+        </div>
+    </div>
+</div>
