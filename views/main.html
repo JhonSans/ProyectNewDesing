@@ -26,7 +26,7 @@
             <div class="swiper">
                 <div class="swiper-wrapper">
                     <div ng-repeat="new in news" class="swiper-slide swiper-gallery-slide">
-                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img"/>
+                        <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img fix"/>
                     </div>
                 </div>
             </div>
@@ -64,27 +64,31 @@
     // const swiperCarouselParams = {
     //     slidesPerView: 1,
     //     spaceBetween: 10,
+    //     nested: true,
+    //     preventClicks: true,
+    //     mousewheel: { invert: true },
     //     breakpoints: {
     //         285: { slidesPerView: 2 },
     //         576: { slidesPerView: 3 },
-    //         768: { slidesPerView: 4 }, 
-    //         992: { slidesPerView: 5 }, 
-    //         1200: { slidesPerView: 6}
+    //         768: { slidesPerView: 4 },
+    //         992: { slidesPerView: 5 },
+    //         1200: { slidesPerView: 6 },
     //     },
     // };
 
     // Object.assign(swiperCarousel, swiperCarouselParams);
 
     // swiperCarousel.initialize();
-    const swiper = new Swiper('.swiper', {
+
+    const swiper = new Swiper(".swiper", {
         slidesPerView: 1,
         spaceBetween: 10,
         breakpoints: {
             285: { slidesPerView: 2 },
             576: { slidesPerView: 3 },
-            768: { slidesPerView: 4 }, 
-            992: { slidesPerView: 5 }, 
-            1200: { slidesPerView: 6}
+            768: { slidesPerView: 4 },
+            992: { slidesPerView: 5 },
+            1200: { slidesPerView: 6 },
         },
     });
 </script>
