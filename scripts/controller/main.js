@@ -42,6 +42,8 @@ mainApp.controller("mainController", function ($scope) {
 
     // $scope.newsGallery = _.chunk(_.shuffle(_.map($scope.news, function (n) { return { Picture: n.Picture, Name: n.Name, Style: n.Style } })), 2);
 
+    $scope.init = function () { }
+
     $scope.toggleMenuAction = function () {
 
         if ($scope.toggleNav == "Default") {
@@ -57,4 +59,6 @@ mainApp.controller("mainController", function ($scope) {
             $scope.toggleMenuAction();
         }
     }
+
+    $scope.init();
 });
