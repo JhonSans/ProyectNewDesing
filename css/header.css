@@ -10,7 +10,7 @@
     transition: linear 0.3s all;
 }
 .news.active {
-    height: calc(100vh - 50px);
+    height: calc(100vh - 95px);
 }
 .header {
     position: relative;

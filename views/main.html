@@ -18,18 +18,18 @@
                 <h2>Seccion 1</h2>
             </div>
             <!-- <swiper-container init="false" class="carousel-style"> -->
-            <!-- <swiper-container slides-per-view="1" space-between="10" breakpoints='{ "285": {"slidesPerView": 2}, "576": {"slidesPerView": 3}, "768": {"slidesPerView": 4}, "992": {"slidesPerView": 5}, "1200": {"slidesPerView": 6} }'>
+            <swiper-container slides-per-view="1" space-between="10" virtual="true" rewind="true" breakpoints='{ "285": {"slidesPerView": 2}, "576": {"slidesPerView": 3}, "768": {"slidesPerView": 4}, "992": {"slidesPerView": 5}, "1200": {"slidesPerView": 6} }'>
                 <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide">
                         <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img swiper-gallery-img-hover"/>
                 </swiper-slide>
-            </swiper-container> -->
-            <div class="swiper carousel-style">
+            </swiper-container>
+            <!-- <div class="swiper carousel-style">
                 <div class="swiper-wrapper">
                     <div ng-repeat="new in news" class="swiper-slide swiper-gallery-slide">
                         <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img fix"/>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="row">
@@ -38,7 +38,7 @@
             <div>
                 <h2>Seccion 2</h2>
             </div>
-            <!-- <swiper-container thumbs-swiper=".swiper-gallery-thumbs" space-between="50" speed="1000" keyboard="true" rewind="true">
+            <swiper-container thumbs-swiper=".swiper-gallery-thumbs" space-between="50" speed="1000" rewind="true">
                 <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide">
                         <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img swiper-gallery-img-hover"/>
                 </swiper-slide>
@@ -47,55 +47,56 @@
                 <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide thumb">
                         <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img thumb"/>
                 </swiper-slide>
-            </swiper-container> -->
-            <div class="swiper gallery-style">
+            </swiper-container>
+            <!-- <div class="swiper gallery-style">
                 <div class="swiper-wrapper">
                     <div ng-repeat="new in news" class="swiper-slide swiper-gallery-slide">
                         <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img fix">
                     </div>
                 </div>
             </div>
-            <div class="swiper gallery-thumbs-style">
+            <div thumbsSlider="" class="swiper gallery-thumbs-style">
                 <div class="swiper-wrapper">
                     <div ng-repeat="new in news" class="swiper-slide swiper-gallery-slide thumb">
                         <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img thumb">
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
     var carouselStyle = new Swiper(".carousel-style", {
-        spaceBetween: 10,
-        speed: 1000,
-        rewind: true,
-        breakpoints: {
-            285: { slidesPerView: 2 },
-            576: { slidesPerView: 3 },
-            768: { slidesPerView: 4 },
-            992: { slidesPerView: 5 },
-            1200: { slidesPerView: 6 },
-        },
-    });
+    spaceBetween: 10,
+    speed: 1000,
+    rewind: true,
+    breakpoints: {
+        285: { slidesPerView: 2 },
+        576: { slidesPerView: 3 },
+        768: { slidesPerView: 4 },
+        992: { slidesPerView: 5 },
+        1200: { slidesPerView: 6 },
+    },
+});
 
-    var galleryThumbsStyle = new Swiper(".gallery-thumbs-style", {
-        slidesPerView: 2,
-        spaceBetween: 10,
-        freeMode: true,
-        breakpoints: {
-            280: { slidesPerView: 3 },
-            576: { slidesPerView: 4 },
-            768: { slidesPerView: 5 },
-            992: { slidesPerView: 6 },
-        }
-    });
+var galleryThumbsStyle = new Swiper(".gallery-thumbs-style", {
+    slidesPerView: 2,
+    spaceBetween: 10,
+    freeMode: true,
+    breakpoints: {
+        280: { slidesPerView: 3 },
+        576: { slidesPerView: 4 },
+        768: { slidesPerView: 5 },
+        992: { slidesPerView: 6 },
+    }
+});
 
-    var galleryStyle = new Swiper(".gallery-style", {
-        speed: 1000,
-        rewind: true,
-        thumbs: {
-            swiper: galleryThumbsStyle,
-        },
-    });
-</script>
+var galleryStyle = new Swiper(".gallery-style", {
+    spaceBetween: 10,
+    speed: 1000,
+    rewind: true,
+    thumbs: {
+        swiper: galleryThumbsStyle,
+    },
+});
+</script> -->
