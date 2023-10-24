@@ -8,6 +8,7 @@
 .swiper-gallery-slide.main-thumb {
     margin-bottom: 8px;
     height: 250px;
+    width: 100%;
 }
 .swiper-gallery-slide.thumb {
     height: 100px;
