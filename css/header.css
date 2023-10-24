@@ -10,7 +10,7 @@
     transition: linear 0.3s all;
 }
 .news.active {
-    height: calc(100vh - 95px);
+    height: calc(100vh - 100px);
 }
 .header {
     position: relative;
@@ -88,4 +88,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (min-width: 768px) {
+    .news.active {
+        height: calc(100vh - 50px);
+    }
 }

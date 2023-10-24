@@ -10,12 +10,12 @@
     padding-top: 40px;
     background-color: #212529;
     position: relative;
-    height: calc(100vh - 45px);
+    height: calc(100vh - 50px);
     overflow: hidden;
 }
 .main-background .main-img,
 .main-background .main-shadow {
-    height: calc(100vh - 85px);
+    height: calc(100vh - 90px);
     width: 130%;
     object-fit: cover;
 }
@@ -52,6 +52,6 @@
     }
     .main-background .main-img,
     .main-background .main-shadow {
-        height: calc(100vh - 45px);
+        height: calc(100vh - 40px);
     }
 }
