@@ -18,7 +18,7 @@
             <div>
                 <h2>Seccion 2</h2>
             </div>
-            <swiper-container thumbs-swiper=".swiper-gallery-thumbs" space-between="8" speed="1500" rewind="true">
+            <swiper-container thumbs-swiper=".swiper-gallery-thumbs" slides-per-view="1" space-between="8" speed="1500" rewind="true">
                 <swiper-slide ng-repeat="new in news" class="swiper-gallery-slide main-thumb">
                         <img ng-src="{{ new.Picture }}" alt="{{ new.Name }}" class="swiper-gallery-img"/>
                 </swiper-slide>
