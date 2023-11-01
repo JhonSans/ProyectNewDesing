@@ -119,6 +119,15 @@ nav {
     height: 100%;
 }
 
+.nav.shift ul li a.active {
+    background-color: #0c9191;
+    color: #443f3f;
+}
+
+.nav.shift ul li a.active:hover:after {
+    opacity: 0;
+}
+
 .btn-menu {
     position: relative;
     width: 50px;
@@ -290,7 +299,7 @@ span + span {
 
 @media (min-width: 768px) {
     .nav ul {
-        justify-content: space-evenly;
+        justify-content: space-between;
     }
 
     .nav ul li {

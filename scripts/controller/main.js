@@ -1,7 +1,8 @@
-mainApp.controller("mainController", function ($scope) {
+mainApp.controller("mainController", function ($scope, $location) {
     $scope.toggleNav = "Default";
     $scope.toggleMenu = false;
     $scope.toggleHeader = false;
+    $scope.stickyNav = false;
 
     $scope.news = [
         {
@@ -41,6 +42,17 @@ mainApp.controller("mainController", function ($scope) {
             Description: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.",
         },
     ];
+
+    $scope.isActive = function (viewLocate) {
+        return viewLocate === $location.path();
+    };
+
+    $scope.$on("$locationChangeStart", function (event, next, current) {
+        if (current != next) {
+            $scope.toggleNav = "In";
+            $scope.toggleMenuAction();
+        }
+    });
 
     $scope.toggleMenuAction = function () {
         if ($scope.toggleNav == "Default") {

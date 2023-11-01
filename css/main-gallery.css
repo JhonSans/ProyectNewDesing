@@ -21,7 +21,28 @@
 }
 .swiper-gallery-img.thumb {
     opacity: 0.4;
+    filter: grayscale(1);
 }
 .swiper-slide-thumb-active .swiper-gallery-img.thumb {
     opacity: 1;
+    filter: none;
+}
+.swiper-gallery-thumbs-container {
+    position: relative;
+}
+
+@media (min-width: 992px) {
+
+    .swiper-gallery-slide.main-thumb {
+        height: 400px;
+    }
+
+    .swiper-gallery-thumbs {
+        position: absolute;
+        right: 0px;
+        bottom: -50px;
+        background: white;
+        border: 8px solid white;
+        border-top-left-radius: 5px;
+    }    
 }
