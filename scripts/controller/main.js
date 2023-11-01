@@ -1,8 +1,10 @@
-mainApp.controller("mainController", function ($scope, $location) {
+mainApp.controller("mainController", function ($scope, $location, $window) {
     $scope.toggleNav = "Default";
     $scope.toggleMenu = false;
     $scope.toggleHeader = false;
     $scope.stickyNav = false;
+
+    $scope.lastScrollPosition = $window.scrollY || $window.pageYOffset;
 
     $scope.news = [
         {
@@ -66,4 +68,29 @@ mainApp.controller("mainController", function ($scope, $location) {
             $scope.toggleMenuAction();
         }
     };
+
+    // Function to handle scroll event
+    angular.element($window).bind('scroll', function() {
+        // Get the current scroll position
+        var currentScrollPosition = $window.scrollY || $window.pageYOffset;
+
+        // Detect change in scroll position
+        if (currentScrollPosition !== $scope.lastScrollPosition) {
+            // Scroll position has changed
+            // console.log('Scroll position changed!');
+            // console.log('Previous scroll position:', $scope.lastScrollPosition);
+            // console.log('Current scroll position:', currentScrollPosition);
+
+            // Update the last scroll position
+            $scope.lastScrollPosition = currentScrollPosition;
+
+            if ($scope.lastScrollPosition >= 150)
+                $scope.stickyNav = true;
+            else
+                $scope.stickyNav = false;
+
+            // Apply changes to the scope (if needed)
+            $scope.$apply();
+        }
+    });
 });

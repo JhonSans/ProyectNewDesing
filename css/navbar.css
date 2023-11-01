@@ -1,8 +1,13 @@
 nav {
-    position: absolute;
     width: 100%;
     z-index: 1000;
     margin-top: 50px;
+}
+nav.absolute {
+    position: absolute;
+}
+nav.sticky {
+    position: sticky;
 }
 .nav {
     width: 80%;
