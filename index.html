@@ -19,10 +19,10 @@
 <body ng-app="MainApp" ng-controller="mainController">
 
     <!-- HEADER -->
-    <header ng-include="'views/header/header.html'"></header>
+    <header class="header" ng-include="'views/header/header.html'"></header>
     
     <!-- NAVBAR -->
-    <nav ng-class="{ 'absolute' : !stickyNav, 'sticky' : stickyNav }" ng-include="'views/navbar.html'"></nav>
+    <nav class="nav shift" ng-class="{ 'absolute' : !fixedNav, 'fixed' : fixedNav }" ng-include="'views/navbar.html'"></nav>
 
     <!-- MAIN BACKGROUND -->
     <section class="main-background" ng-if="isActive('/Inicio')" ng-include="'views/background.html'"></section>

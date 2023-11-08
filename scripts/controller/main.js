@@ -2,7 +2,7 @@ mainApp.controller("mainController", function ($scope, $location, $window) {
     $scope.toggleNav = "Default";
     $scope.toggleMenu = false;
     $scope.toggleHeader = false;
-    $scope.stickyNav = false;
+    $scope.fixedNav = false;
 
     $scope.lastScrollPosition = $window.scrollY || $window.pageYOffset;
 
@@ -84,10 +84,10 @@ mainApp.controller("mainController", function ($scope, $location, $window) {
             // Update the last scroll position
             $scope.lastScrollPosition = currentScrollPosition;
 
-            if ($scope.lastScrollPosition >= 150)
-                $scope.stickyNav = true;
+            if ($scope.lastScrollPosition >= 110)
+                $scope.fixedNav = true;
             else
-                $scope.stickyNav = false;
+                $scope.fixedNav = false;
 
             // Apply changes to the scope (if needed)
             $scope.$apply();
