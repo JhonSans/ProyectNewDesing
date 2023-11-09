@@ -1,7 +1,7 @@
-<div class="nav shift" ng-class="{ 'collapse-in' : toggleNav == 'In', 'collapse' : toggleNav == 'Down' }">
+<!-- <div class="nav shift" ng-class="{ 'collapse-in' : toggleNav == 'In', 'collapse' : toggleNav == 'Down' }">
     <ul>
         <li>
-            <a href="#"><i class="fa-solid fa-circle-play"></i> Logo</a>
+            <a href="#!/Inicio"><i class="fa-solid fa-circle-play"></i> Logo</a>
         </li>
         <li>
             <div class="btn-menu" ng-class="toggleMenu ? 'active' : 'not-active'" ng-click="toggleMenuAction()">
@@ -11,13 +11,34 @@
             </div>
         </li>
         <li>
-            <a href="#"><i class="fa-solid fa-house"></i> Inicio</a>
+            <a href="#!/Inicio" ng-class="{ 'active' : isActive('/Inicio') }"><i class="fa-solid fa-house"></i> Inicio</a>
         </li>
         <li>
-            <a href="#"><i class="fa-solid fa-bookmark"></i> Mi Lista</a>
-        </li>
-        <li>
-            <a href="#"><i class="fa-solid fa-heart"></i> Favoritos</a>
+            <a href="#!/Listado" ng-class="{ 'active' : isActive('/Listado') }"><i class="fa-solid fa-list"></i> Listado</a>
         </li>
     </ul>
-</div>
+</div> -->
+<ul class="nav-list-menu">
+    <li class="nav-list-item">
+        <a href="#!/Inicio" class="nav-list-item-link shift-effect">
+            <i class="fa-solid fa-circle-play"></i> Logo
+        </a>
+    </li>
+    <li class="nav-list-item">
+        <div class="nav-btn-menu" ng-class="toggleMenu ? 'active' : 'not-active'" ng-click="toggleMenuAction()">
+            <span class="nav-btn-icon"></span>
+            <span class="nav-btn-icon"></span>
+            <span class="nav-btn-icon"></span>
+        </div>
+    </li>
+    <li class="nav-list-item">
+        <a href="#!/Inicio" class="nav-list-item-link shift-effect" ng-class="{ 'active' : isActive('/Inicio') }">
+            <i class="fa-solid fa-house"></i> Inicio
+        </a>
+    </li>
+    <li class="nav-list-item">
+        <a href="#!/Listado" class="nav-list-item-link shift-effect" ng-class="{ 'active' : isActive('/Listado') }">
+            <i class="fa-solid fa-list"></i> Listado
+        </a>
+    </li>
+</ul>

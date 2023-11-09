@@ -7,10 +7,9 @@
     --swiper-pagination-bullet-border-radius: 0;
 }
 .main-background {
-    padding-top: 40px;
     background-color: #212529;
     position: relative;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 90px);
     overflow: hidden;
 }
 .main-background .main-img,

@@ -1,0 +1,11 @@
+<div class="content-list">
+    <div ng-repeat="data in lC.listItems">
+        <label>{{ data }}</label>
+    </div>
+    <pager 
+        paging-size="5" 
+        items-per-page="5"
+        total-items="lC.listItems" 
+        display-items="lC.listItems">
+    </pager>
+</div>

@@ -1,7 +1,10 @@
-mainApp.controller("mainController", function ($scope) {
+mainApp.controller("mainController", function ($scope, $location, $window) {
     $scope.toggleNav = "Default";
     $scope.toggleMenu = false;
     $scope.toggleHeader = false;
+    $scope.fixedNav = false;
+
+    $scope.lastScrollPosition = $window.scrollY || $window.pageYOffset;
 
     $scope.news = [
         {
@@ -42,6 +45,17 @@ mainApp.controller("mainController", function ($scope) {
         },
     ];
 
+    $scope.isActive = function (viewLocate) {
+        return viewLocate === $location.path();
+    };
+
+    $scope.$on("$locationChangeStart", function (event, next, current) {
+        if (current != next) {
+            $scope.toggleNav = "In";
+            $scope.toggleMenuAction();
+        }
+    });
+
     $scope.toggleMenuAction = function () {
         if ($scope.toggleNav == "Default") {
             $scope.toggleNav = "In";
@@ -54,4 +68,29 @@ mainApp.controller("mainController", function ($scope) {
             $scope.toggleMenuAction();
         }
     };
+
+    // Function to handle scroll event
+    angular.element($window).bind('scroll', function() {
+        // Get the current scroll position
+        var currentScrollPosition = $window.scrollY || $window.pageYOffset;
+
+        // Detect change in scroll position
+        if (currentScrollPosition !== $scope.lastScrollPosition) {
+            // Scroll position has changed
+            // console.log('Scroll position changed!');
+            // console.log('Previous scroll position:', $scope.lastScrollPosition);
+            // console.log('Current scroll position:', currentScrollPosition);
+
+            // Update the last scroll position
+            $scope.lastScrollPosition = currentScrollPosition;
+
+            if ($scope.lastScrollPosition >= 110)
+                $scope.fixedNav = true;
+            else
+                $scope.fixedNav = false;
+
+            // Apply changes to the scope (if needed)
+            $scope.$apply();
+        }
+    });
 });
